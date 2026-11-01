@@ -255,10 +255,10 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _teaching
-  - scope:
-      path: ""
-      type: teaching
+  # _mentorship
+- scope:
+    path: ""
+    type: mentorship
     values:
       layout: single
       author_profile: true
