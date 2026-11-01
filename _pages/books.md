@@ -262,6 +262,51 @@ A personal reading list on economics, liberty, political philosophy, and the hum
   <a class="book-link" href="https://www.goodreads.com/search?q=My+Grandfathers+Son+Clarence+Thomas" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
 </article>
 
+
+<article class="book">
+  <div class="book-top">
+    <span class="book-number">29</span>
+    <p class="category">Political Economy</p>
+  </div>
+  <h3>The Limits of Liberty</h3>
+  <p class="author">James M. Buchanan</p>
+  <p class="description">An examination of the foundations of political order, social cooperation, constitutional constraints, and the limits of government between anarchy and Leviathan.</p>
+  <a class="book-link" href="https://www.goodreads.com/search?q=The+Limits+of+Liberty+James+Buchanan" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
+</article>
+
+<article class="book">
+  <div class="book-top">
+    <span class="book-number">30</span>
+    <p class="category">International Law</p>
+  </div>
+  <h3>Brownlie's Principles of Public International Law</h3>
+  <p class="author">James Crawford</p>
+  <p class="description">A comprehensive examination of public international law, covering state sovereignty, treaties, international responsibility, jurisdiction, and the legal foundations of relations between states.</p>
+  <a class="book-link" href="https://www.goodreads.com/search?q=Brownlies+Principles+of+Public+International+Law+James+Crawford" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
+</article>
+
+<article class="book">
+  <div class="book-top">
+    <span class="book-number">31</span>
+    <p class="category">Constitutional Liberalism</p>
+  </div>
+  <h3>The Constitution of Liberty</h3>
+  <p class="author">Friedrich A. Hayek</p>
+  <p class="description">A systematic defense of individual freedom, constitutional safeguards, the rule of law, and the institutional foundations of a free society.</p>
+  <a class="book-link" href="https://www.goodreads.com/search?q=The+Constitution+of+Liberty+Friedrich+Hayek" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
+</article>
+
+<article class="book">
+  <div class="book-top">
+    <span class="book-number">32</span>
+    <p class="category">Supply-Side Economics</p>
+  </div>
+  <h3>Taxes Have Consequences</h3>
+  <p class="author">Arthur B. Laffer, Brian Domitrovic, and Jeanne Sinquefield</p>
+  <p class="description">A historical and economic examination of income taxation in the United States, exploring the relationship between tax policy, incentives, investment, economic growth, and government revenue.</p>
+  <a class="book-link" href="https://www.goodreads.com/search?q=Taxes+Have+Consequences+Arthur+Laffer" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
+</article>
+
 </div>
 
 <p class="books-note">A personal reading list on economics, liberty, and political philosophy.</p>
