@@ -1,5 +1,5 @@
 ---
-title: "32 Books to Read"
+title: "28 Books to Read"
 layout: single
 permalink: /books/
 author_profile: false
