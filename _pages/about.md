@@ -120,6 +120,19 @@ redirect_from:
 
 <article class="interest-item"> <span class="interest-number">12</span> <h3>Research Methods & Applied Economic Analysis</h3> <p>Empirical economic research, comparative analysis, macroeconomic indicators, policy assessment, quantitative interpretation, and evidence-based evaluation of economic outcomes.</p> </article>
 
+<article class="interest-item">
+  <span class="interest-number">13</span>
+  <h3>International, Transnational & Dispute Resolution Law</h3>
+  <p>Public and private international law, transnational legal frameworks, international commercial arbitration, mediation and alternative dispute resolution (ADR), international litigation, jurisdictional conflicts, cross-border dispute resolution, international treaties, investment protection, and the recognition and enforcement of foreign judgments and arbitral awards.</p>
+</article>
+
+<article class="interest-item">
+  <span class="interest-number">14</span>
+  <h3>Corporate, Commercial & Financial Law</h3>
+  <p>Corporate law, corporate governance, mergers and acquisitions (M&A), business and commercial law, international business transactions, domestic and international taxation, financial and economic regulation, banking and securities law, notarial law, corporate transactions, legal technology, and artificial intelligence in law (AI & Law).</p>
+</article>
+
+
 </div> </div>
 
 <div class="profile-section">
