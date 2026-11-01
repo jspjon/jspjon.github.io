@@ -262,7 +262,6 @@ A personal reading list on economics, liberty, political philosophy, and the hum
   <a class="book-link" href="https://www.goodreads.com/search?q=My+Grandfathers+Son+Clarence+Thomas" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>
 </article>
 
-
 <article class="book">
   <div class="book-top">
     <span class="book-number">29</span>
