@@ -322,7 +322,7 @@ redirect_from:
           Autonomous University of Chihuahua
           <span class="cv-abbr">UACH</span>
         </p>
-        <p class="cv-detail">Academic distinction.</p>
+        <p class="cv-detail">Legal Specializations · Corporate, International & Tax Law</p>
       </div>
     </div>
 
