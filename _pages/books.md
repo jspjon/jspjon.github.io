@@ -308,4 +308,4 @@ A personal reading list on economics, liberty, political philosophy, and the hum
 
 </div>
 
-<p class="books-note">A personal reading list on economics, liberty, and political philosophy.</p>
+<p class="books-note">A personal reading list on economics, liberty, and political philosophy.</p> 
