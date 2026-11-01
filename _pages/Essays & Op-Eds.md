@@ -63,6 +63,21 @@ A selection of essays, articles, and opinion pieces on political economy, social
 
 <a class="essay-link" href="https://mises.org/mises-wire/silent-theft-how-castros-regime-stole-aurelio-baldors-life-work-and-legacy" target="_blank" rel="noopener noreferrer">Read original essay ↗</a> </article>
 
+<article class="essay">
+  <div class="essay-top">
+    <span class="essay-number">03</span>
+    <p class="category">Economic Theory · Political History</p>
+  </div>
+
+  <h3>Economic Calculation, Prices, and Freedom: The Destruction of Venezuela’s Economy under Chávez and Maduro</h3>
+
+  <p class="publication">Jonathan Simon P. · Mises Institute · Mises Wire</p>
+
+  <p class="description">An examination of Venezuela’s economic collapse under Chávez and Maduro through Ludwig von Mises’s theory of economic calculation. The essay explores how the suppression of private property and market prices undermined economic coordination, voluntary cooperation, and individual freedom.</p>
+
+  <a class="essay-link" href="https://mises.org/" target="_blank" rel="noopener noreferrer">Read original essay ↗</a>
+</article>
+
 </div>
 
 <p class="essays-note">Selected writing beyond formal academic publications.</p>
