@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "About Me"
+title: "Welcome to my website!"
 author_profile: true
 redirect_from: 
   - /about/
@@ -65,7 +65,7 @@ redirect_from:
 
 <div class="profile-card">
 
-<p class="profile-label">Professional Profile</p>
+<p class="profile-label">ABOUT ME</p>
 
 <h2>Hi there, I'm Jonathan! 👋</h2>
 
