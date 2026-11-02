@@ -106,7 +106,7 @@ redirect_from:
   font-weight: 400;
 }
 
-/* EDUCATION */
+/* EDUCATION 🎓 */
 
 .cv-entry {
   display: grid;
