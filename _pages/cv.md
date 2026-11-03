@@ -314,6 +314,9 @@ redirect_from:
 
 .cv-language {
   flex: 1 1 160px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 19px 20px;
   border: 1px solid var(--line);
   border-radius: 4px;
@@ -328,6 +331,14 @@ redirect_from:
 .cv-language span {
   color: var(--muted);
   font-size: .79rem;
+}
+
+.cv-language-flag {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 /* GENERATED PUBLICATIONS / TALKS */
@@ -594,20 +605,40 @@ redirect_from:
       <span class="cv-number">05</span> Languages
     </h2>
 
-    <div class="cv-language-list">
-      <div class="cv-language">
-        <strong>Spanish</strong>
-        <span>Fluent</span>
-      </div>
-      <div class="cv-language">
-        <strong>Italian</strong>
-        <span>Fluent</span>
-      </div>
-      <div class="cv-language">
-        <strong>English</strong>
-        <span>Fluent</span>
-      </div>
+   <div class="cv-language-list">
+
+  <div class="cv-language">
+    <div>
+      <strong>Spanish</strong>
+      <span>Fluent</span>
     </div>
+    <img src="{{ base_path }}/images/flag-mexico.svg"
+         alt="Spanish flag"
+         class="cv-language-flag">
+  </div>
+
+  <div class="cv-language">
+    <div>
+      <strong>Italian</strong>
+      <span>Fluent</span>
+    </div>
+    <img src="{{ base_path }}/images/flag-italy.svg"
+         alt="Italian flag"
+         class="cv-language-flag">
+  </div>
+
+  <div class="cv-language">
+    <div>
+      <strong>English</strong>
+      <span>Fluent</span>
+    </div>
+    <img src="{{ base_path }}/images/flag-uk.svg"
+         alt="English flag"
+         class="cv-language-flag">
+  </div>
+
+  </div>
+
   </section>
 
   <section class="cv-section">
