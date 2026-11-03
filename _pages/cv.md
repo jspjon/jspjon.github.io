@@ -612,7 +612,7 @@ redirect_from:
       <strong>Spanish</strong>
       <span>Fluent</span>
     </div>
-    <img src="{{ base_path }}/images/flag-mexico.svg"
+    <img src="{{ base_path }}/images/flag-spain.svg"
          alt="Spanish flag"
          class="cv-language-flag">
   </div>
