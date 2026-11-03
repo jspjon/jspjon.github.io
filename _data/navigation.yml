@@ -10,8 +10,8 @@
 main:
 # Navigation menu for the website
 
-  - title: "Publications"
-    url: /publications/
+  - title: "About me"
+    url: /aboutme/
 
   - title: "Essays & Op-Eds"
     url: /essays-op-eds/
