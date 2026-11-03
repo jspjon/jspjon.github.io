@@ -263,15 +263,15 @@ defaults:
       share: true
       comments: true
 
-  # _aboutme
-- scope:
-    path: ""
-    type: pages
-  values:
-    layout: single
-    author_profile: true
-    share: true
-    comments: true
+# _aboutme
+  - scope:
+      path: "_pages/aboutme.html"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
 
   # _portfolio
   - scope:
