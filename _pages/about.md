@@ -294,7 +294,7 @@ redirect_from:
 <div class="subterranean-system">
   
   <div class="sys-header">
-    <h2>Subterranean Archology</h2>
+    <h2>Subterranean Profile</h2>
     <h1>Underground Exploration System</h1>
     <p>Navigate through seven subterranean levels of academic architecture. Each level represents a distinct domain of research, teaching, and professional practice.</p>
   </div>
