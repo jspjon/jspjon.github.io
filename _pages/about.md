@@ -7,502 +7,906 @@ redirect_from:
   - /about.html
 ---
 <style>
-  /* ARQUITECTURA AVANZADA - Corte Transversal con Vista Lateral */
-  .building-section {
-    margin: 50px 0 60px;
+  /* SUBTERRANEAN ARCHOLOGY - Underground Exploration System */
+  .subterranean-system {
+    margin: 80px 0 100px;
     font-family: "JetBrains Mono", monospace;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .depth-container {
+    max-width: 1100px;
+    margin: 0 auto;
     position: relative;
   }
 
-  .building-container {
-    max-width: 900px;
-    margin: 0 auto;
+  /* Header del sistema subterráneo */
+  .system-header {
+    text-align: center;
+    margin-bottom: 80px;
     position: relative;
     padding: 40px 20px;
   }
 
-  /* Título del proyecto arquitectónico */
-  .building-header {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-  }
-
-  .building-header::before,
-  .building-header::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 30%;
-    height: 1px;
-    background: #e5e1d9;
-  }
-
-  .building-header::before { left: 0; }
-  .building-header::after { right: 0; }
-
-  .building-title {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #9a8d78;
-    margin: 0;
-    display: inline-block;
-    padding: 0 20px;
-    background: #faf9f7;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* Estructura del edificio */
-  .building-structure {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  /* Columnas estructurales (laterales) */
-  .building-structure::before,
-  .building-structure::after {
+  .system-header::before {
     content: '';
     position: absolute;
     top: 0;
-    bottom: 0;
-    width: 3px;
-    background: linear-gradient(to bottom, #2a2a2a 0%, #9a8d78 100%);
-    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, 
+      transparent 0%, 
+      #9a8d78 50%, 
+      transparent 100%);
   }
 
-  .building-structure::before { left: 60px; }
-  .building-structure::after { right: 60px; }
-
-  /* Cada piso del edificio */
-  .floor-level {
-    position: relative;
-    display: grid;
-    grid-template-columns: 80px 1fr 80px;
-    min-height: 110px;
-    border-bottom: 2px solid #2a2a2a;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
+  .system-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #9a8d78;
+    margin: 80px 0 12px 0;
+    font-weight: 500;
   }
 
-  .floor-level:last-child {
-    border-bottom: 3px solid #2a2a2a;
-  }
-
-  /* Efecto hover sofisticado */
-  .floor-level:hover {
-    background: linear-gradient(to right, 
-      rgba(229, 225, 217, 0.3) 0%, 
-      rgba(229, 225, 217, 0.1) 50%, 
-      rgba(229, 225, 217, 0.3) 100%);
-    transform: scale(1.02);
-    box-shadow: 
-      0 8px 24px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  }
-
-  .floor-level:hover .floor-number {
+  .system-subtitle {
+    font-size: 2.2rem;
+    font-weight: 700;
     color: #2a2a2a;
-    transform: scale(1.1);
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
-  .floor-level:hover .floor-content h3 {
-    color: #2a2a2a;
+  .system-description {
+    font-size: 0.85rem;
+    color: #817766;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
   }
 
-  /* Indicador de elevación (izquierda) */
-  .floor-elevation {
+  /* Shaft del ascensor (indicador de profundidad) */
+  .elevator-shaft {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 15px 10px;
-    position: relative;
+    z-index: 100;
   }
 
-  .floor-elevation::before {
-    content: '';
+  .shaft-track {
     position: absolute;
     left: 50%;
     top: 0;
     bottom: 0;
-    width: 1px;
-    background: repeating-linear-gradient(
-      to bottom,
-      #e5e1d9 0px,
-      #e5e1d9 4px,
-      transparent 4px,
-      transparent 8px
-    );
-    opacity: 0.5;
+    width: 2px;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      #e5e1d9 10%,
+      #e5e1d9 90%,
+      transparent 100%);
+    transform: translateX(-50%);
   }
 
-  .elevation-marker {
+  .shaft-indicator {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid #9a8d78;
+    border-radius: 50%;
+    background: #faf9f7;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px rgba(154, 141, 120, 0.3);
+  }
+
+  .shaft-indicator.active {
+    background: #9a8d78;
+    box-shadow: 0 0 30px rgba(154, 141, 120, 0.6);
+    transform: translateX(-50%) scale(1.3);
+  }
+
+  .shaft-label {
+    position: absolute;
+    right: 20px;
     font-size: 0.65rem;
     color: #9a8d78;
     letter-spacing: 0.1em;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    position: relative;
-    z-index: 1;
-    background: #faf9f7;
-    padding: 8px 4px;
-  }
-
-  /* Contenido principal del piso (centro) */
-  .floor-content {
-    padding: 25px 30px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* Ventanas decorativas */
-  .floor-content::before {
-    content: '';
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 60px;
-    border: 2px solid #e5e1d9;
-    background: linear-gradient(135deg, 
-      rgba(250, 249, 247, 0.8) 0%, 
-      rgba(229, 225, 217, 0.4) 100%);
-    opacity: 0.6;
+    white-space: nowrap;
     transition: all 0.3s ease;
   }
 
-  .floor-level:hover .floor-content::before {
-    opacity: 1;
-    border-color: #9a8d78;
-    box-shadow: inset 0 0 20px rgba(229, 225, 217, 0.5);
-  }
-
-  .floor-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #9a8d78;
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
-  .floor-content h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    margin: 0 0 6px 0;
+  .shaft-label.active {
     color: #2a2a2a;
-    transition: color 0.3s ease;
-    line-height: 1.4;
+    font-weight: 600;
+    transform: translateX(-5px);
   }
 
-  .floor-content p {
-    font-size: 0.72rem;
-    color: #817766;
-    margin: 0;
-    line-height: 1.6;
-    opacity: 0.85;
+  /* Contenedor de pisos subterráneos */
+  .underground-levels {
+    position: relative;
+    padding: 0 20px;
   }
 
-  /* Número de piso (derecha) */
-  .floor-number-container {
+  /* Cada nivel subterráneo */
+  .underground-level {
+    position: relative;
+    margin-bottom: 120px;
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .underground-level.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Estructura del nivel */
+  .level-structure {
+    display: grid;
+    grid-template-columns: 120px 1fr 120px;
+    gap: 40px;
+    position: relative;
+    padding: 50px 0;
+    border-top: 1px solid #e5e1d9;
+    border-bottom: 1px solid #e5e1d9;
+    background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(229, 225, 217, 0.05) 50%,
+      transparent 100%);
+  }
+
+  /* Columnas estructurales */
+  .level-structure::before,
+  .level-structure::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom,
+      #9a8d78 0%,
+      #e5e1d9 50%,
+      #9a8d78 100%);
+    opacity: 0.3;
+  }
+
+  .level-structure::before { left: 100px; }
+  .level-structure::after { right: 100px; }
+
+  /* Indicador de profundidad (izquierda) */
+  .depth-indicator {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 15px 10px;
     position: relative;
   }
 
-  .floor-number-container::before {
-    content: '';
+  .depth-marker {
+    position: relative;
+    text-align: center;
+  }
+
+  .depth-number {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #e5e1d9;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+  }
+
+  .underground-level.visible .depth-number {
+    color: #9a8d78;
+  }
+
+  .depth-unit {
+    font-size: 0.7rem;
+    color: #9a8d78;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .depth-line {
     position: absolute;
-    right: 50%;
-    top: 0;
-    bottom: 0;
+    left: 50%;
+    top: -30px;
+    bottom: -30px;
     width: 1px;
     background: repeating-linear-gradient(
       to bottom,
       #e5e1d9 0px,
-      #e5e1d9 4px,
-      transparent 4px,
-      transparent 8px
+      #e5e1d9 6px,
+      transparent 6px,
+      transparent 12px
     );
-    opacity: 0.5;
-  }
-
-  .floor-number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #9a8d78;
-    line-height: 1;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    opacity: 0.4;
     z-index: 1;
-    background: #faf9f7;
-    padding: 8px 4px;
   }
 
-  .floor-unit {
-    font-size: 0.6rem;
-    color: #9a8d78;
-    letter-spacing: 0.1em;
-    margin-top: 4px;
-    text-transform: uppercase;
+  /* Contenido principal del nivel (centro) */
+  .level-content {
+    position: relative;
+    padding: 20px 0;
   }
 
-  /* Piso especial: Lobby (entrada) */
-  .floor-level.lobby {
-    background: linear-gradient(to bottom, 
-      rgba(229, 225, 217, 0.2) 0%, 
-      transparent 100%);
-    border-bottom: 4px solid #2a2a2a;
+  /* Efecto de "habitación" con perspectiva */
+  .level-room {
+    position: relative;
+    padding: 40px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
   }
 
-  .floor-level.lobby .floor-number {
+  .level-room:hover {
+    background: rgba(250, 249, 247, 0.8);
+    border-color: #e5e1d9;
+    transform: translateX(10px);
+    box-shadow: 
+      -20px 0 40px rgba(0, 0, 0, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  .level-room:hover ~ .depth-indicator .depth-number {
     color: #2a2a2a;
-    font-size: 2.8rem;
+    transform: scale(1.1);
   }
 
-  /* Piso especial: Roof (cima) */
-  .floor-level.roof {
-    background: linear-gradient(to top, 
-      rgba(229, 225, 217, 0.2) 0%, 
-      transparent 100%);
-  }
-
-  .floor-level.roof .floor-number {
-    color: #817766;
-  }
-
-  /* Detalles arquitectónicos: vigas horizontales */
-  .floor-level::after {
+  /* Detalles arquitectónicos: vigas y tuberías */
+  .level-room::before {
     content: '';
     position: absolute;
-    bottom: -1px;
-    left: 60px;
-    right: 60px;
-    height: 1px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
     background: linear-gradient(to right,
       transparent 0%,
       #e5e1d9 20%,
       #e5e1d9 80%,
       transparent 100%);
-    opacity: 0.6;
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
-  /* Indicadores de cota (como en planos) */
-  .cota-indicator {
+  .level-room:hover::before {
+    opacity: 1;
+  }
+
+  .level-room::after {
+    content: '';
     position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(to right,
+      transparent 0%,
+      #e5e1d9 20%,
+      #e5e1d9 80%,
+      transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .level-room:hover::after {
+    opacity: 1;
+  }
+
+  /* Etiquetas del nivel */
+  .level-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9a8d78;
+    margin-bottom: 16px;
+    padding: 6px 12px;
+    border: 1px solid #e5e1d9;
+    background: rgba(250, 249, 247, 0.5);
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .level-room:hover .level-tag {
+    background: #9a8d78;
+    color: #faf9f7;
+    border-color: #9a8d78;
+  }
+
+  .level-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2a2a2a;
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    transition: all 0.4s ease;
+  }
+
+  .level-room:hover .level-title {
+    transform: translateX(5px);
+  }
+
+  .level-description {
+    font-size: 0.85rem;
+    color: #817766;
+    line-height: 1.8;
+    margin: 0 0 20px 0;
+    max-width: 500px;
+  }
+
+  /* Detalles técnicos del nivel */
+  .level-details {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e1d9;
+  }
+
+  .level-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .level-detail-label {
     font-size: 0.6rem;
     color: #9a8d78;
-    letter-spacing: 0.05em;
-    opacity: 0.7;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 
-  /* Footer técnico */
-  .building-footer {
-    margin-top: 40px;
-    padding-top: 20px;
+  .level-detail-value {
+    font-size: 0.75rem;
+    color: #2a2a2a;
+    font-weight: 600;
+  }
+
+  /* Indicador de acceso (derecha) */
+  .access-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .access-icon {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #e5e1d9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #9a8d78;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    background: #faf9f7;
+  }
+
+  .level-room:hover ~ .access-indicator .access-icon {
+    border-color: #9a8d78;
+    background: #9a8d78;
+    color: #faf9f7;
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 0 0 30px rgba(154, 141, 120, 0.4);
+  }
+
+  .access-label {
+    font-size: 0.6rem;
+    color: #9a8d78;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .level-room:hover ~ .access-indicator .access-label {
+    color: #2a2a2a;
+    transform: translateY(3px);
+  }
+
+  /* Nivel especial: Ground Zero (entrada) */
+  .underground-level.ground-zero .level-structure {
+    background: linear-gradient(to bottom,
+      rgba(229, 225, 217, 0.15) 0%,
+      rgba(229, 225, 217, 0.05) 100%);
+    border-top: 3px solid #9a8d78;
+  }
+
+  .underground-level.ground-zero .depth-number {
+    color: #2a2a2a;
+    font-size: 5rem;
+  }
+
+  /* Nivel especial: Apex (cima) */
+  .underground-level.apex .level-structure {
+    background: linear-gradient(to top,
+      rgba(229, 225, 217, 0.15) 0%,
+      rgba(229, 225, 217, 0.05) 100%);
+    border-bottom: 3px solid #9a8d78;
+  }
+
+  /* Footer del sistema */
+  .system-footer {
+    margin-top: 100px;
+    padding: 40px 20px;
     border-top: 1px solid #e5e1d9;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     color: #9a8d78;
     letter-spacing: 0.1em;
   }
 
-  .building-footer span {
+  .system-footer-item {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
   }
 
-  .status-dot {
-    width: 6px;
-    height: 6px;
+  .status-indicator {
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #817766;
-    animation: pulse 2s ease-in-out infinite;
+    background: #9a8d78;
+    animation: statusPulse 2.5s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+  @keyframes statusPulse {
+    0%, 100% { 
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(154, 141, 120, 0.5);
+    }
+    50% { 
+      opacity: 0.4;
+      box-shadow: 0 0 5px rgba(154, 141, 120, 0.3);
+    }
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
-    .building-structure::before,
-    .building-structure::after {
+  @media (max-width: 1024px) {
+    .elevator-shaft {
       display: none;
     }
 
-    .floor-level {
+    .level-structure {
       grid-template-columns: 1fr;
-      padding: 20px;
+      gap: 20px;
     }
 
-    .floor-elevation,
-    .floor-number-container {
+    .depth-indicator,
+    .access-indicator {
       display: none;
     }
 
-    .floor-content::before {
+    .level-structure::before,
+    .level-structure::after {
       display: none;
     }
 
-    .floor-number {
-      font-size: 2rem;
+    .level-room {
+      padding: 30px 20px;
+    }
+
+    .level-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .system-subtitle {
+      font-size: 1.6rem;
+    }
+
+    .level-room {
+      padding: 25px 15px;
+    }
+
+    .level-details {
+      flex-direction: column;
+      gap: 16px;
     }
   }
 </style>
 
-<div class="building-section">
-  <div class="building-container">
+<div class="subterranean-system">
+  <div class="depth-container">
     
-    <div class="building-header">
-      <h2 class="building-title">Neo-Babel Arcology · Sección Transversal</h2>
+    <!-- Header del sistema -->
+    <div class="system-header">
+      <p class="system-title">Subterranean Archology</p>
+      <h1 class="system-subtitle">Underground Exploration System</h1>
+      <p class="system-description">
+        Navigate through seven subterranean levels of academic architecture. 
+        Each level represents a distinct domain of research, teaching, and professional practice.
+      </p>
     </div>
 
-    <div class="building-structure">
-      
-      <!-- NIVEL 06: CV (Roof) -->
-      <a href="/cv/" class="floor-level roof">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+21.00m</span>
-        </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 06 · Acceso Principal</span>
-          <h3>CV</h3>
-          <p>Currículum vitae completo · Experiencia profesional</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">06</span>
-          <span class="floor-unit">Roof</span>
-        </div>
-      </a>
+    <!-- Elevator shaft indicator (fixed position) -->
+    <div class="elevator-shaft">
+      <div class="shaft-track"></div>
+      <div class="shaft-indicator" data-level="6"></div>
+      <div class="shaft-label" data-level="6">-21.0m</div>
+      <div class="shaft-indicator" data-level="5"></div>
+      <div class="shaft-label" data-level="5">-17.5m</div>
+      <div class="shaft-indicator" data-level="4"></div>
+      <div class="shaft-label" data-level="4">-14.0m</div>
+      <div class="shaft-indicator" data-level="3"></div>
+      <div class="shaft-label" data-level="3">-10.5m</div>
+      <div class="shaft-indicator" data-level="2"></div>
+      <div class="shaft-label" data-level="2">-7.0m</div>
+      <div class="shaft-indicator" data-level="1"></div>
+      <div class="shaft-label" data-level="1">-3.5m</div>
+      <div class="shaft-indicator" data-level="0"></div>
+      <div class="shaft-label" data-level="0">±0.0m</div>
+    </div>
 
-      <!-- NIVEL 05: Books -->
-      <a href="/books/" class="floor-level">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+17.50m</span>
-        </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 05 · Archivo de Obras</span>
-          <h3>Books</h3>
-          <p>Publicaciones académicas · Libros y capítulos</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">05</span>
-          <span class="floor-unit">Level</span>
-        </div>
-      </a>
+    <!-- Underground levels -->
+    <div class="underground-levels">
 
-      <!-- NIVEL 04: Portfolio -->
-      <a href="/portfolio/" class="floor-level">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+14.00m</span>
+      <!-- LEVEL -06: CV (Apex) -->
+      <div class="underground-level apex" data-depth="6">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-06</div>
+              <div class="depth-unit">Apex Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/cv/" class="level-room">
+              <span class="level-tag">Level -06 · Primary Access</span>
+              <h2 class="level-title">Curriculum Vitae</h2>
+              <p class="level-description">
+                Comprehensive professional portfolio documenting academic credentials, 
+                research experience, teaching positions, and professional achievements.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Professional Record</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Status</span>
+                  <span class="level-detail-value">Current</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 04 · Sala de Proyectos</span>
-          <h3>Portfolio</h3>
-          <p>Trabajos seleccionados · Casos de estudio</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">04</span>
-          <span class="floor-unit">Level</span>
-        </div>
-      </a>
+      </div>
 
-      <!-- NIVEL 03: Mentorship -->
-      <a href="/mentorship/" class="floor-level">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+10.50m</span>
+      <!-- LEVEL -05: Books -->
+      <div class="underground-level" data-depth="5">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-05</div>
+              <div class="depth-unit">Archive Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/books/" class="level-room">
+              <span class="level-tag">Level -05 · Works Archive</span>
+              <h2 class="level-title">Books & Publications</h2>
+              <p class="level-description">
+                Scholarly books, monographs, and edited volumes exploring economic theory, 
+                institutional analysis, and the foundations of market prosperity.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Published Works</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Format</span>
+                  <span class="level-detail-value">Books & Chapters</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 03 · Centro de Guía</span>
-          <h3>Mentorship</h3>
-          <p>Asesoría académica · Orientación profesional</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">03</span>
-          <span class="floor-unit">Level</span>
-        </div>
-      </a>
+      </div>
 
-      <!-- NIVEL 02: Essays -->
-      <a href="/essays/" class="floor-level">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+7.00m</span>
+      <!-- LEVEL -04: Portfolio -->
+      <div class="underground-level" data-depth="4">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-04</div>
+              <div class="depth-unit">Project Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/portfolio/" class="level-room">
+              <span class="level-tag">Level -04 · Project Hall</span>
+              <h2 class="level-title">Portfolio</h2>
+              <p class="level-description">
+                Selected research projects, case studies, and applied economic analyses 
+                demonstrating methodological rigor and practical impact.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Research Projects</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Scope</span>
+                  <span class="level-detail-value">Applied Analysis</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 02 · Transmisiones</span>
-          <h3>Essays & Op-Eds</h3>
-          <p>Artículos de opinión · Ensayos y análisis</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">02</span>
-          <span class="floor-unit">Level</span>
-        </div>
-      </a>
+      </div>
 
-      <!-- NIVEL 01: Publications -->
-      <a href="/publications/" class="floor-level">
-        <div class="floor-elevation">
-          <span class="elevation-marker">+3.50m</span>
+      <!-- LEVEL -03: Mentorship -->
+      <div class="underground-level" data-depth="3">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-03</div>
+              <div class="depth-unit">Guidance Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/mentorship/" class="level-room">
+              <span class="level-tag">Level -03 · Guidance Center</span>
+              <h2 class="level-title">Mentorship</h2>
+              <p class="level-description">
+                Academic guidance and professional mentorship programs supporting students 
+                across disciplines in their intellectual and career development.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Academic Support</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Focus</span>
+                  <span class="level-detail-value">Student Development</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 01 · Repositorio</span>
-          <h3>Publications</h3>
-          <p>Investigaciones · Papers académicos</p>
-        </div>
-        <div class="floor-number-container">
-          <span class="floor-number">01</span>
-          <span class="floor-unit">Level</span>
-        </div>
-      </a>
+      </div>
 
-      <!-- NIVEL 00: About (Lobby) -->
-      <a href="/" class="floor-level lobby">
-        <div class="floor-elevation">
-          <span class="elevation-marker">±0.00m</span>
+      <!-- LEVEL -02: Essays -->
+      <div class="underground-level" data-depth="2">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-02</div>
+              <div class="depth-unit">Broadcast Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/essays/" class="level-room">
+              <span class="level-tag">Level -02 · Signal Transmission</span>
+              <h2 class="level-title">Essays & Op-Eds</h2>
+              <p class="level-description">
+                Analytical essays and opinion pieces addressing contemporary economic policy, 
+                institutional reform, and the philosophical foundations of free markets.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Public Commentary</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Format</span>
+                  <span class="level-detail-value">Essays & Articles</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-content">
-          <span class="floor-label">Nivel 00 · Entrada Principal</span>
-          <h3>Jonathan Simon P.</h3>
-          <p>Sobre mí · Presentación personal</p>
+      </div>
+
+      <!-- LEVEL -01: Publications -->
+      <div class="underground-level" data-depth="1">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">-01</div>
+              <div class="depth-unit">Repository Level</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/publications/" class="level-room">
+              <span class="level-tag">Level -01 · Data Repository</span>
+              <h2 class="level-title">Publications</h2>
+              <p class="level-description">
+                Peer-reviewed academic papers and research articles in economics, law, 
+                finance, and public policy, contributing to scholarly discourse.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Academic Research</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Format</span>
+                  <span class="level-detail-value">Journal Articles</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-        <div class="floor-number-container">
-          <span class="floor-number">00</span>
-          <span class="floor-unit">Lobby</span>
+      </div>
+
+      <!-- LEVEL 00: About (Ground Zero) -->
+      <div class="underground-level ground-zero" data-depth="0">
+        <div class="level-structure">
+          <div class="depth-indicator">
+            <div class="depth-line"></div>
+            <div class="depth-marker">
+              <div class="depth-number">00</div>
+              <div class="depth-unit">Ground Zero</div>
+            </div>
+          </div>
+          <div class="level-content">
+            <a href="/" class="level-room">
+              <span class="level-tag">Level 00 · Main Entrance</span>
+              <h2 class="level-title">Jonathan Simon P.</h2>
+              <p class="level-description">
+                Interdisciplinary scholar specializing in law, economics, finance, accounting, 
+                and public policy. Committed to advancing knowledge at the intersection of 
+                market institutions and human prosperity.
+              </p>
+              <div class="level-details">
+                <div class="level-detail">
+                  <span class="level-detail-label">Classification</span>
+                  <span class="level-detail-value">Personal Profile</span>
+                </div>
+                <div class="level-detail">
+                  <span class="level-detail-label">Languages</span>
+                  <span class="level-detail-value">ES · IT · EN</span>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="access-indicator">
+            <div class="access-icon">↓</div>
+            <span class="access-label">Access</span>
+          </div>
         </div>
-      </a>
+      </div>
 
     </div>
 
-    <div class="building-footer">
-      <span>
-        <span class="status-dot"></span>
-        SISTEMA OPERATIVO
-      </span>
-      <span>ARQUITECTURA v2.0</span>
-      <span>7 NIVELES · 21.00m</span>
+    <!-- System footer -->
+    <div class="system-footer">
+      <div class="system-footer-item">
+        <span class="status-indicator"></span>
+        <span>SYSTEM OPERATIONAL</span>
+      </div>
+      <div class="system-footer-item">
+        <span>ARCHITECTURE v3.0</span>
+      </div>
+      <div class="system-footer-item">
+        <span>7 LEVELS · 21.0m DEPTH</span>
+      </div>
     </div>
 
   </div>
 </div>
+
+<script>
+  // Scroll-based reveal animation
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // Update elevator shaft indicator
+        const depth = entry.target.dataset.depth;
+        document.querySelectorAll('.shaft-indicator').forEach(indicator => {
+          indicator.classList.remove('active');
+        });
+        document.querySelectorAll('.shaft-label').forEach(label => {
+          label.classList.remove('active');
+        });
+        
+        const activeIndicator = document.querySelector(`.shaft-indicator[data-level="${depth}"]`);
+        const activeLabel = document.querySelector(`.shaft-label[data-level="${depth}"]`);
+        if (activeIndicator) activeIndicator.classList.add('active');
+        if (activeLabel) activeLabel.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all underground levels
+  document.querySelectorAll('.underground-level').forEach(level => {
+    observer.observe(level);
+  });
+
+  // Position elevator shaft indicators
+  function positionShaftIndicators() {
+    const shaft = document.querySelector('.elevator-shaft');
+    const indicators = document.querySelectorAll('.shaft-indicator');
+    const labels = document.querySelectorAll('.shaft-label');
+    const shaftHeight = shaft.offsetHeight;
+    const indicatorCount = indicators.length;
+    const spacing = shaftHeight / (indicatorCount - 1);
+
+    indicators.forEach((indicator, index) => {
+      indicator.style.top = `${index * spacing}px`;
+    });
+
+    labels.forEach((label, index) => {
+      label.style.top = `${index * spacing - 8}px`;
+    });
+  }
+
+  positionShaftIndicators();
+  window.addEventListener('resize', positionShaftIndicators);
+</script>
 
 <style> .profile-wrapper { margin: 28px 0 36px; font-family: "JetBrains Mono", monospace; }
 
