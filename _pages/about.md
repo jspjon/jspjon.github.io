@@ -315,19 +315,19 @@ redirect_from:
       </a>
     </div>
 
-    <!-- LEVEL 01: PUBLICATIONS -->
-    <div class="sys-level">
-      <div class="sys-depth-marker">
-        <span class="depth-number">01</span>
-        <span class="depth-elevation">ELV. -3.50m</span>
-      </div>
-      <a href="/publications/" class="sys-content-card">
-        <span class="sys-tag">Data Repository</span>
-        <h3 class="sys-title">Publications</h3>
-        <p class="sys-desc">Peer-reviewed academic papers and research articles in economics, law, finance, and public policy.</p>
-        <span class="sys-access">→</span>
-      </a>
-    </div>
+   <!-- LEVEL 01: ABOUT ME -->
+<div class="sys-level">
+  <div class="sys-depth-marker">
+    <span class="depth-number">01</span>
+    <span class="depth-elevation">ELV. -3.50m</span>
+  </div>
+  <a href="/about-me/" class="sys-content-card">
+    <span class="sys-tag">Academic Profile</span>
+    <h3 class="sys-title">About Me</h3>
+    <p class="sys-desc">Academic background, professional experience, research interests, and intellectual pursuits.</p>
+    <span class="sys-access">→</span>
+  </a>
+</div>
 
     <!-- LEVEL 02: ESSAYS -->
     <div class="sys-level">
@@ -335,7 +335,7 @@ redirect_from:
         <span class="depth-number">02</span>
         <span class="depth-elevation">ELV. -7.00m</span>
       </div>
-      <a href="/essays/" class="sys-content-card">
+      <a href="/essays-op-eds/" class="sys-content-card">
         <span class="sys-tag">Signal Transmission</span>
         <h3 class="sys-title">Essays & Op-Eds</h3>
         <p class="sys-desc">Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform.</p>
