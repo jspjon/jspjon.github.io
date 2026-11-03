@@ -6,433 +6,408 @@ redirect_from:
   - /about/
   - /about.html
 ---
+
 <style>
   /* =========================================
-    Profile-Strata
+     SUBTERRANEAN ARCHOLOGY (High-End Engineering)
+     Paleta extraída directamente de tu GitHub Page
      ========================================= */
-  :root {
-    --arch-bg: #060608;
-    --arch-block: #0e0e11;
-    --arch-block-hover: #131318;
-    --arch-cyan: #00f0ff;
-    --arch-amber: #ffb800;
-    --arch-text: #eaeaea;
-    --arch-muted: #6b6b76;
-    --arch-border: #2a2a30;
-    --arch-font: 'JetBrains Mono', 'Courier New', monospace;
-  }
-
-  .arch-container {
-    max-width: 900px;
-    margin: 60px auto 100px;
-    padding: 60px 20px;
-    font-family: var(--arch-font);
-    background: var(--arch-bg);
-    color: var(--arch-text);
+  .subterranean-system {
+    --sys-bg: #faf9f7;
+    --sys-border: #e5e1d9;
+    --sys-accent: #9a8d78;
+    --sys-muted: #817766;
+    --sys-text: #2a2a2a;
+    --sys-hover: #f4f2ef;
+    
+    margin: 60px 0 80px;
+    font-family: "JetBrains Mono", monospace;
     position: relative;
-    overflow: hidden;
-    border-radius: 4px;
   }
 
-  /* Fondo de cuadrícula tipo plano arquitectónico */
-  .arch-container::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .arch-header {
+  .sys-header {
     text-align: center;
-    margin-bottom: 80px;
-    position: relative;
-    z-index: 2;
+    margin-bottom: 60px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--sys-border);
   }
 
-  .arch-header h2 {
+  .sys-header h2 {
     font-size: 0.7rem;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--arch-cyan);
-    margin-bottom: 16px;
+    color: var(--sys-accent);
+    margin: 0 0 16px 0;
     font-weight: 500;
   }
 
-  .arch-header h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin: 0;
-    background: linear-gradient(to right, #ffffff, #888888);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .sys-header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: var(--sys-text);
+    margin: 0 0 16px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
-  /* Eje central (Shaft del ascensor) */
-  .arch-spine {
+  .sys-header p {
+    font-size: 0.8rem;
+    color: var(--sys-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* Contenedor principal con Grid para evitar superposiciones */
+  .sys-shaft {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 20px;
+  }
+
+  /* Línea central del eje estructural (El "pozo") */
+  .sys-shaft::before {
+    content: '';
     position: absolute;
-    left: 50%;
-    top: 220px;
-    bottom: 80px;
-    width: 2px;
-    background: linear-gradient(to bottom, 
-      transparent, 
-      var(--arch-cyan) 15%, 
-      var(--arch-cyan) 85%, 
-      transparent);
-    opacity: 0.2;
-    transform: translateX(-50%);
+    left: 39px; /* Alineado con el centro de los marcadores */
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--sys-border) 0px,
+      var(--sys-border) 6px,
+      transparent 6px,
+      transparent 12px
+    );
     z-index: 0;
   }
 
-  .arch-spine::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background: var(--arch-cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--arch-cyan);
-    animation: spineTravel 4s ease-in-out infinite;
+  /* Cada nivel subterráneo */
+  .sys-level {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 30px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
   }
 
-  @keyframes spineTravel {
-    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateY(0); }
-    50% { opacity: 1; transform: translateX(-50%) translateY(300px); }
-  }
-
-  .arch-levels {
+  /* Marcador de profundidad (Izquierda) */
+  .sys-depth-marker {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    position: relative;
-    z-index: 2;
-  }
-
-  /* BLOQUE ARQUITECTÓNICO (Cada piso) */
-  .arch-block {
-    display: grid;
-    grid-template-columns: 90px 1fr 90px;
     align-items: center;
-    background: var(--arch-block);
-    border: 1px solid var(--arch-border);
-    text-decoration: none !important;
-    color: inherit !important;
+    padding-top: 24px;
     position: relative;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    overflow: hidden;
   }
 
-  /* EFECTO 8D CHONGQING: Desplazamiento asimétrico */
-  .arch-block:nth-child(1) { transform: translateX(0); width: 100%; border-color: var(--arch-cyan); } /* Lobby: Base sólida */
-  .arch-block:nth-child(2) { transform: translateX(-24px); width: 95%; }
-  .arch-block:nth-child(3) { transform: translateX(24px); width: 95%; }
-  .arch-block:nth-child(4) { transform: translateX(-16px); width: 90%; }
-  .arch-block:nth-child(5) { transform: translateX(16px); width: 90%; }
-  .arch-block:nth-child(6) { transform: translateX(-8px); width: 85%; }
-  .arch-block:nth-child(7) { transform: translateX(8px); width: 85%; }
-
-  /* Efecto Hover de Alto Nivel: Centrado, elevación y brillo */
-  .arch-block:hover {
-    background: var(--arch-block-hover);
-    border-color: var(--arch-cyan);
-    transform: translateX(0) scale(1.03) !important;
-    box-shadow: 
-      0 25px 50px -12px rgba(0, 0, 0, 0.6),
-      0 0 30px rgba(0, 240, 255, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    z-index: 10;
-  }
-
-  /* Efecto de "Scanline" al hacer hover */
-  .arch-block::before {
+  /* Línea conectora horizontal */
+  .sys-depth-marker::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(0, 240, 255, 0.04) 50%, transparent 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-  }
-  .arch-block:hover::before { opacity: 1; }
-
-  /* Columna del número de piso */
-  .block-floor {
-    padding: 32px 20px;
-    text-align: center;
-    border-right: 1px solid var(--arch-border);
-    position: relative;
+    top: 32px;
+    right: -30px;
+    width: 30px;
+    height: 1px;
+    background: var(--sys-border);
+    transition: background 0.3s ease;
   }
 
-  .floor-number {
-    font-size: 2.8rem;
+  .sys-level:hover .sys-depth-marker::after {
+    background: var(--sys-accent);
+  }
+
+  .depth-number {
+    font-size: 2.2rem;
     font-weight: 800;
-    color: var(--arch-border);
+    color: var(--sys-border);
     line-height: 1;
-    transition: all 0.4s ease;
+    letter-spacing: -0.03em;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .depth-elevation {
+    font-size: 0.6rem;
+    color: var(--sys-muted);
+    letter-spacing: 0.1em;
+    margin-top: 8px;
     font-variant-numeric: tabular-nums;
   }
 
-  .arch-block:hover .floor-number {
-    color: var(--arch-cyan);
-    text-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  /* Tarjeta de contenido del nivel */
+  .sys-content-card {
+    display: block;
+    text-decoration: none !important;
+    color: inherit !important;
+    padding: 28px 32px;
+    border: 1px solid var(--sys-border);
+    background: var(--sys-bg);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Efecto Hover de Alto Nivel */
+  .sys-content-card:hover {
+    background: var(--sys-hover);
+    border-color: var(--sys-accent);
+    transform: translateX(8px);
+    box-shadow: 0 12px 30px -10px rgba(154, 141, 120, 0.15);
+  }
+
+  .sys-content-card:hover ~ .sys-depth-marker .depth-number,
+  .sys-level:has(.sys-content-card:hover) .depth-number {
+    color: var(--sys-text);
     transform: scale(1.1);
   }
 
-  .floor-label {
+  .sys-tag {
+    display: inline-block;
     font-size: 0.6rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--arch-muted);
-    margin-top: 10px;
-    display: block;
-  }
-
-  /* Contenido central */
-  .block-content {
-    padding: 32px 40px;
-  }
-
-  .block-tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--arch-amber);
+    color: var(--sys-accent);
     margin-bottom: 12px;
     padding: 4px 10px;
-    border: 1px solid var(--arch-border);
-    background: rgba(255, 184, 0, 0.05);
+    border: 1px solid var(--sys-border);
+    background: rgba(154, 141, 120, 0.05);
     transition: all 0.3s ease;
   }
 
-  .arch-block:hover .block-tag {
-    border-color: var(--arch-amber);
-    background: rgba(255, 184, 0, 0.1);
+  .sys-content-card:hover .sys-tag {
+    border-color: var(--sys-accent);
+    background: rgba(154, 141, 120, 0.1);
   }
 
-  .block-title {
-    font-size: 1.4rem;
+  .sys-title {
+    font-size: 1.15rem;
     font-weight: 700;
-    margin: 0 0 8px 0;
-    letter-spacing: -0.02em;
-    color: var(--arch-text);
+    color: var(--sys-text);
+    margin: 0 0 10px 0;
+    letter-spacing: -0.01em;
     transition: transform 0.3s ease;
   }
 
-  .arch-block:hover .block-title {
-    transform: translateX(6px);
+  .sys-content-card:hover .sys-title {
+    transform: translateX(4px);
   }
 
-  .block-desc {
-    font-size: 0.78rem;
-    color: var(--arch-muted);
-    line-height: 1.6;
+  .sys-desc {
+    font-size: 0.75rem;
+    color: var(--sys-muted);
+    line-height: 1.7;
     margin: 0;
-    max-width: 400px;
+    max-width: 550px;
   }
 
-  /* Flecha de acceso */
-  .block-arrow {
-    padding: 32px 20px;
-    text-align: center;
+  /* Indicador de acceso (flecha) */
+  .sys-access {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px);
     font-size: 1.2rem;
-    color: var(--arch-border);
+    color: var(--sys-border);
+    opacity: 0;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    border-left: 1px solid var(--arch-border);
   }
 
-  .arch-block:hover .block-arrow {
-    color: var(--arch-cyan);
-    transform: translateX(6px);
+  .sys-content-card:hover .sys-access {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    color: var(--sys-accent);
   }
 
-  /* Estilo especial para el Lobby (Nivel 00) */
-  .arch-block.lobby {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.04), transparent);
+  /* Nivel especial: Ground Zero (Entrada) */
+  .sys-level.ground-zero .sys-content-card {
+    border-left: 3px solid var(--sys-text);
+    background: linear-gradient(to right, rgba(42, 42, 42, 0.02), transparent);
   }
-  .arch-block.lobby .floor-number {
-    color: var(--arch-cyan);
+  
+  .sys-level.ground-zero .depth-number {
+    color: var(--sys-text);
   }
 
-  /* Footer del sistema */
-  .arch-footer {
-    margin-top: 60px;
+  /* Footer técnico */
+  .sys-footer {
+    margin-top: 50px;
     padding-top: 24px;
-    border-top: 1px solid var(--arch-border);
+    border-top: 1px solid var(--sys-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 0.65rem;
-    color: var(--arch-muted);
+    color: var(--sys-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    position: relative;
-    z-index: 2;
+  }
+
+  .sys-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .status-dot {
-    display: inline-block;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--arch-cyan);
-    margin-right: 8px;
-    box-shadow: 0 0 10px var(--arch-cyan);
-    animation: blink 2s infinite;
+    background: var(--sys-accent);
+    animation: sysPulse 2.5s ease-in-out infinite;
   }
 
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+  @keyframes sysPulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(154, 141, 120, 0.4); }
+    50% { opacity: 0.5; box-shadow: 0 0 0 4px rgba(154, 141, 120, 0); }
   }
 
-  /* Responsive: Se convierte en una pila limpia en móviles */
+  /* Responsive: Se adapta perfectamente sin superposiciones */
   @media (max-width: 768px) {
-    .arch-block {
+    .sys-shaft { padding-left: 0; }
+    .sys-shaft::before { display: none; }
+    
+    .sys-level {
       grid-template-columns: 1fr;
-      transform: none !important;
-      width: 100% !important;
+      gap: 16px;
     }
-    .block-floor, .block-arrow {
-      display: none;
+    
+    .sys-depth-marker {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 12px;
+      padding-top: 0;
+      justify-content: flex-start;
     }
-    .block-content {
-      padding: 28px 24px;
-    }
-    .arch-spine {
-      display: none;
-    }
-    .arch-header h1 {
-      font-size: 2rem;
-    }
+    
+    .sys-depth-marker::after { display: none; }
+    
+    .depth-number { font-size: 1.5rem; }
+    .depth-elevation { margin-top: 0; }
+    
+    .sys-content-card { padding: 24px; }
+    .sys-access { display: none; }
   }
 </style>
 
-<div class="arch-container">
+<div class="subterranean-system">
   
-  <div class="arch-header">
-    <h2>System Navigation</h2>
-    <h1>Neo-Babel Arcology</h1>
+  <div class="sys-header">
+    <h2>Subterranean Archology</h2>
+    <h1>Underground Exploration System</h1>
+    <p>Navigate through seven subterranean levels of academic architecture. Each level represents a distinct domain of research, teaching, and professional practice.</p>
   </div>
 
-  <div class="arch-spine"></div>
+  <div class="sys-shaft">
 
-  <div class="arch-levels">
-    
-    <!-- LEVEL 00: LOBBY -->
-    <a href="/" class="arch-block lobby">
-      <div class="block-floor">
-        <div class="floor-number">00</div>
-        <span class="floor-label">Ground Zero</span>
+    <!-- LEVEL 00: GROUND ZERO (ABOUT) -->
+    <div class="sys-level ground-zero">
+      <div class="sys-depth-marker">
+        <span class="depth-number">00</span>
+        <span class="depth-elevation">ELV. ±0.00m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Main Entrance</span>
-        <h3 class="block-title">Jonathan Simon P.</h3>
-        <p class="block-desc">Interdisciplinary scholar. Law, economics, finance, and public policy. The foundation of the structure.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/" class="sys-content-card">
+        <span class="sys-tag">Main Entrance</span>
+        <h3 class="sys-title">Jonathan Simon P.</h3>
+        <p class="sys-desc">Interdisciplinary scholar specializing in law, economics, finance, accounting, and public policy. The foundation of the structure.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
     <!-- LEVEL 01: PUBLICATIONS -->
-    <a href="/publications/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">01</div>
-        <span class="floor-label">Repository</span>
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">01</span>
+        <span class="depth-elevation">ELV. -3.50m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Peer-Reviewed</span>
-        <h3 class="block-title">Publications</h3>
-        <p class="block-desc">Academic papers, journal articles, and formal research contributions to economic and legal discourse.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/publications/" class="sys-content-card">
+        <span class="sys-tag">Data Repository</span>
+        <h3 class="sys-title">Publications</h3>
+        <p class="sys-desc">Peer-reviewed academic papers and research articles in economics, law, finance, and public policy.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
     <!-- LEVEL 02: ESSAYS -->
-    <a href="/essays/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">02</div>
-        <span class="floor-label">Broadcast</span>
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">02</span>
+        <span class="depth-elevation">ELV. -7.00m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Signal Transmission</span>
-        <h3 class="block-title">Essays & Op-Eds</h3>
-        <p class="block-desc">Analytical essays and opinion pieces on contemporary policy, institutional reform, and free markets.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/essays/" class="sys-content-card">
+        <span class="sys-tag">Signal Transmission</span>
+        <h3 class="sys-title">Essays & Op-Eds</h3>
+        <p class="sys-desc">Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
     <!-- LEVEL 03: MENTORSHIP -->
-    <a href="/mentorship/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">03</div>
-        <span class="floor-label">Nexus</span>
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">03</span>
+        <span class="depth-elevation">ELV. -10.50m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Guidance Center</span>
-        <h3 class="block-title">Mentorship</h3>
-        <p class="block-desc">Academic guidance and professional development support for students across multiple disciplines.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/mentorship/" class="sys-content-card">
+        <span class="sys-tag">Guidance Center</span>
+        <h3 class="sys-title">Mentorship</h3>
+        <p class="sys-desc">Academic guidance and professional mentorship programs supporting students across disciplines.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
     <!-- LEVEL 04: PORTFOLIO -->
-    <a href="/portfolio/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">04</div>
-        <span class="floor-label">Showroom</span>
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">04</span>
+        <span class="depth-elevation">ELV. -14.00m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Applied Analysis</span>
-        <h3 class="block-title">Portfolio</h3>
-        <p class="block-desc">Selected research projects, case studies, and practical applications of economic and legal theory.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/portfolio/" class="sys-content-card">
+        <span class="sys-tag">Project Hall</span>
+        <h3 class="sys-title">Portfolio</h3>
+        <p class="sys-desc">Selected research projects, case studies, and applied economic analyses demonstrating methodological rigor.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
     <!-- LEVEL 05: BOOKS -->
-    <a href="/books/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">05</div>
-        <span class="floor-label">Archive</span>
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">05</span>
+        <span class="depth-elevation">ELV. -17.50m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Published Works</span>
-        <h3 class="block-title">Books</h3>
-        <p class="block-desc">Monographs, edited volumes, and comprehensive texts on institutional analysis and market prosperity.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/books/" class="sys-content-card">
+        <span class="sys-tag">Works Archive</span>
+        <h3 class="sys-title">Books</h3>
+        <p class="sys-desc">Scholarly books, monographs, and edited volumes exploring economic theory and institutional analysis.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
-    <!-- LEVEL 06: CV -->
-    <a href="/cv/" class="arch-block">
-      <div class="block-floor">
-        <div class="floor-number">06</div>
-        <span class="floor-label">Root Access</span>
+    <!-- LEVEL 06: CV (DEEPEST CORE) -->
+    <div class="sys-level">
+      <div class="sys-depth-marker">
+        <span class="depth-number">06</span>
+        <span class="depth-elevation">ELV. -21.00m</span>
       </div>
-      <div class="block-content">
-        <span class="block-tag">Primary Record</span>
-        <h3 class="block-title">Curriculum Vitae</h3>
-        <p class="block-desc">Comprehensive professional dossier. Academic credentials, experience, and institutional affiliations.</p>
-      </div>
-      <div class="block-arrow">→</div>
-    </a>
+      <a href="/cv/" class="sys-content-card">
+        <span class="sys-tag">Primary Access</span>
+        <h3 class="sys-title">Curriculum Vitae</h3>
+        <p class="sys-desc">Comprehensive professional dossier documenting academic credentials, research experience, and achievements.</p>
+        <span class="sys-access">→</span>
+      </a>
+    </div>
 
   </div>
 
-  <div class="arch-footer">
-    <div><span class="status-dot"></span> SYSTEM ONLINE</div>
-    <div>ARCHITECTURE v4.0</div>
-    <div>7 LEVELS DEEP</div>
+  <div class="sys-footer">
+    <div class="sys-status">
+      <span class="status-dot"></span>
+      <span>System Operational</span>
+    </div>
+    <div>Architecture v5.0</div>
+    <div>7 Levels · 21.0m Depth</div>
   </div>
 
 </div>
