@@ -106,56 +106,101 @@ redirect_from:
   font-weight: 400;
 }
 
-/* EDUCATION 🎓 */
+/* EDUCATION 🎓 - Cuadros con logo a la derecha */
 
 .cv-entry {
-  display: grid;
-  grid-template-columns: 125px minmax(0, 1fr);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 25px;
-  padding: 27px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  margin-bottom: 17px;
+  background-color: #fff;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.cv-entry:first-child {
-  padding-top: 8px;
+.cv-entry:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(154, 141, 120, 0.1);
 }
 
 .cv-entry:last-child {
-  border-bottom: 0;
+  margin-bottom: 0;
 }
 
-.cv-date {
+.cv-entry .cv-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cv-entry .cv-date {
   color: var(--accent);
-  font-size: .83rem;
-  padding-top: 5px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .cv-entry h3 {
-  margin: 0 0 11px;
+  margin: 0;
   font-family: "JetBrains Mono", monospace;
   font-size: 1.17rem;
-  line-height: 1.65;
+  line-height: 1.4;
   font-weight: 600;
 }
 
 .cv-institution {
-  margin-bottom: 10px;
-  font-size: .91rem;
+  margin: 0;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
 .cv-abbr {
   margin-left: 7px;
   padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
   color: var(--accent);
-  font-size: .72rem;
+  font-size: 0.72rem;
   white-space: nowrap;
 }
 
 .cv-detail {
-  margin: 0;
-  font-size: .86rem;
-  line-height: 1.95;
+  margin: 4px 0 0;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.cv-logo-box {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  transition: border-color 0.25s ease;
+}
+
+.cv-entry:hover .cv-logo-box {
+  border-color: var(--accent);
+}
+
+.cv-university-logo {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* EXPERIENCE */
@@ -336,12 +381,20 @@ redirect_from:
   }
 
   .cv-entry {
-    grid-template-columns: 1fr;
-    gap: 7px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
   }
 
   .cv-entry h3 {
     font-size: 1.05rem;
+  }
+
+  .cv-logo-box {
+    width: 80px;
+    height: 80px;
+    align-self: flex-end;
   }
 
   .cv-card {
@@ -375,9 +428,10 @@ redirect_from:
       <span class="cv-number">01</span> Education
     </h2>
 
+    <!-- Universidad 1: UACH -->
     <div class="cv-entry">
-      <div class="cv-date">2026</div>
-      <div>
+      <div class="cv-info">
+        <div class="cv-date">2026</div>
         <h3>Bachelor of Laws (LL.B.)</h3>
         <p class="cv-institution">
           Autonomous University of Chihuahua
@@ -385,11 +439,15 @@ redirect_from:
         </p>
         <p class="cv-detail">Legal Specializations · Corporate, International & Tax Law</p>
       </div>
+      <div class="cv-logo-box">
+        <img src="/assets/images/uach-logo.png" alt="UACH Logo" class="cv-university-logo">
+      </div>
     </div>
 
+    <!-- Universidad 2: Tecmilenio -->
     <div class="cv-entry">
-      <div class="cv-date">2022</div>
-      <div>
+      <div class="cv-info">
+        <div class="cv-date">2022</div>
         <h3>Bachelor of Business Administration (BBA)</h3>
         <p class="cv-institution">
           Tecmilenio University
@@ -397,17 +455,24 @@ redirect_from:
         </p>
         <p class="cv-detail">Major in Finance.</p>
       </div>
+      <div class="cv-logo-box">
+        <img src="/assets/images/tecmilenio-logo.png" alt="Tecmilenio Logo" class="cv-university-logo">
+      </div>
     </div>
 
+    <!-- Universidad 3: IPN -->
     <div class="cv-entry">
-      <div class="cv-date">2017</div>
-      <div>
+      <div class="cv-info">
+        <div class="cv-date">2017</div>
         <h3>Bachelor of Accounting (BAcc)</h3>
         <p class="cv-institution">
           National Polytechnic Institute
           <span class="cv-abbr">IPN</span>
         </p>
         <p class="cv-detail">Major in Taxation.</p>
+      </div>
+      <div class="cv-logo-box">
+        <img src="/assets/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">
       </div>
     </div>
   </section>
