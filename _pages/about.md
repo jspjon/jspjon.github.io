@@ -8,7 +8,7 @@ redirect_from:
 ---
 <style>
   /* =========================================
-     HIGH-END ARCHITECTURAL STACK (8D CITY STYLE)
+    Profile-Strata
      ========================================= */
   :root {
     --arch-bg: #060608;
