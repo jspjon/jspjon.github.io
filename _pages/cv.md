@@ -440,7 +440,7 @@ redirect_from:
         <p class="cv-detail">Legal Specializations · Corporate, International & Tax Law</p>
       </div>
       <div class="cv-logo-box">
-        <img src="/assets/images/uach-logo.png" alt="UACH Logo" class="cv-university-logo">
+<img src="{{ base_path }}/images/uach-logo.png" alt="UACH Logo" class="cv-university-logo">
       </div>
     </div>
 
@@ -456,7 +456,7 @@ redirect_from:
         <p class="cv-detail">Major in Finance.</p>
       </div>
       <div class="cv-logo-box">
-        <img src="/assets/images/tecmilenio-logo.png" alt="Tecmilenio Logo" class="cv-university-logo">
+<img src="{{ base_path }}/images/tecmilenio-logo.png" alt="Tecmilenio Logo" class="cv-university-logo">
       </div>
     </div>
 
@@ -472,8 +472,7 @@ redirect_from:
         <p class="cv-detail">Major in Taxation.</p>
       </div>
       <div class="cv-logo-box">
-        <img src="/assets/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">
-      </div>
+<img src="{{ base_path }}/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">      </div>
     </div>
   </section>
 
