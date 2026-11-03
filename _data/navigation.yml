@@ -11,7 +11,7 @@ main:
 # Navigation menu for the website
 
   - title: "About me"
-    url: /aboutme/
+    url: /about-me/
 
   - title: "Essays & Op-Eds"
     url: /essays-op-eds/
