@@ -6,167 +6,501 @@ redirect_from:
   - /about/
   - /about.html
 ---
-
 <style>
-  /* Estilos del edificio arquitectónico - Estilo académico minimalista */
-  .arcology-wrapper {
-    margin: 0 0 40px;
+  /* ARQUITECTURA AVANZADA - Corte Transversal con Vista Lateral */
+  .building-section {
+    margin: 50px 0 60px;
     font-family: "JetBrains Mono", monospace;
+    position: relative;
   }
 
-  .arcology-container {
+  .building-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    padding: 40px 20px;
+  }
+
+  /* Título del proyecto arquitectónico */
+  .building-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+
+  .building-header::before,
+  .building-header::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background: #e5e1d9;
+  }
+
+  .building-header::before { left: 0; }
+  .building-header::after { right: 0; }
+
+  .building-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #9a8d78;
+    margin: 0;
+    display: inline-block;
+    padding: 0 20px;
+    background: #faf9f7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Estructura del edificio */
+  .building-structure {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Columnas estructurales (laterales) */
+  .building-structure::before,
+  .building-structure::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, #2a2a2a 0%, #9a8d78 100%);
+    z-index: 2;
+  }
+
+  .building-structure::before { left: 60px; }
+  .building-structure::after { right: 60px; }
+
+  /* Cada piso del edificio */
+  .floor-level {
+    position: relative;
+    display: grid;
+    grid-template-columns: 80px 1fr 80px;
+    min-height: 110px;
+    border-bottom: 2px solid #2a2a2a;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .floor-level:last-child {
+    border-bottom: 3px solid #2a2a2a;
+  }
+
+  /* Efecto hover sofisticado */
+  .floor-level:hover {
+    background: linear-gradient(to right, 
+      rgba(229, 225, 217, 0.3) 0%, 
+      rgba(229, 225, 217, 0.1) 50%, 
+      rgba(229, 225, 217, 0.3) 100%);
+    transform: scale(1.02);
+    box-shadow: 
+      0 8px 24px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .floor-level:hover .floor-number {
+    color: #2a2a2a;
+    transform: scale(1.1);
+  }
+
+  .floor-level:hover .floor-content h3 {
+    color: #2a2a2a;
+  }
+
+  /* Indicador de elevación (izquierda) */
+  .floor-elevation {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 520px;
-    margin: 0 auto;
+    justify-content: center;
+    padding: 15px 10px;
     position: relative;
-    padding: 20px 0;
   }
 
-  /* Línea central decorativa (eje del edificio) */
-  .arcology-container::before {
+  .floor-elevation::before {
     content: '';
     position: absolute;
-    top: 0; bottom: 0; left: 50%;
+    left: 50%;
+    top: 0;
+    bottom: 0;
     width: 1px;
-    background: linear-gradient(to bottom, transparent, #e5e1d9, transparent);
-    opacity: 0.4;
-    z-index: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      #e5e1d9 0px,
+      #e5e1d9 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    opacity: 0.5;
   }
 
-  .arcology-level {
-    background: transparent;
-    border: 1px solid #e5e1d9;
-    border-left: 3px solid #9a8d78;
-    margin-bottom: 8px;
-    padding: 18px 22px;
-    width: 100%;
-    text-decoration: none !important;
-    color: #2a2a2a !important;
-    position: relative;
-    z-index: 1;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    display: block;
-    box-sizing: border-box;
-  }
-
-  /* ARQUITECTURA ESCALONADA (Efecto rascacielos) */
-  .arcology-level:nth-child(1) { width: 65%; border-left-color: #817766; }
-  .arcology-level:nth-child(2) { width: 72%; }
-  .arcology-level:nth-child(3) { width: 79%; }
-  .arcology-level:nth-child(4) { width: 86%; }
-  .arcology-level:nth-child(5) { width: 91%; }
-  .arcology-level:nth-child(6) { width: 96%; }
-  .arcology-level:nth-child(7) { width: 100%; border-left-color: #2a2a2a; }
-
-  .arcology-level:hover {
-    background: #faf9f7;
-    border-left-width: 6px;
-    transform: translateX(10px);
-    border-color: #aaa18f;
-  }
-
-  .arcology-level:nth-child(1):hover {
-    border-left-color: #817766;
-  }
-
-  .level-label {
-    font-size: 0.68rem;
-    color: #9a8d78;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    display: block;
-    opacity: 0.9;
-  }
-
-  .arcology-level:nth-child(1) .level-label { color: #817766; }
-  .arcology-level:nth-child(7) .level-label { color: #2a2a2a; }
-
-  .level-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
-  }
-
-  .level-title span {
-    font-weight: 400;
-    color: #817766;
-    font-size: 0.85rem;
-    margin-left: 4px;
-  }
-  
-  .arcology-status {
-    margin-top: 20px;
-    font-size: 0.68rem;
+  .elevation-marker {
+    font-size: 0.65rem;
     color: #9a8d78;
     letter-spacing: 0.1em;
-    text-align: center;
-    border-top: 1px solid #e5e1d9;
-    padding-top: 14px;
-    width: 100%;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    position: relative;
+    z-index: 1;
+    background: #faf9f7;
+    padding: 8px 4px;
   }
-  .arcology-status span { color: #817766; font-weight: 600; }
 
-  @media (max-width: 600px) {
-    .arcology-container { max-width: 100%; }
-    .arcology-level { padding: 16px 18px; }
-    .level-title { font-size: 0.95rem; }
-    .level-title span { font-size: 0.78rem; }
+  /* Contenido principal del piso (centro) */
+  .floor-content {
+    padding: 25px 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Ventanas decorativas */
+  .floor-content::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 60px;
+    border: 2px solid #e5e1d9;
+    background: linear-gradient(135deg, 
+      rgba(250, 249, 247, 0.8) 0%, 
+      rgba(229, 225, 217, 0.4) 100%);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .floor-level:hover .floor-content::before {
+    opacity: 1;
+    border-color: #9a8d78;
+    box-shadow: inset 0 0 20px rgba(229, 225, 217, 0.5);
+  }
+
+  .floor-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #9a8d78;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .floor-content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    color: #2a2a2a;
+    transition: color 0.3s ease;
+    line-height: 1.4;
+  }
+
+  .floor-content p {
+    font-size: 0.72rem;
+    color: #817766;
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  /* Número de piso (derecha) */
+  .floor-number-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;
+    position: relative;
+  }
+
+  .floor-number-container::before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      #e5e1d9 0px,
+      #e5e1d9 4px,
+      transparent 4px,
+      transparent 8px
+    );
+    opacity: 0.5;
+  }
+
+  .floor-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #9a8d78;
+    line-height: 1;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 1;
+    background: #faf9f7;
+    padding: 8px 4px;
+  }
+
+  .floor-unit {
+    font-size: 0.6rem;
+    color: #9a8d78;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Piso especial: Lobby (entrada) */
+  .floor-level.lobby {
+    background: linear-gradient(to bottom, 
+      rgba(229, 225, 217, 0.2) 0%, 
+      transparent 100%);
+    border-bottom: 4px solid #2a2a2a;
+  }
+
+  .floor-level.lobby .floor-number {
+    color: #2a2a2a;
+    font-size: 2.8rem;
+  }
+
+  /* Piso especial: Roof (cima) */
+  .floor-level.roof {
+    background: linear-gradient(to top, 
+      rgba(229, 225, 217, 0.2) 0%, 
+      transparent 100%);
+  }
+
+  .floor-level.roof .floor-number {
+    color: #817766;
+  }
+
+  /* Detalles arquitectónicos: vigas horizontales */
+  .floor-level::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 60px;
+    right: 60px;
+    height: 1px;
+    background: linear-gradient(to right,
+      transparent 0%,
+      #e5e1d9 20%,
+      #e5e1d9 80%,
+      transparent 100%);
+    opacity: 0.6;
+  }
+
+  /* Indicadores de cota (como en planos) */
+  .cota-indicator {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.6rem;
+    color: #9a8d78;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+  }
+
+  /* Footer técnico */
+  .building-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e1d9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.65rem;
+    color: #9a8d78;
+    letter-spacing: 0.1em;
+  }
+
+  .building-footer span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #817766;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .building-structure::before,
+    .building-structure::after {
+      display: none;
+    }
+
+    .floor-level {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+
+    .floor-elevation,
+    .floor-number-container {
+      display: none;
+    }
+
+    .floor-content::before {
+      display: none;
+    }
+
+    .floor-number {
+      font-size: 2rem;
+    }
   }
 </style>
 
-<div class="arcology-wrapper">
-  <div class="arcology-container">
+<div class="building-section">
+  <div class="building-container">
     
-    <!-- NIVEL 6: CV -->
-    <a href="/cv/" class="arcology-level">
-      <span class="level-label">Nivel 06 · Acceso Principal</span>
-      <span class="level-title">CV <span>/ Currículum</span></span>
-    </a>
-    
-    <!-- NIVEL 5: Books -->
-    <a href="/books/" class="arcology-level">
-      <span class="level-label">Nivel 05 · Archivo de Obras</span>
-      <span class="level-title">Books <span>/ Publicaciones</span></span>
-    </a>
-
-    <!-- NIVEL 4: Portfolio -->
-    <a href="/portfolio/" class="arcology-level">
-      <span class="level-label">Nivel 04 · Sala de Proyectos</span>
-      <span class="level-title">Portfolio <span>/ Trabajos</span></span>
-    </a>
-
-    <!-- NIVEL 3: Mentorship -->
-    <a href="/mentorship/" class="arcology-level">
-      <span class="level-label">Nivel 03 · Centro de Guía</span>
-      <span class="level-title">Mentorship <span>/ Asesoría</span></span>
-    </a>
-
-    <!-- NIVEL 2: Essays -->
-    <a href="/essays/" class="arcology-level">
-      <span class="level-label">Nivel 02 · Transmisiones</span>
-      <span class="level-title">Essays & Op-Eds <span>/ Artículos</span></span>
-    </a>
-
-    <!-- NIVEL 1: Publications -->
-    <a href="/publications/" class="arcology-level">
-      <span class="level-label">Nivel 01 · Repositorio</span>
-      <span class="level-title">Publications <span>/ Investigaciones</span></span>
-    </a>
-
-    <!-- NIVEL 0: About / Jonathan Simon P. -->
-    <a href="/" class="arcology-level">
-      <span class="level-label">Nivel 00 · Entrada Principal</span>
-      <span class="level-title">Jonathan Simon P. <span>/ Sobre mí</span></span>
-    </a>
-
-    <div class="arcology-status">
-      ESTADO: <span>EN LÍNEA</span> · ARQUITECTURA: NEO-BABEL v1.0
+    <div class="building-header">
+      <h2 class="building-title">Neo-Babel Arcology · Sección Transversal</h2>
     </div>
+
+    <div class="building-structure">
+      
+      <!-- NIVEL 06: CV (Roof) -->
+      <a href="/cv/" class="floor-level roof">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+21.00m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 06 · Acceso Principal</span>
+          <h3>CV</h3>
+          <p>Currículum vitae completo · Experiencia profesional</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">06</span>
+          <span class="floor-unit">Roof</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 05: Books -->
+      <a href="/books/" class="floor-level">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+17.50m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 05 · Archivo de Obras</span>
+          <h3>Books</h3>
+          <p>Publicaciones académicas · Libros y capítulos</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">05</span>
+          <span class="floor-unit">Level</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 04: Portfolio -->
+      <a href="/portfolio/" class="floor-level">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+14.00m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 04 · Sala de Proyectos</span>
+          <h3>Portfolio</h3>
+          <p>Trabajos seleccionados · Casos de estudio</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">04</span>
+          <span class="floor-unit">Level</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 03: Mentorship -->
+      <a href="/mentorship/" class="floor-level">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+10.50m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 03 · Centro de Guía</span>
+          <h3>Mentorship</h3>
+          <p>Asesoría académica · Orientación profesional</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">03</span>
+          <span class="floor-unit">Level</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 02: Essays -->
+      <a href="/essays/" class="floor-level">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+7.00m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 02 · Transmisiones</span>
+          <h3>Essays & Op-Eds</h3>
+          <p>Artículos de opinión · Ensayos y análisis</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">02</span>
+          <span class="floor-unit">Level</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 01: Publications -->
+      <a href="/publications/" class="floor-level">
+        <div class="floor-elevation">
+          <span class="elevation-marker">+3.50m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 01 · Repositorio</span>
+          <h3>Publications</h3>
+          <p>Investigaciones · Papers académicos</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">01</span>
+          <span class="floor-unit">Level</span>
+        </div>
+      </a>
+
+      <!-- NIVEL 00: About (Lobby) -->
+      <a href="/" class="floor-level lobby">
+        <div class="floor-elevation">
+          <span class="elevation-marker">±0.00m</span>
+        </div>
+        <div class="floor-content">
+          <span class="floor-label">Nivel 00 · Entrada Principal</span>
+          <h3>Jonathan Simon P.</h3>
+          <p>Sobre mí · Presentación personal</p>
+        </div>
+        <div class="floor-number-container">
+          <span class="floor-number">00</span>
+          <span class="floor-unit">Lobby</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="building-footer">
+      <span>
+        <span class="status-dot"></span>
+        SISTEMA OPERATIVO
+      </span>
+      <span>ARQUITECTURA v2.0</span>
+      <span>7 NIVELES · 21.00m</span>
+    </div>
+
   </div>
 </div>
 
