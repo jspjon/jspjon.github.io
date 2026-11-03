@@ -27,7 +27,7 @@ SUBTERRANEAN SYSTEM
 --sys-text: #2a2a2a;
 --sys-hover: #f4f2ef;
 
-margin: 60px 0 80px;
+margin: 20px 0 80px;
 font-family: "JetBrains Mono", monospace;
 position: relative;
 }
