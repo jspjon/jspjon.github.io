@@ -12,7 +12,7 @@ locale                   : "en-US"
 site_theme               : "default"
 title                    : "Jonathan Simon P."
 title_separator          : "-"
-name                     : &name "<h1><strong>Jonathan</strong> Simon P.</h1>"
+name                     : &name "Jonathan Simon P."
 description              : &description "Your Name's academic portfolio"
 url                      : https://jspjon.github.io
 baseurl                  : ""
