@@ -327,10 +327,11 @@ redirect_from:
   font-size: .91rem;
   margin-bottom: 4px;
 }
-
+  
 .cv-language span {
   color: var(--muted);
   font-size: .79rem;
+  text-align: center;
 }
 
 .cv-language-flag {
