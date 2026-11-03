@@ -7,6 +7,169 @@ redirect_from:
   - /about.html
 ---
 
+<style>
+  /* Estilos del edificio arquitectónico - Estilo académico minimalista */
+  .arcology-wrapper {
+    margin: 0 0 40px;
+    font-family: "JetBrains Mono", monospace;
+  }
+
+  .arcology-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px 0;
+  }
+
+  /* Línea central decorativa (eje del edificio) */
+  .arcology-container::before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, #e5e1d9, transparent);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  .arcology-level {
+    background: transparent;
+    border: 1px solid #e5e1d9;
+    border-left: 3px solid #9a8d78;
+    margin-bottom: 8px;
+    padding: 18px 22px;
+    width: 100%;
+    text-decoration: none !important;
+    color: #2a2a2a !important;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: block;
+    box-sizing: border-box;
+  }
+
+  /* ARQUITECTURA ESCALONADA (Efecto rascacielos) */
+  .arcology-level:nth-child(1) { width: 65%; border-left-color: #817766; }
+  .arcology-level:nth-child(2) { width: 72%; }
+  .arcology-level:nth-child(3) { width: 79%; }
+  .arcology-level:nth-child(4) { width: 86%; }
+  .arcology-level:nth-child(5) { width: 91%; }
+  .arcology-level:nth-child(6) { width: 96%; }
+  .arcology-level:nth-child(7) { width: 100%; border-left-color: #2a2a2a; }
+
+  .arcology-level:hover {
+    background: #faf9f7;
+    border-left-width: 6px;
+    transform: translateX(10px);
+    border-color: #aaa18f;
+  }
+
+  .arcology-level:nth-child(1):hover {
+    border-left-color: #817766;
+  }
+
+  .level-label {
+    font-size: 0.68rem;
+    color: #9a8d78;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+    opacity: 0.9;
+  }
+
+  .arcology-level:nth-child(1) .level-label { color: #817766; }
+  .arcology-level:nth-child(7) .level-label { color: #2a2a2a; }
+
+  .level-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  .level-title span {
+    font-weight: 400;
+    color: #817766;
+    font-size: 0.85rem;
+    margin-left: 4px;
+  }
+  
+  .arcology-status {
+    margin-top: 20px;
+    font-size: 0.68rem;
+    color: #9a8d78;
+    letter-spacing: 0.1em;
+    text-align: center;
+    border-top: 1px solid #e5e1d9;
+    padding-top: 14px;
+    width: 100%;
+  }
+  .arcology-status span { color: #817766; font-weight: 600; }
+
+  @media (max-width: 600px) {
+    .arcology-container { max-width: 100%; }
+    .arcology-level { padding: 16px 18px; }
+    .level-title { font-size: 0.95rem; }
+    .level-title span { font-size: 0.78rem; }
+  }
+</style>
+
+<div class="arcology-wrapper">
+  <div class="arcology-container">
+    
+    <!-- NIVEL 6: CV -->
+    <a href="/cv/" class="arcology-level">
+      <span class="level-label">Nivel 06 · Acceso Principal</span>
+      <span class="level-title">CV <span>/ Currículum</span></span>
+    </a>
+    
+    <!-- NIVEL 5: Books -->
+    <a href="/books/" class="arcology-level">
+      <span class="level-label">Nivel 05 · Archivo de Obras</span>
+      <span class="level-title">Books <span>/ Publicaciones</span></span>
+    </a>
+
+    <!-- NIVEL 4: Portfolio -->
+    <a href="/portfolio/" class="arcology-level">
+      <span class="level-label">Nivel 04 · Sala de Proyectos</span>
+      <span class="level-title">Portfolio <span>/ Trabajos</span></span>
+    </a>
+
+    <!-- NIVEL 3: Mentorship -->
+    <a href="/mentorship/" class="arcology-level">
+      <span class="level-label">Nivel 03 · Centro de Guía</span>
+      <span class="level-title">Mentorship <span>/ Asesoría</span></span>
+    </a>
+
+    <!-- NIVEL 2: Essays -->
+    <a href="/essays/" class="arcology-level">
+      <span class="level-label">Nivel 02 · Transmisiones</span>
+      <span class="level-title">Essays & Op-Eds <span>/ Artículos</span></span>
+    </a>
+
+    <!-- NIVEL 1: Publications -->
+    <a href="/publications/" class="arcology-level">
+      <span class="level-label">Nivel 01 · Repositorio</span>
+      <span class="level-title">Publications <span>/ Investigaciones</span></span>
+    </a>
+
+    <!-- NIVEL 0: About / Jonathan Simon P. -->
+    <a href="/" class="arcology-level">
+      <span class="level-label">Nivel 00 · Entrada Principal</span>
+      <span class="level-title">Jonathan Simon P. <span>/ Sobre mí</span></span>
+    </a>
+
+    <div class="arcology-status">
+      ESTADO: <span>EN LÍNEA</span> · ARQUITECTURA: NEO-BABEL v1.0
+    </div>
+  </div>
+</div>
+
 <style> .profile-wrapper { margin: 28px 0 36px; font-family: "JetBrains Mono", monospace; }
 
 .profile-card { display: block; width: 100%; max-width: none; box-sizing: border-box; padding: 28px 30px; border: 1px solid #e5e1d9; border-radius: 4px; background: transparent; }
