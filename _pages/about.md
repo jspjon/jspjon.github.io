@@ -9,7 +9,7 @@ redirect_from:
 
 <style>
   /* =========================================
-     SUBTERRANEAN ARCHOLOGY (High-End Engineering)
+     SUBTERRANEAN SYSTEM (High-End Engineering)
      Paleta extraída directamente de tu GitHub Page
      ========================================= */
   .subterranean-system {
