@@ -322,10 +322,25 @@ redirect_from:
   border-radius: 4px;
 }
 
+.cv-language > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+  
 .cv-language strong {
   display: block;
   font-size: .91rem;
   margin-bottom: 4px;
+  text-align: center;
+}
+
+.cv-language span {
+  display: block;
+  color: var(--muted);
+  font-size: .79rem;
+  text-align: center;
+  margin: 0;
 }
   
 .cv-language span {
