@@ -3,6 +3,7 @@ permalink: / title: "" author_profile: true redirect_from:
 
 /about/
 /about.html
+
 <!-- JETBRAINS MONO FONT -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
