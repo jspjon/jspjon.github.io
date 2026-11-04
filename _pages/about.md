@@ -27,6 +27,9 @@ VARIABLES GLOBALES
   --led-off: #3a3530;
   --metal-light: #f0ede8;
   --metal-dark: #d4cfc7;
+  /* [NUEVO] Ancho de la cabina del ascensor (las etiquetas
+     de los pisos se posicionan solas a partir de este valor) */
+  --cabin-width: 72px;
 }
 
 /* =========================================
@@ -72,6 +75,121 @@ SUBTERRANEAN SYSTEM (Tu diseño original)
 @media (max-width: 480px) { .sys-header h1 { font-size: 1.65rem; } .sys-welcome { font-size: 0.55em; } }
 
 /* =========================================
+[NUEVO] NIVELES ALARGADOS (viaje de ascensor)
+Cada nivel ocupa casi una pantalla para que el
+descenso se sienta como un viaje real.
+Ajusta 62vh si lo quieres más corto o largo.
+========================================= */
+@media (min-width: 769px) {
+  .sys-level { min-height: 62vh; align-items: center; }
+  .sys-depth-marker { padding-top: 0; }
+  .sys-depth-marker::after { top: 50%; }
+}
+
+/* [NUEVO] El nivel donde atraca el ascensor se ilumina */
+.sys-level.floor-active .depth-number { color: var(--sys-accent); transform: scale(1.08); }
+.sys-level.floor-active .sys-depth-marker::after { background: var(--sys-accent); }
+
+/* =========================================
+[NUEVO] ASCENSOR SVG (widget fijo lateral)
+========================================= */
+.elevator-container {
+  position: fixed;
+  right: clamp(30px, 5vw, 60px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9999;
+  display: flex; flex-direction: row-reverse;
+  align-items: center; gap: 24px;
+  font-family: "JetBrains Mono", monospace;
+}
+.elevator-shaft {
+  position: relative; width: 2px; height: 65vh; min-height: 450px;
+  background: linear-gradient(to bottom,
+    transparent 0%, var(--sys-border) 8%,
+    var(--sys-border) 92%, transparent 100%);
+}
+.floor-marker {
+  position: absolute; left: 50%; transform: translate(-50%, -50%);
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--sys-bg); border: 2px solid var(--sys-border);
+  cursor: pointer; z-index: 2;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.floor-marker::before {
+  content: attr(data-label); position: absolute; top: 50%;
+  transform: translateY(-50%);
+  right: calc(var(--cabin-width) / 2 + 12px);
+  font-size: 0.65rem; font-weight: 700;
+  color: var(--sys-muted); letter-spacing: 0.1em; opacity: 0;
+  transition: all 0.3s ease; white-space: nowrap;
+}
+.floor-marker::after {
+  content: ''; position: absolute;
+  right: calc(var(--cabin-width) / 2 + 2px);
+  top: 50%; transform: translateY(-50%);
+  width: 0px; height: 1px;
+  background: var(--sys-accent);
+  transition: width 0.3s ease;
+}
+.floor-marker:hover, .floor-marker.active {
+  background: var(--sys-accent); border-color: var(--sys-accent);
+  box-shadow: 0 0 0 5px rgba(154, 141, 120, 0.15);
+}
+.floor-marker:hover::before, .floor-marker.active::before {
+  opacity: 1; color: var(--sys-accent);
+  right: calc(var(--cabin-width) / 2 + 16px);
+}
+.floor-marker:hover::after, .floor-marker.active::after { width: 14px; }
+.elevator-cabin {
+  position: absolute; left: 50%; top: 0;
+  transform: translate(-50%, 0);
+  width: var(--cabin-width);
+  z-index: 3; will-change: transform;
+}
+.elevator-cabin::before {
+  content: ''; position: absolute; top: -100vh; left: 50%;
+  transform: translateX(-50%); width: 2px; height: 100vh;
+  background: var(--sys-muted); opacity: 0.3; z-index: -1;
+}
+.elevator-cabin svg {
+  width: 100%; height: auto; display: block; overflow: visible;
+  transition: filter 0.4s ease;
+}
+.elevator-cabin.doors-open svg {
+  filter: drop-shadow(0 0 16px rgba(255, 179, 71, 0.45));
+}
+.svg-door-left, .svg-door-right {
+  transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.elevator-cabin.doors-open .svg-door-left  { transform: translateX(-44px); }
+.elevator-cabin.doors-open .svg-door-right { transform: translateX(44px); }
+.door-light { opacity: 0; transition: opacity 0.5s ease; mix-blend-mode: screen; }
+.elevator-cabin.doors-open .door-light { opacity: 1; }
+#svgFloorDisplay {
+  fill: var(--led-on);
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 800; font-size: 16px; letter-spacing: 2px;
+  transition: fill 0.4s ease, filter 0.4s ease, opacity 0.3s ease;
+}
+.elevator-cabin:not(.doors-open) #svgFloorDisplay { opacity: 0.75; }
+.elevator-cabin.doors-open #svgFloorDisplay {
+  fill: #ffd700;
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
+}
+.cabin-light {
+  transform-box: fill-box; transform-origin: center;
+  animation: cabinPulse 2.5s ease-in-out infinite;
+}
+@keyframes cabinPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50%      { opacity: 0.85; transform: scale(1.15); }
+}
+/* El ascensor se oculta en pantallas angostas para no tapar
+   tus tarjetas. Baja este número si quieres verlo antes. */
+@media (max-width: 1150px) { .elevator-container { display: none; } }
+
+/* =========================================
 PROFILE SECTION (Tu diseño original)
 ========================================= */
 .profile-wrapper { margin: 28px 0 36px; font-family: "JetBrains Mono", monospace; }
@@ -99,6 +217,46 @@ PROFILE SECTION (Tu diseño original)
   .interest-grid { grid-template-columns: 1fr; gap: 12px; } .interest-item { padding: 18px 17px; } .interest-item p { font-size: 0.7rem; } .research-card { padding: 19px; }
 }
 </style>
+
+<!-- =========================================
+[NUEVO] ASCENSOR SVG — WIDGET FIJO LATERAL
+========================================= -->
+<div class="elevator-container" id="elevatorContainer">
+  <div class="elevator-shaft" id="elevatorShaft">
+    <div class="floor-marker" data-floor="0" data-label="GROUND"   style="top: 0%"></div>
+    <div class="floor-marker" data-floor="1" data-label="LEVEL 01" style="top: 16.66%"></div>
+    <div class="floor-marker" data-floor="2" data-label="LEVEL 02" style="top: 33.33%"></div>
+    <div class="floor-marker" data-floor="3" data-label="LEVEL 03" style="top: 50%"></div>
+    <div class="floor-marker" data-floor="4" data-label="LEVEL 04" style="top: 66.66%"></div>
+    <div class="floor-marker" data-floor="5" data-label="LEVEL 05" style="top: 83.33%"></div>
+    <div class="floor-marker" data-floor="6" data-label="LEVEL 06" style="top: 100%"></div>
+
+    <div class="elevator-cabin" id="elevatorCabin">
+      <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Ascensor">
+        <defs>
+          <linearGradient id="frameGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e9e4da"/><stop offset="1" stop-color="#b9ae9a"/>
+          </linearGradient>
+          <linearGradient id="doorGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#f4f2ef"/><stop offset="1" stop-color="#ddd6cb"/>
+          </linearGradient>
+          <radialGradient id="lightSpill">
+            <stop offset="0" stop-color="#ffd98a" stop-opacity="0.9"/>
+            <stop offset="1" stop-color="#ffd98a" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect x="4" y="4" width="112" height="152" rx="10" fill="url(#frameGrad)" stroke="#8f8471"/>
+        <rect x="16" y="48" width="88" height="98" rx="3" fill="#191919"/>
+        <circle class="cabin-light" cx="60" cy="136" r="6" fill="#9a8d78"/>
+        <ellipse class="door-light" cx="60" cy="97" rx="48" ry="54" fill="url(#lightSpill)"/>
+        <rect class="svg-door-left"  x="16" y="48" width="44" height="98" fill="url(#doorGrad)" stroke="rgba(154,141,120,0.5)"/>
+        <rect class="svg-door-right" x="60" y="48" width="44" height="98" fill="url(#doorGrad)" stroke="rgba(154,141,120,0.5)"/>
+        <rect x="24" y="12" width="72" height="26" rx="4" fill="#161616" stroke="#3a3a3a"/>
+        <text id="svgFloorDisplay" x="60" y="31" text-anchor="middle">00</text>
+      </svg>
+    </div>
+  </div>
+</div>
 
 <!-- =========================================
 MAIN SUBTERRANEAN SYSTEM
@@ -188,13 +346,83 @@ PROFILE SECTION CONTENT
     <div class="research-card">
       <h3>Selected Research Projects</h3>
       <p>“Macroeconomic Effects of Fiscal Consolidation and Monetary Stabilization: Evidence from Argentina, 2023–2025.”</p>
-
-        <p style="margin-top: 14px;">“The Invisible Hand, 250 Years Later: The Visible Hand of Freedom — Adam Smith, the Enlightenment, and the Prosperity of Nations in the 21st Century.”</p>
-
-        <p style="margin-top: 14px;">“Economic Freedom and Its Relationship with the Welfare, Prosperity, and Wealth of Nations in the 21st Century: A Global Analysis.”</p>
-
+      <p style="margin-top: 14px;">“The Invisible Hand, 250 Years Later: The Visible Hand of Freedom — Adam Smith, the Enlightenment, and the Prosperity of Nations in the 21st Century.”</p>
+      <p style="margin-top: 14px;">“Economic Freedom and Its Relationship with the Welfare, Prosperity, and Wealth of Nations in the 21st Century: A Global Analysis.”</p>
     </div>
+  </div>
+</div>
 
-</div>
-</div>
-      <p>
+<script>
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    const cabin = document.getElementById('elevatorCabin');
+    const shaft = document.getElementById('elevatorShaft');
+    const svgDisplay = document.getElementById('svgFloorDisplay');
+    const markers = Array.from(document.querySelectorAll('.elevator-container .floor-marker'));
+    const levels = Array.from(document.querySelectorAll('.subterranean-system .sys-level'));
+    if (!cabin || !shaft || levels.length === 0) return;
+    const totalFloors = levels.length;
+
+    // Clic en un marcador del ascensor → viajar a ese nivel
+    markers.forEach((marker, i) => {
+      marker.addEventListener('click', function () {
+        if (levels[i]) levels[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    function updateElevator() {
+      const viewCenter = window.scrollY + window.innerHeight / 2;
+
+      // Centro (en coordenadas del documento) de cada nivel/piso
+      const centers = levels.map(function (l) {
+        return l.getBoundingClientRect().top + window.scrollY + l.offsetHeight / 2;
+      });
+
+      // Progreso continuo 0..6 según qué tan abajo está el centro de la ventana
+      let progress;
+      if (viewCenter <= centers[0]) {
+        progress = 0;
+      } else if (viewCenter >= centers[totalFloors - 1]) {
+        progress = totalFloors - 1;
+      } else {
+        let i = 0;
+        while (i < totalFloors - 2 && viewCenter > centers[i + 1]) i++;
+        const span = centers[i + 1] - centers[i];
+        const t = span > 0 ? (viewCenter - centers[i]) / span : 0;
+        progress = i + t;
+      }
+
+      // Mover la cabina (0% = GROUND arriba, 100% = LEVEL 06 abajo)
+      const shaftHeight = shaft.offsetHeight;
+      const cabinHeight = cabin.offsetHeight;
+      const maxTranslate = Math.max(0, shaftHeight - cabinHeight);
+      cabin.style.transform = 'translate(-50%, ' + (progress / (totalFloors - 1)) * maxTranslate + 'px)';
+
+      // Piso actual → display LED del SVG (00 a 06)
+      const currentFloor = Math.min(Math.max(Math.round(progress), 0), totalFloors - 1);
+      if (svgDisplay) svgDisplay.textContent = String(currentFloor).padStart(2, '0');
+
+      // ¿Atracado? El nivel activo está cerca del centro de la ventana
+      const distToDock = Math.abs(centers[currentFloor] - viewCenter);
+      const isDocked = distToDock < window.innerHeight * 0.30;
+
+      markers.forEach(function (m, i) { m.classList.toggle('active', i === currentFloor); });
+      levels.forEach(function (l, i) { l.classList.toggle('floor-active', isDocked && i === currentFloor); });
+      cabin.classList.toggle('doors-open', isDocked);
+    }
+
+    // Optimización 60fps
+    let ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(function () { updateElevator(); ticking = false; });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', function () { window.requestAnimationFrame(updateElevator); }, { passive: true });
+    window.addEventListener('load', updateElevator);
+    updateElevator();
+  });
+})();
+</script>
