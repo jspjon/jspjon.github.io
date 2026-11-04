@@ -82,7 +82,7 @@ Ajusta 62vh si lo quieres más corto o largo.
 ========================================= */
 @media (min-width: 769px) {
   .sys-level { min-height: 62vh; align-items: center; }
-  .sys-level.ground-zero { min-height: 36vh; }
+  .sys-level.ground-zero { align-items: start; padding-top: 48px; }
   .sys-depth-marker { padding-top: 0; padding-left: 10px; }
   .sys-depth-marker::after { top: 50%; }
 }
