@@ -60,7 +60,7 @@
 
       // ¿Atracado? El nivel activo está cerca del centro de la ventana
       var dist = Math.abs(centers[currentFloor] - viewCenter);
-      var isDocked = Math.sign(dist - window.innerHeight * 0.30) === -1;
+      var isDocked = Math.sign(dist - window.innerHeight * 0.13) === -1;
 
       markers.forEach(function (m, idx) { m.classList.toggle('active', idx === currentFloor); });
       levels.forEach(function (l, idx) { l.classList.toggle('floor-active', isDocked && idx === currentFloor); });
