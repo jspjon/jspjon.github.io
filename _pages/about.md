@@ -43,7 +43,7 @@ SUBTERRANEAN SYSTEM (Tu diseño original)
 .sys-main-title { display: block; font-family: "JetBrains Mono", monospace; font-size: 1em; font-weight: 700; letter-spacing: -0.02em; color: var(--sys-text); }
 .sys-header p { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--sys-muted); max-width: 600px; margin: 0 auto; line-height: 1.8; }
 .sys-shaft { display: flex; flex-direction: column; position: relative; padding-left: 20px; }
-.sys-shaft::before { content: ''; position: absolute; left: 39px; top: 0; bottom: 0; width: 1px; background: repeating-linear-gradient(to bottom, var(--sys-border) 0px, var(--sys-border) 6px, transparent 6px, transparent 12px); z-index: 0; }
+.sys-shaft::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: repeating-linear-gradient(to bottom, var(--sys-border) 0px, var(--sys-border) 6px, transparent 6px, transparent 12px); z-index: 0; }
 .sys-level { display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 12px; position: relative; z-index: 1; }
 .sys-depth-marker { display: flex; flex-direction: column; align-items: center; padding-top: 24px; position: relative; }
 .sys-depth-marker::after { content: ''; position: absolute; top: 32px; right: -30px; width: 30px; height: 1px; background: var(--sys-border); transition: background 0.3s ease; }
@@ -82,7 +82,7 @@ Ajusta 62vh si lo quieres más corto o largo.
 ========================================= */
 @media (min-width: 769px) {
   .sys-level { min-height: 62vh; align-items: center; }
-  .sys-depth-marker { padding-top: 0; }
+  .sys-depth-marker { padding-top: 0; padding-left: 10px; }
   .sys-depth-marker::after { top: 50%; }
 }
 
@@ -119,7 +119,7 @@ Ajusta 62vh si lo quieres más corto o largo.
 .floor-marker::before {
   content: attr(data-label); position: absolute; top: 50%;
   transform: translateY(-50%);
-  right: calc(var(--cabin-width) / 2 + 12px);
+  right: calc(var(--cabin-width) / 2 + 28px);
   font-size: 0.65rem; font-weight: 700;
   color: var(--sys-muted); letter-spacing: 0.1em; opacity: 0;
   transition: all 0.3s ease; white-space: nowrap;
@@ -138,7 +138,7 @@ Ajusta 62vh si lo quieres más corto o largo.
 }
 .floor-marker:hover::before, .floor-marker.active::before {
   opacity: 1; color: var(--sys-accent);
-  right: calc(var(--cabin-width) / 2 + 16px);
+  right: calc(var(--cabin-width) / 2 + 32px);
 }
 .floor-marker:hover::after, .floor-marker.active::after { width: 14px; }
 .elevator-cabin {
@@ -224,12 +224,12 @@ PROFILE SECTION (Tu diseño original)
 <div class="elevator-container" id="elevatorContainer">
   <div class="elevator-shaft" id="elevatorShaft">
     <div class="floor-marker" data-floor="0" data-label="GROUND"   style="top: 0%"></div>
-    <div class="floor-marker" data-floor="1" data-label="LEVEL 01" style="top: 16.66%"></div>
-    <div class="floor-marker" data-floor="2" data-label="LEVEL 02" style="top: 33.33%"></div>
-    <div class="floor-marker" data-floor="3" data-label="LEVEL 03" style="top: 50%"></div>
-    <div class="floor-marker" data-floor="4" data-label="LEVEL 04" style="top: 66.66%"></div>
-    <div class="floor-marker" data-floor="5" data-label="LEVEL 05" style="top: 83.33%"></div>
-    <div class="floor-marker" data-floor="6" data-label="LEVEL 06" style="top: 100%"></div>
+    <div class="floor-marker" data-floor="1" data-label="LEVEL -01" style="top: 16.66%"></div>
+    <div class="floor-marker" data-floor="2" data-label="LEVEL -02" style="top: 33.33%"></div>
+    <div class="floor-marker" data-floor="3" data-label="LEVEL -03" style="top: 50%"></div>
+    <div class="floor-marker" data-floor="4" data-label="LEVEL -04" style="top: 66.66%"></div>
+    <div class="floor-marker" data-floor="5" data-label="LEVEL -05" style="top: 83.33%"></div>
+    <div class="floor-marker" data-floor="6" data-label="LEVEL -06" style="top: 100%"></div>
 
     <div class="elevator-cabin" id="elevatorCabin">
       <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Ascensor">
@@ -270,31 +270,31 @@ MAIN SUBTERRANEAN SYSTEM
 
   <div class="sys-shaft">
     <div class="sys-level ground-zero" id="level-00">
-      <div class="sys-depth-marker"><span class="depth-number">00</span><span class="depth-elevation">ELV. ±0.00m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">00</span><span class="depth-elevation">DEPTH ±0.0m</span></div>
       <a href="/" class="sys-content-card"><span class="sys-tag">Main Entrance</span><h3 class="sys-title">Jonathan Simon P.</h3><p class="sys-desc">Interdisciplinary scholar specializing in law, economics, finance, accounting, and public policy. The foundation of the structure.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-01">
-      <div class="sys-depth-marker"><span class="depth-number">01</span><span class="depth-elevation">ELV. -3.50m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">01</span><span class="depth-elevation">DEPTH -16.7m</span></div>
       <a href="/about-me/" class="sys-content-card"><span class="sys-tag">Academic Profile</span><h3 class="sys-title">About Me</h3><p class="sys-desc">Academic background, professional experience, research interests, and intellectual pursuits.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-02">
-      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">ELV. -7.00m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">DEPTH -33.3m/span></div>
       <a href="/essays-op-eds/" class="sys-content-card"><span class="sys-tag">Signal Transmission</span><h3 class="sys-title">Essays & Op-Eds</h3><p class="sys-desc">Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-03">
-      <div class="sys-depth-marker"><span class="depth-number">03</span><span class="depth-elevation">ELV. -10.50m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">03</span><span class="depth-elevation">DEPTH -50.0m</span></div>
       <a href="/mentorship/" class="sys-content-card"><span class="sys-tag">Guidance Center</span><h3 class="sys-title">Mentorship</h3><p class="sys-desc">Academic guidance and professional mentorship programs supporting students across disciplines.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-04">
-      <div class="sys-depth-marker"><span class="depth-number">04</span><span class="depth-elevation">ELV. -14.00m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">04</span><span class="depth-elevation">DEPTH -66.7m</span></div>
       <a href="/portfolio/" class="sys-content-card"><span class="sys-tag">Project Hall</span><h3 class="sys-title">Portfolio</h3><p class="sys-desc">Selected research projects, case studies, and applied economic analyses demonstrating methodological rigor.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-05">
-      <div class="sys-depth-marker"><span class="depth-number">05</span><span class="depth-elevation">ELV. -17.50m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">05</span><span class="depth-elevation">DEPTH -83.3m</span></div>
       <a href="/books/" class="sys-content-card"><span class="sys-tag">Works Archive</span><h3 class="sys-title">Books</h3><p class="sys-desc">Scholarly books, monographs, and edited volumes exploring economic theory and institutional analysis.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-06">
-      <div class="sys-depth-marker"><span class="depth-number">06</span><span class="depth-elevation">ELV. -21.00m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">06</span><span class="depth-elevation">DEPTH -100.0m</span></div>
       <a href="/cv/" class="sys-content-card"><span class="sys-tag">Primary Access</span><h3 class="sys-title">Curriculum Vitae</h3><p class="sys-desc">Comprehensive professional dossier documenting academic credentials, research experience, and achievements.</p><span class="sys-access">→</span></a>
     </div>
   </div>
@@ -302,7 +302,7 @@ MAIN SUBTERRANEAN SYSTEM
   <div class="sys-footer">
     <div class="sys-status"><span class="status-dot"></span><span>System Operational</span></div>
     <div>Architecture v5.0</div>
-    <div>7 Levels · 21.0m Depth</div>
+    <div>7 Levels · 100m Depth</div>
   </div>
 </div>
 
