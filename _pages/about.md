@@ -96,7 +96,7 @@ Ajusta 62vh si lo quieres más corto o largo.
 ========================================= */
 .elevator-container {
   position: fixed;
-  right: clamp(30px, 5vw, 60px);
+   right: clamp(60px, 9vw, 120px);
   top: 50%;
   transform: translateY(-50%);
   z-index: 9999;
