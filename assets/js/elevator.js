@@ -58,9 +58,17 @@
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
      display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      // ¿Atracado? El nivel activo está cerca del centro de la ventana
-      var dist = Math.abs(centers[currentFloor] - viewCenter);
-      var isDocked = Math.sign(dist - window.innerHeight * 0.13) === -1;
+      // ¿Atracado? Se mide sobre la TARJETA del piso (no sobre la fila),
+      // porque la tarjeta del piso 00 va pegada al título, arriba de su fila
+      var cardEl = levels[currentFloor].querySelector('.sys-content-card');
+      var isDocked = false;
+      if (cardEl) {
+        var cr = cardEl.getBoundingClientRect();
+        var dist = Math.abs((cr.top + cr.height / 2) - window.innerHeight / 2);
+        isDocked = Math.sign(dist - window.innerHeight * 0.13) === -1;
+      }
+      // Vestíbulo: con el título a la vista, las puertas siguen abiertas
+      if (viewCenter <= centers[0]) isDocked = true;
 
       markers.forEach(function (m, idx) { m.classList.toggle('active', idx === currentFloor); });
       levels.forEach(function (l, idx) { l.classList.toggle('floor-active', isDocked && idx === currentFloor); });
