@@ -56,7 +56,7 @@
 
       // Piso actual → LED del SVG (00 a 06)
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
-      display.textContent = '0' + currentFloor;
+     display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
       // ¿Atracado? El nivel activo está cerca del centro de la ventana
       var dist = Math.abs(centers[currentFloor] - viewCenter);
