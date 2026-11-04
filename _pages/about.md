@@ -278,7 +278,7 @@ MAIN SUBTERRANEAN SYSTEM
       <a href="/about-me/" class="sys-content-card"><span class="sys-tag">Academic Profile</span><h3 class="sys-title">About Me</h3><p class="sys-desc">Academic background, professional experience, research interests, and intellectual pursuits.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-02">
-      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">DEPTH -33.3m/</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">DEPTH -33.3m</span></div>
       <a href="/essays-op-eds/" class="sys-content-card"><span class="sys-tag">Signal Transmission</span><h3 class="sys-title">Essays & Op-Eds</h3><p class="sys-desc">Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-03">
