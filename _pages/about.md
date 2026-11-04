@@ -187,4 +187,14 @@ PROFILE SECTION CONTENT
     <h2 class="profile-section-title">Research & Academic Work</h2>
     <div class="research-card">
       <h3>Selected Research Projects</h3>
+      <p>“Macroeconomic Effects of Fiscal Consolidation and Monetary Stabilization: Evidence from Argentina, 2023–2025.”</p>
+
+        <p style="margin-top: 14px;">“The Invisible Hand, 250 Years Later: The Visible Hand of Freedom — Adam Smith, the Enlightenment, and the Prosperity of Nations in the 21st Century.”</p>
+
+        <p style="margin-top: 14px;">“Economic Freedom and Its Relationship with the Welfare, Prosperity, and Wealth of Nations in the 21st Century: A Global Analysis.”</p>
+
+    </div>
+
+</div>
+</div>
       <p>
