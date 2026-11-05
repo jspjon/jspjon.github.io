@@ -1,6 +1,90 @@
-/* REFERENTES — 33 placas cronológicas. Datos + render.
-   files: candidatos en Wikimedia (se prueban en orden).
-   host: wiki de origen (por defecto: Commons). */
+/* ============================================================
+   REFERENTES — Intellectual Foundations
+   Este archivo construye toda la sección: estilos, cabecera,
+   las 33 placas y su lógica. El .md solo lo invoca.
+   ============================================================ */
+
+/* ---------- 1. ESTILOS ---------- */
+const REF_CSS = `
+:root{
+  --ref-bg:#faf9f7; --ref-border:#e5e1d9; --ref-accent:#9a8d78; --ref-muted:#817766;
+  --ref-text:#2a2a2a; --ref-num:#a69a84;
+}
+.ref-system,.ref-system *{box-sizing:border-box;margin:0;padding:0}
+.ref-system{
+  font-family:"JetBrains Mono",monospace;-webkit-font-smoothing:antialiased;
+  background:#faf9f7;color:var(--ref-text);margin:20px 0 80px;
+}
+
+/* ---------- Cabecera ---------- */
+.ref-header{text-align:center;max-width:1080px;margin:0 auto 6px;padding:0 20px 30px;border-bottom:1px solid var(--ref-border)}
+.ref-header h2{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ref-accent);font-weight:500;margin-bottom:24px}
+.ref-header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.4;margin-bottom:20px}
+.ref-welcome{display:block;font-size:.55em;font-weight:500;letter-spacing:.02em;color:var(--ref-muted);margin-bottom:12px}
+.ref-main-title{display:block;font-size:1em;font-weight:700;letter-spacing:-.02em}
+.ref-header p{font-size:.78rem;color:var(--ref-muted);max-width:700px;margin:0 auto;line-height:1.9}
+.ref-actions-top{margin-top:24px;display:flex;justify-content:center}
+.ref-depth{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ref-accent);padding:5px 12px;border:1px solid var(--ref-border);background:rgba(154,141,120,.05)}
+
+/* ---------- Botón Source ---------- */
+.btn-src{
+  font-family:inherit;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:10px 12px;border:1px solid var(--ref-border);background:transparent;color:var(--ref-muted);
+  cursor:pointer;text-decoration:none;display:inline-block;transition:all .25s ease;
+}
+.btn-src:hover{border-color:var(--ref-accent);color:var(--ref-accent)}
+
+/* ---------- Muro de placas ---------- */
+.ref-grid{max-width:1080px;margin:52px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.ref-card{
+  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  background:var(--ref-bg);border:1px solid var(--ref-border);
+  opacity:0;transform:translateY(22px);
+  transition:opacity .7s ease,transform .7s cubic-bezier(.23,1,.32,1),border-color .35s ease,box-shadow .4s ease;
+}
+.ref-card.on{opacity:1;transform:none}
+.ref-card:hover{border-color:var(--ref-accent);transform:translateY(-5px);box-shadow:0 16px 34px -14px rgba(154,141,120,.25)}
+
+.ref-plate{padding:16px 16px 12px;border-bottom:1px solid var(--ref-border);background:linear-gradient(180deg,#f3f1ec,#eceae4)}
+.ref-photo{position:relative;aspect-ratio:4/5;border:1px solid var(--ref-border);overflow:hidden;background:#e6e3dc}
+.ref-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.07) brightness(1.01);transition:filter .5s ease,transform .8s cubic-bezier(.23,1,.32,1)}
+.ref-card:hover .ref-photo img{filter:grayscale(1) contrast(1.14);transform:scale(1.03)}
+.ref-photo::after{content:"";position:absolute;inset:7px;border:1px solid rgba(250,249,247,.5);pointer-events:none;z-index:2}
+.ref-photo.noimg img{display:none}
+.ref-photo.noimg::before{content:attr(data-mono);position:absolute;inset:0;display:grid;place-items:center;font-size:2.6rem;font-weight:800;letter-spacing:.06em;color:var(--ref-accent);z-index:1}
+.ref-photo.noimg{background:linear-gradient(160deg,#efede7,#ded9cf)}
+
+.ref-body{padding:18px 18px 16px;flex:1}
+.ref-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:8px}
+.ref-no{font-size:.62rem;letter-spacing:.22em;color:var(--ref-num);font-weight:700}
+.ref-dates{font-size:.6rem;letter-spacing:.1em;color:var(--ref-muted);text-align:right}
+.ref-name{font-size:1.02rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
+.ref-tag{display:inline-block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ref-accent);padding:4px 9px;border:1px solid var(--ref-border);background:rgba(154,141,120,.05);margin-bottom:12px}
+.ref-desc{font-size:.71rem;line-height:1.85;color:var(--ref-muted)}
+.ref-quote{margin-top:14px;padding-left:12px;border-left:2px solid var(--ref-accent);font-style:italic;font-size:.67rem;line-height:1.8;opacity:.92}
+.ref-work{margin-top:13px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ref-accent)}
+
+.ref-actions{display:flex;justify-content:center;padding:13px 18px;border-top:1px solid var(--ref-border)}
+
+/* ---------- Pie ---------- */
+.ref-footer{max-width:1080px;margin:44px auto 0;padding:20px;border-top:1px solid var(--ref-border);display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:var(--ref-muted);letter-spacing:.15em;text-transform:uppercase;flex-wrap:wrap;gap:14px}
+.ref-status{display:flex;align-items:center;gap:8px}
+.ref-dot{width:6px;height:6px;border-radius:50%;background:var(--ref-accent);animation:refPulse 2.5s ease-in-out infinite}
+@keyframes refPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(154,141,120,.4)}50%{opacity:.5;box-shadow:0 0 0 4px rgba(154,141,120,0)}}
+
+@media(max-width:560px){
+  .ref-grid{padding:0 14px}
+  .ref-plate{padding:12px 12px 10px}
+  .ref-body{padding:16px 15px 14px}
+  .ref-name{font-size:.95rem}
+}
+@media(prefers-reduced-motion:reduce){
+  .ref-card{opacity:1;transform:none;transition:none}
+  .ref-dot{animation:none}
+}
+`;
+
+/* ---------- 2. DATOS — 33 referentes ---------- */
 const PLATES=[
 { no:"REF.01", name:"John Locke", slug:"john-locke", dates:"1632–1704", origin:"Wrington, England",
   role:"Social Contract · Natural Rights",
@@ -235,51 +319,89 @@ const PLATES=[
   files:["Javier Milei - Presidencia (crop).jpg","Javier Milei 2023 (cropped).jpg","Javier Milei.jpg","Retrato oficial de Javier Milei (cropped).jpg","Javier Milei - Davos 2024 (cropped).jpg"], pos:[50,15] }
 ];
 
+/* ---------- 3. CONSTRUCCIÓN ---------- */
 const HOST=r=>r.host||"commons.wikimedia.org";
 const special=(r,f,w)=>`https://${HOST(r)}/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
 const commonsPage=r=>`https://${HOST(r)}/wiki/File:${r.fileUsed||r.files[0]}`;
 
-const grid=document.getElementById("refGrid");
-grid.innerHTML=PLATES.map((r,i)=>`
-<article class="ref-card" id="plate-${i}">
-  <div class="ref-plate">
-    <div class="ref-photo" data-mono="${r.name.split(" ").filter(w=>w[0]===w[0].toUpperCase()).map(w=>w[0]).slice(0,2).join("")}">
-      <img alt="Portrait of ${r.name}" loading="lazy" decoding="async">
+(function build(){
+  /* estilos */
+  const st=document.createElement("style");
+  st.textContent=REF_CSS;
+  document.head.appendChild(st);
+
+  /* raíz (creada por el .md; si no existe, se crea aquí) */
+  let root=document.getElementById("ref-root");
+  if(!root){
+    root=document.createElement("div");
+    root.id="ref-root";
+    (document.querySelector("article")||document.querySelector("main")||document.body).appendChild(root);
+  }
+
+  root.innerHTML=`
+  <div class="ref-system">
+    <header class="ref-header">
+      <h2>Intellectual Lineage</h2>
+      <h1><span class="ref-welcome">On the shoulders of giants</span><span class="ref-main-title">Intellectual Foundations</span></h1>
+      <p>Thirty-three minds in economics, law, philosophy, and political leadership —
+      the scholars and statesmen whose ideas inform the research, teaching, and writing
+      collected on this site.</p>
+      <div class="ref-actions-top">
+        <span class="ref-depth">33 Plates · 1632 — 1970</span>
+      </div>
+    </header>
+
+    <section class="ref-grid" id="refGrid" aria-label="Portrait plates"></section>
+
+    <footer class="ref-footer">
+      <div class="ref-status"><span class="ref-dot"></span><span>Archive Operational</span></div>
+      <div>Portraits via Wikimedia Commons</div>
+      <div>For Reference &amp; Study</div>
+    </footer>
+  </div>`;
+
+  const grid=root.querySelector("#refGrid");
+  grid.innerHTML=PLATES.map((r,i)=>`
+  <article class="ref-card" id="plate-${i}">
+    <div class="ref-plate">
+      <div class="ref-photo" data-mono="${r.name.split(" ").filter(w=>w[0]===w[0].toUpperCase()).map(w=>w[0]).slice(0,2).join("")}">
+        <img alt="Portrait of ${r.name}" loading="lazy" decoding="async">
+      </div>
     </div>
-  </div>
-  <div class="ref-body">
-    <div class="ref-row"><span class="ref-no">${r.no}</span><span class="ref-dates">${r.dates} · ${r.origin}</span></div>
-    <h3 class="ref-name">${r.name}</h3>
-    <span class="ref-tag">${r.role}</span>
-    <p class="ref-desc">${r.desc}</p>
-    <p class="ref-quote">“${r.quote}”</p>
-    <p class="ref-work">Key Work — ${r.work}</p>
-  </div>
-  <div class="ref-actions">
-    <a class="btn-src" href="${commonsPage(r)}" target="_blank" rel="noopener">Source ↗</a>
-  </div>
-</article>`).join("");
+    <div class="ref-body">
+      <div class="ref-row"><span class="ref-no">${r.no}</span><span class="ref-dates">${r.dates} · ${r.origin}</span></div>
+      <h3 class="ref-name">${r.name}</h3>
+      <span class="ref-tag">${r.role}</span>
+      <p class="ref-desc">${r.desc}</p>
+      <p class="ref-quote">“${r.quote}”</p>
+      <p class="ref-work">Key Work — ${r.work}</p>
+    </div>
+    <div class="ref-actions">
+      <a class="btn-src" href="${commonsPage(r)}" target="_blank" rel="noopener">Source ↗</a>
+    </div>
+  </article>`).join("");
 
-function loadWithFallbacks(card,r){
-  const img=card.querySelector(".ref-photo img");
-  const link=card.querySelector(".btn-src");
-  let k=0;
-  img.onload=()=>{ r.fileUsed=r.files[k]; link.href=commonsPage(r); };
-  img.onerror=()=>{
-    k++;
-    if(k<r.files.length) img.src=special(r,r.files[k],900);
-    else{img.onerror=null;card.querySelector(".ref-photo").classList.add("noimg")}
-  };
-  img.src=special(r,r.files[0],900);
-}
+  function loadWithFallbacks(card,r){
+    const img=card.querySelector(".ref-photo img");
+    const link=card.querySelector(".btn-src");
+    let k=0;
+    img.onload=()=>{ r.fileUsed=r.files[k]; link.href=commonsPage(r); };
+    img.onerror=()=>{
+      k++;
+      if(k<r.files.length) img.src=special(r,r.files[k],900);
+      else{img.onerror=null;card.querySelector(".ref-photo").classList.add("noimg")}
+    };
+    img.src=special(r,r.files[0],900);
+  }
 
-const refCards=grid.querySelectorAll(".ref-card");
-const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
-if(reduced){refCards.forEach(c=>c.classList.add("on"))}
-else{
-  const io=new IntersectionObserver(es=>es.forEach((e,i)=>{
-    if(e.isIntersecting){setTimeout(()=>e.target.classList.add("on"),(i%3)*90);io.unobserve(e.target)}
-  }),{threshold:.1});
-  refCards.forEach(c=>io.observe(c));
-}
-refCards.forEach((card,i)=>loadWithFallbacks(card,PLATES[i]));
+  const cards=grid.querySelectorAll(".ref-card");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced){cards.forEach(c=>c.classList.add("on"))}
+  else{
+    const io=new IntersectionObserver(es=>es.forEach((e,i)=>{
+      if(e.isIntersecting){setTimeout(()=>e.target.classList.add("on"),(i%3)*90);io.unobserve(e.target)}
+    }),{threshold:.1});
+    cards.forEach(c=>io.observe(c));
+  }
+  cards.forEach((card,i)=>loadWithFallbacks(card,PLATES[i]));
+})();
