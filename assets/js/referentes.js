@@ -274,7 +274,7 @@ const PLATES=[
   desc:"Philosopher of beauty, home and inheritance. He taught that conservatism begins in gratitude — that good things are easily destroyed and slowly, lovingly, built.",
   quote:"Good things are easily destroyed, but not easily created.",
   work:"How to Be a Conservative · 2014",
-  files:["Roger Scruton.jpg","Roger Scruton 2015.jpg","Roger Scruton 2014.jpg"], pos:[50,20] },
+  files:["Roger Scruton by Pete Helme.jpg","Roger Scruton.jpg","Roger Scruton 2015.jpg","Roger Scruton 2014.jpg"], pos:[50,20] },
 
 { no:"REF.28", name:"Clarence Thomas", slug:"clarence-thomas", dates:"b. 1948", origin:"Pin Point, Georgia",
   role:"Constitutional Law · Originalism",
