@@ -1,7 +1,7 @@
 /* ============================================================
    REFERENTES — Intellectual Foundations
    Este archivo construye toda la sección: estilos, cabecera,
-   las 33 placas y su lógica. El .md solo lo invoca.
+   las 35 placas y su lógica. El .md solo lo invoca.
    ============================================================ */
 
 /* ---------- 1. ESTILOS ---------- */
@@ -84,7 +84,7 @@ const REF_CSS = `
 }
 `;
 
-/* ---------- 2. DATOS — 33 referentes ---------- */
+/* ---------- 2. DATOS — 35 referentes ---------- */
 const PLATES=[
 { no:"REF.01", name:"John Locke", slug:"john-locke", dates:"1632–1704", origin:"Wrington, England",
   role:"Social Contract · Natural Rights",
@@ -241,77 +241,91 @@ const PLATES=[
   work:"Anarchy, State, and Utopia · 1974",
   files:["Robert Nozick 1977 Libertarian Review cover (4x5 cropped).jpg"], pos:[50,15] },
 
-{ no:"REF.23", name:"David Gordon", slug:"david-gordon", dates:"b. 1942", origin:"United States",
+{ no:"REF.23", name:"Eugene F. Fama", slug:"eugene-fama", dates:"b. 1939", origin:"Boston, Massachusetts",
+  role:"Chicago School · Efficient Markets",
+  desc:"Nobel laureate and father of the efficient-markets hypothesis. Prices, he showed, are the fastest summarizers of the world's information.",
+  quote:"I don't even know what a bubble means.",
+  work:"Efficient Capital Markets · 1970",
+  files:["Eugene Fama at Nobel Prize, 2013.jpg"], pos:[50,18] },
+
+{ no:"REF.24", name:"Arthur B. Laffer", slug:"arthur-laffer", dates:"b. 1940", origin:"Youngstown, Ohio",
+  role:"Supply-Side Economics · The Laffer Curve",
+  desc:"Economist of the curve that bears his name. Supply-side adviser to presidents — and chronicler of what high tax rates really do to work, investment and revenue.",
+  quote:"There are always two tax rates that yield the same revenue.",
+  work:"Taxes Have Consequences · 2022",
+  files:["Artur Laffer.jpg"], pos:[50,18] },
+
+{ no:"REF.25", name:"David Gordon", slug:"david-gordon", dates:"b. 1942", origin:"United States",
   role:"Austrian Economics · Philosophy",
   desc:"Philosopher of the Austrian school at the Mises Institute. Reviewer of everything, editor of the Journal of Libertarian Studies, guardian of the school's intellectual lineage.",
   quote:"Austrian economics has its origins in the late scholastics.",
   work:"The Philosophical Origins of Austrian Economics · 1993",
   files:["David Gordon by Gage Skidmore.jpg"], pos:[50,20] },
 
-{ no:"REF.24", name:"Walter Block", slug:"walter-block", dates:"b. 1942", origin:"Brooklyn, New York",
+{ no:"REF.26", name:"Walter Block", slug:"walter-block", dates:"b. 1942", origin:"Brooklyn, New York",
   role:"Austrian Economics · Anarcho-Capitalism",
   desc:"The professor of unpopular defenses. From rent control to roads, he took the arguments nobody would touch and gave them a market-case rigor that trained a generation.",
   quote:"Taxation is theft.",
   work:"Defending the Undefendable · 1976",
   files:["Walter Block.jpg","Walter Block by Gage Skidmore.jpg","Walter Block 2016.jpg"], pos:[50,20] },
 
-{ no:"REF.25", name:"Deirdre N. McCloskey", slug:"deirdre-mccloskey", dates:"b. 1942", origin:"Ann Arbor, Michigan",
+{ no:"REF.27", name:"Deirdre N. McCloskey", slug:"deirdre-mccloskey", dates:"b. 1942", origin:"Ann Arbor, Michigan",
   role:"Economic History · Rhetoric",
   desc:"Historian of the Great Enrichment. Her trilogy argues the modern world was made not by capital but by ideas — dignity and liberty for the bourgeois innovators.",
   quote:"Not capital, but ideas, made the modern world.",
   work:"Bourgeois Dignity · 2010",
   files:["Deirdre McCloskey (15579711609).jpg","Deirdre McCloskey.jpg","Deirdre Nansen McCloskey.jpg"], pos:[50,22] },
 
-{ no:"REF.26", name:"Richard A. Epstein", slug:"richard-epstein", dates:"b. 1943", origin:"New York, New York",
+{ no:"REF.28", name:"Richard A. Epstein", slug:"richard-epstein", dates:"b. 1943", origin:"New York, New York",
   role:"Law & Economics · Simple Rules",
   desc:"Legal scholar of simple rules. Takings, torts, and the case that a complex world needs few — and firm — principles.",
   quote:"You own yourself.",
   work:"Simple Rules for a Complex World · 1995",
   files:["Epsteinatgmu.jpg"], pos:[50,20] },
 
-{ no:"REF.27", name:"Roger Scruton", slug:"roger-scruton", dates:"1944–2020", origin:"Buslingthorpe, England",
+{ no:"REF.29", name:"Roger Scruton", slug:"roger-scruton", dates:"1944–2020", origin:"Buslingthorpe, England",
   role:"Philosophy · Conservatism",
   desc:"Philosopher of beauty, home and inheritance. He taught that conservatism begins in gratitude — that good things are easily destroyed and slowly, lovingly, built.",
   quote:"Good things are easily destroyed, but not easily created.",
   work:"How to Be a Conservative · 2014",
   files:["Roger Scruton by Pete Helme.jpg","Roger Scruton.jpg","Roger Scruton 2015.jpg","Roger Scruton 2014.jpg"], pos:[50,20] },
 
-{ no:"REF.28", name:"Clarence Thomas", slug:"clarence-thomas", dates:"b. 1948", origin:"Pin Point, Georgia",
+{ no:"REF.30", name:"Clarence Thomas", slug:"clarence-thomas", dates:"b. 1948", origin:"Pin Point, Georgia",
   role:"Constitutional Law · Originalism",
   desc:"Justice of the U.S. Supreme Court since 1991. From Pin Point, Georgia, to the bench — originalism as lived autobiography, and a jurisprudence of quiet conviction.",
   quote:"Good manners will open doors that the best education cannot.",
   work:"My Grandfather's Son · 2007",
   files:["Clarence Thomas official SCOTUS portrait crop.jpg"], pos:[50,18] },
 
-{ no:"REF.29", name:"Hans-Hermann Hoppe", slug:"hans-hermann-hoppe", dates:"b. 1949", origin:"Peine, Germany",
+{ no:"REF.31", name:"Hans-Hermann Hoppe", slug:"hans-hermann-hoppe", dates:"b. 1949", origin:"Peine, Germany",
   role:"Austrian Economics · Philosophy",
   desc:"Mises–Rothbard's sharpest heir. Argumentation ethics, the private-property order, and a systematic case that democracy erodes exactly what it promises to protect.",
   quote:"Democracy has nothing to do with freedom. Democracy is a soft variant of communism.",
   work:"Democracy: The God That Failed · 2001",
   files:["Hans-Hermann Hoppe.jpg","Hans-Hermann Hoppe 2012.jpg"], pos:[50,20] },
 
-{ no:"REF.30", name:"Samuel A. Alito Jr.", slug:"samuel-alito", dates:"b. 1950", origin:"Trenton, New Jersey",
+{ no:"REF.32", name:"Samuel A. Alito Jr.", slug:"samuel-alito", dates:"b. 1950", origin:"Trenton, New Jersey",
   role:"Constitutional Law · Originalism",
   desc:"Justice of the U.S. Supreme Court since 2006. The careful craftsman of the modern Court's originalist majority.",
   quote:"A judge's job is to apply the law, not to remake it.",
   work:"So Ordered",
   files:["Samuel Alito official photo.jpg"], pos:[50,18] },
 
-{ no:"REF.31", name:"Randy E. Barnett", slug:"randy-barnett", dates:"b. 1952", origin:"United States",
+{ no:"REF.33", name:"Randy E. Barnett", slug:"randy-barnett", dates:"b. 1952", origin:"United States",
   role:"Constitutional Law · Presumption of Liberty",
   desc:"Constitutional scholar and advocate. The presumption of liberty, the structure of rights, and the case that rebuilt the Ninth Amendment.",
   quote:"The presumption of liberty.",
   work:"The Structure of Liberty · 1998",
   files:["Randy Barnett.jpg"], pos:[50,20] },
 
-{ no:"REF.32", name:"Jesús Huerta de Soto", slug:"jesus-huerta-de-soto", dates:"b. 1956", origin:"Madrid, Spain",
+{ no:"REF.34", name:"Jesús Huerta de Soto", slug:"jesus-huerta-de-soto", dates:"b. 1956", origin:"Madrid, Spain",
   role:"Austrian Economics · Finance",
   desc:"The Spanish master of the Austrian school. Money, bank credit and economic cycles — a complete theory of fractional-reserve instability, taught from Madrid to the world.",
   quote:"Socialism is the most widespread intellectual error of our time.",
   work:"Money, Bank Credit, and Economic Cycles · 1998",
   files:["Profesor Jesus-Huerta-de-Soto.jpg","Jesús Huerta de Soto.jpg","Jesus Huerta de Soto.jpg","Huerta de Soto.jpg"], pos:[50,0] },
 
-{ no:"REF.33", name:"Javier Milei", slug:"javier-milei", dates:"b. 1970", origin:"Buenos Aires, Argentina",
+{ no:"REF.35", name:"Javier Milei", slug:"javier-milei", dates:"b. 1970", origin:"Buenos Aires, Argentina",
   role:"Austrian School · Political Leadership",
   desc:"Economist turned president. From classrooms and television to the Casa Rosada — proof that the ideas of Mises and Hoppe can win a national election in the 21st century.",
   quote:"¡Viva la libertad, carajo!",
@@ -343,11 +357,11 @@ const commonsPage=r=>`https://${HOST(r)}/wiki/File:${r.fileUsed||r.files[0]}`;
     <header class="ref-header">
       <h2>Intellectual Lineage</h2>
       <h1><span class="ref-welcome">On the shoulders of giants</span><span class="ref-main-title">Intellectual Foundations</span></h1>
-      <p>Thirty-three minds in economics, law, philosophy, and political leadership —
+      <p>Thirty-five minds in economics, law, philosophy, and political leadership —
       the scholars and statesmen whose ideas inform the research, teaching, and writing
       collected on this site.</p>
       <div class="ref-actions-top">
-        <span class="ref-depth">33 Plates · 1632 — 1970</span>
+        <span class="ref-depth">35 Plates · 1632 — 1970</span>
       </div>
     </header>
 
