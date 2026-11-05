@@ -1,5 +1,5 @@
 ---
-permalink: /referents/
+permalink: /referentes/
 title: "Referents"
 author_profile: true
 ---
