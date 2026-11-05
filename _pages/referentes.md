@@ -269,7 +269,7 @@ const PLATES=[
   desc:"The Spanish master of the Austrian school. Money, bank credit and economic cycles — a complete theory of fractional-reserve instability, taught from Madrid to the world.",
   quote:"Socialism is the most widespread intellectual error of our time.",
   work:"Money, Bank Credit, and Economic Cycles · 1998",
-  files:["Jesús Huerta de Soto.jpg","Jesus Huerta de Soto.jpg","Huerta de Soto.jpg"], pos:[50,20] },
+    files:["Profesor Jesus-Huerta-de-Soto.jpg","Jesús Huerta de Soto.jpg","Jesus Huerta de Soto.jpg","Huerta de Soto.jpg"], pos:[50,20] },
 
 { no:"REF.21", name:"Javier Milei", slug:"javier-milei", dates:"b. 1970", origin:"Buenos Aires, Argentina",
   role:"Austrian School · Political Leadership",
