@@ -1,8 +1,3 @@
----
-permalink: /referentes/
-title: "Referentes"
-author_profile: true
----
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
@@ -162,7 +157,7 @@ const PLATES=[
   desc:"Menger's great successor. His theory of capital and interest — present goods valued over future goods — explained profit, wages and the roundabout structure of production.",
   quote:"Present goods are, as a rule, worth more than future goods.",
   work:"Capital and Interest · 1884",
-  files:["Eugen von Böhm-Bawerk.jpg","Eugen von Boehm-Bawerk.jpg"], pos:[50,18] },
+  files:["Eugen von Böhm-Bawerk 1896 Portrait cropped.png","Eugen von Böhm-Bawerk.jpg","Eugen von Boehm-Bawerk.jpg"], pos:[50,18] },
 
 { no:"REF.05", name:"Winston Churchill", slug:"winston-churchill", dates:"1874–1965", origin:"Blenheim Palace, England",
   role:"Statesmanship · Rhetoric",
@@ -183,7 +178,7 @@ const PLATES=[
   desc:"The journalist who made Austrian economics readable. One lesson, repeated against every fashion: trace the unseen, long-run consequences for all groups, not the visible few.",
   quote:"The art of economics consists in looking not merely at the immediate but at the longer effects of any act or policy; it consists in tracing the consequences of that policy not merely for one group but for all groups.",
   work:"Economics in One Lesson · 1946",
-  files:["Henry Hazlitt.jpg","Henry Hazlitt 1964.jpg"], pos:[50,20] },
+  files:["Hazlitt-photo.jpg","Henry Hazlitt.jpg","Henry Hazlitt 1964.jpg"], pos:[50,20] },
 
 { no:"REF.08", name:"Friedrich A. Hayek", slug:"friedrich-hayek", dates:"1899–1992", origin:"Vienna, Austria",
   role:"Austrian School · Spontaneous Order",
@@ -211,7 +206,7 @@ const PLATES=[
   desc:"Fusionist, polemicist, sailor. He founded National Review, hosted a thousand Firing Lines, and made the argument for ordered liberty entertaining enough to survive.",
   quote:"I would rather be governed by the first 2,000 people in the Boston telephone directory than by the 2,000 people on the faculty of Harvard University.",
   work:"God and Man at Yale · 1951",
-  files:["William F. Buckley Jr. 1985.jpg","William F. Buckley.jpg","WilliamFBuckleyJr1985.jpg"], pos:[50,18] },
+  files:["William F. Buckley, Jr. Public Domain (cropped).jpg","William F. Buckley Jr. 1985.jpg","William F. Buckley.jpg"], pos:[50,18] },
 
 { no:"REF.12", name:"Murray N. Rothbard", slug:"murray-rothbard", dates:"1926–1995", origin:"New York, New York",
   role:"Austrian School · Libertarian Theory",
@@ -225,7 +220,7 @@ const PLATES=[
   desc:"Empiricist of the Hoover Institution. Knowledge, decisions, incentives and trade-offs — a long career spent auditing the unintended consequences of the intended.",
   quote:"It is hard to imagine a more stupid or more dangerous way of making decisions than by putting those decisions in the hands of people who pay no price for being wrong.",
   work:"Basic Economics · 2000",
-  files:["Thomas Sowell.jpg"], pos:[50,18] },
+  files:["Thomas Sowell Portrait (3x4 cropped).jpg","Thomas Sowell.jpg"], pos:[50,18] },
 
 { no:"REF.14", name:"Antonin Scalia", slug:"antonin-scalia", dates:"1936–2016", origin:"Trenton, New Jersey",
   role:"Constitutional Law · Originalism",
@@ -246,7 +241,7 @@ const PLATES=[
   desc:"Historian of the Great Enrichment. Her trilogy argues the modern world was made not by capital but by ideas — dignity and liberty for the bourgeois innovators.",
   quote:"Not capital, but ideas, made the modern world.",
   work:"Bourgeois Dignity · 2010",
-  files:["Deirdre McCloskey.jpg","Deirdre Nansen McCloskey.jpg","Deirdre Mccloskey.jpg"], pos:[50,22] },
+  files:["Deirdre McCloskey (15579711609).jpg","Deirdre McCloskey.jpg","Deirdre Nansen McCloskey.jpg"], pos:[50,22] },
 
 { no:"REF.17", name:"Roger Scruton", slug:"roger-scruton", dates:"1944–2020", origin:"Buslingthorpe, England",
   role:"Philosophy · Conservatism",
