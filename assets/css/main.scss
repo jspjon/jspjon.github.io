@@ -41,7 +41,8 @@
     "layout/json_cv"
 ;
 
-/* Footer: un poco más compacto */
-.page__footer { padding: 1.5em 0 1.75em; }
-.page__footer-follow ul { margin-bottom: .75em; }
-.page__footer p { margin-bottom: .3em; }
+/* Footer: un poco más compacto (v2) */
+.page__footer { margin-top: 1.5em; padding: .5em 0 1em; }
+.page__footer-follow ul { margin: 0; }
+.page__footer-follow li { padding-top: 3px; padding-bottom: 3px; }
+.page__footer p { margin: 0; }
