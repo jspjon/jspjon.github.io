@@ -1,7 +1,7 @@
 /* =========================================================
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
-   Cabina alta con DOS pantallas: pisos (grande) + metros.
-   Flechas ▲▼ + sonido doors.mp3 + flecha circular en tarjetas.
+   Cabina alta + 2 pantallas separadas (pisos / metros).
+   Identificación de piezas por GEOMETRÍA (a prueba de todo).
    ========================================================= */
 (function () {
   var initialized = false;
@@ -31,7 +31,6 @@
     initialized = true;
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
-    /* [NUEVO] Cabina más alta con dos pantallas separadas */
     document.documentElement.style.setProperty('--cabin-width', '84px');
 
     (function injectStyles() {
@@ -67,7 +66,7 @@
       document.head.appendChild(s);
     })();
 
-    /* Flechas ▲▼ dentro de la pantalla de pisos */
+    /* Flechas ▲▼ (dentro de la pantalla de pisos) */
     (function injectArrows() {
       var svg = cabin.querySelector('svg');
       if (!svg || svg.querySelector('.svg-arrow')) return;
@@ -82,44 +81,83 @@
       svg.appendChild(down);
     })();
 
-    /* [NUEVO] Recorte de cabina: más alta + 2 pantallas separadas */
+    /* =====================================================
+       [CORREGIDO] Recorte de cabina por GEOMETRÍA:
+       frame = x4 w112 · interior = x16 w88 · puertas = w44
+       pantallas = x24 w72 (1 o 2, las reubica todas)
+       ===================================================== */
     (function injectScreens() {
       var svg = cabin.querySelector('svg');
       if (!svg || svg.querySelector('#svgDepthDisplay')) return;
 
-      /* 1) Cabina más alta: viewBox 200, marco hasta 196 */
+      var rects = svg.querySelectorAll('rect');
+      var frame = null, backdrop = null, doorL = null, doorR = null;
+      var screens = [];
+
+      for (var i = 0; i < rects.length; i++) {
+        var r = rects[i];
+        var x = r.getAttribute('x'), w = r.getAttribute('width');
+        if (x === '4' && w === '112') { frame = r; continue; }
+        if (x === '24' && w === '72') { screens.push(r); continue; }
+        if (x === '16' && w === '88') { backdrop = r; continue; }
+        if (w === '44') {
+          if (x === '16') doorL = r;
+          else if (x === '60') doorR = r;
+          continue;
+        }
+      }
+
+      /* 1) Cabina más alta */
       svg.setAttribute('viewBox', '0 0 120 200');
-      var frame = svg.querySelector('rect[fill="url(#frameGrad)"]');
       if (frame) frame.setAttribute('height', '192');
 
-      /* 2) Pantalla de PISOS: reutiliza el rect oscuro original */
-      var screen1 = svg.querySelector('rect[fill="#161616"]');
-      if (screen1) { screen1.setAttribute('y', '8'); screen1.setAttribute('height', '28'); }
+      /* 2) Pantalla de PISOS */
+      if (screens[0]) { screens[0].setAttribute('y', '8'); screens[0].setAttribute('height', '28'); }
       display.setAttribute('y', '29');
       display.style.fontSize = '20px';
       display.style.letterSpacing = '1px';
 
-      /* 3) Puertas más largas (cabina alta) */
-      var doorL = svg.querySelector('.svg-door-left');
-      var doorR = svg.querySelector('.svg-door-right');
+      /* 3) Puertas largas */
       if (doorL) { doorL.setAttribute('y', '68'); doorL.setAttribute('height', '118'); }
       if (doorR) { doorR.setAttribute('y', '68'); doorR.setAttribute('height', '118'); }
 
-      /* 4) Luz y circular reposicionadas */
+      /* 4) Interior oscuro: se MUEVE junto con las puertas
+            (y si tu archivo no lo tiene, se crea ya alineado) */
+      var NS = 'http://www.w3.org/2000/svg';
+      if (!backdrop) {
+        backdrop = document.createElementNS(NS, 'rect');
+        backdrop.setAttribute('x', '16');
+        backdrop.setAttribute('width', '88');
+        backdrop.setAttribute('rx', '3');
+        backdrop.setAttribute('fill', '#191919');
+        if (doorL) svg.insertBefore(backdrop, doorL);
+        else svg.appendChild(backdrop);
+      }
+      backdrop.setAttribute('y', '68');
+      backdrop.setAttribute('height', '118');
+
+      /* 5) Luz y bombillo repositados */
       var glow = svg.querySelector('.door-light');
       if (glow) { glow.setAttribute('cy', '127'); glow.setAttribute('ry', '66'); }
       var bulb = svg.querySelector('.cabin-light');
       if (bulb) bulb.setAttribute('cy', '176');
 
-      /* 5) Pantalla de METROS: rect nuevo, separado de la de pisos */
-      var NS = 'http://www.w3.org/2000/svg';
-      var rect2 = document.createElementNS(NS, 'rect');
-      rect2.setAttribute('x', '24'); rect2.setAttribute('y', '40');
-      rect2.setAttribute('width', '72'); rect2.setAttribute('height', '16');
-      rect2.setAttribute('rx', '4');
-      rect2.setAttribute('fill', '#161616');
-      rect2.setAttribute('stroke', '#3a3a3a');
-      svg.appendChild(rect2);
+      /* 6) Pantalla de METROS: la segunda pantalla si existe;
+            si no, se crea nueva */
+      var metersScreen;
+      if (screens[1]) {
+        metersScreen = screens[1];
+      } else {
+        metersScreen = document.createElementNS(NS, 'rect');
+        metersScreen.setAttribute('x', '24');
+        metersScreen.setAttribute('width', '72');
+        metersScreen.setAttribute('rx', '4');
+        metersScreen.setAttribute('fill', '#161616');
+        metersScreen.setAttribute('stroke', '#3a3a3a');
+        svg.appendChild(metersScreen);
+      }
+      metersScreen.setAttribute('y', '40');
+      metersScreen.setAttribute('height', '16');
 
       var m = document.createElementNS(NS, 'text');
       m.setAttribute('id', 'svgDepthDisplay');
@@ -235,7 +273,6 @@
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
       display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      /* Metros en vivo en su propia pantalla */
       var depthM = (progress / last) * 100;
       depthDisplay.textContent = progress === 0 ? '±0.0m' : '−' + depthM.toFixed(1) + 'm';
 
