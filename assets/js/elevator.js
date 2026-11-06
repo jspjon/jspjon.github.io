@@ -12,7 +12,7 @@
     moveURL:     '',                           /* [CAMBIADO] vacío = viaje sin sonido */
     doorsURL:    'assets/sounds/doors.mp3',    /* tu mp3 de apertura de puertas */
     moveVolume:  0.18,
-    doorsVolume: 0.40,  /* 0..1 — sube/baja a gusto (ej: 0.3 – 0.6) */
+    doorsVolume: 0.20,  /* 0..1 — sube/baja a gusto (ej: 0.3 – 0.6) */
     moveFadeIn:  0.4,
     moveFadeOut: 0.5,
     doorsOffset: 0,     /* si tu mp3 tiene silencio al inicio, prueba 0.2 – 0.4 */
