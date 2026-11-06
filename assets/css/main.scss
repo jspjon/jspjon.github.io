@@ -40,3 +40,8 @@
     "layout/sidebar",
     "layout/json_cv"
 ;
+
+/* Footer: un poco más compacto */
+.page__footer { padding: 1.5em 0 1.75em; }
+.page__footer-follow ul { margin-bottom: .75em; }
+.page__footer p { margin-bottom: .3em; }
