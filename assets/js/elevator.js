@@ -34,7 +34,7 @@
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
     /* CSS de flechas, botón ♪, HUD y flecha circular (se inyecta solo) */
-    (function injectStyles() {
+       (function injectStyles() {
       if (document.getElementById('elevator-fx-styles')) return;
       var s = document.createElement('style');
       s.id = 'elevator-fx-styles';
@@ -44,22 +44,25 @@
         '.elevator-cabin.traveling-down .svg-arrow-down{opacity:1;animation:arrowBlink .6s steps(1,end) infinite}' +
         '.elevator-cabin.doors-open .svg-arrow{opacity:0!important}' +
         '@keyframes arrowBlink{0%,100%{opacity:1}50%{opacity:.15}}' +
-        '.elevator-mute{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);' +
-        'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.55rem;letter-spacing:.15em;' +
-        'padding:5px 9px;border:1px solid #d9d3c6;background:#faf9f7;color:#817766;' +
+
+        /* botón ♪ más pequeño */
+        '.elevator-mute{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);' +
+        'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.5rem;letter-spacing:.12em;' +
+        'padding:3px 7px;border:1px solid #d9d3c6;background:#faf9f7;color:#817766;' +
         'cursor:pointer;transition:all .25s ease;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap}' +
         '.elevator-mute:hover{border-color:var(--led-on);color:var(--led-on)}' +
         '.elevator-mute.off{color:#b9b09c}' +
 
-        /* [NUEVO] HUD de profundidad (abajo a la izquierda) */
-        '.depth-hud{position:fixed;left:24px;bottom:20px;z-index:9998;pointer-events:none;' +
-        'font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.28em;' +
-        'font-size:.55rem;color:var(--sys-muted)}' +
-        '.depth-hud .dh-value{display:block;margin-top:4px;font-size:.95rem;font-weight:800;' +
+        /* HUD de profundidad: esquina inferior DERECHA, con fondo */
+        '.depth-hud{position:fixed;right:24px;bottom:20px;z-index:9999;pointer-events:none;' +
+        'text-align:right;font-family:"JetBrains Mono",monospace;text-transform:uppercase;' +
+        'letter-spacing:.28em;font-size:.55rem;color:var(--sys-muted);' +
+        'background:rgba(250,249,247,.92);border:1px solid var(--sys-border);border-radius:3px;padding:7px 10px}' +
+        '.depth-hud .dh-value{display:block;margin-top:4px;font-size:.85rem;font-weight:800;' +
         'letter-spacing:.1em;color:var(--sys-text);font-variant-numeric:tabular-nums}' +
         '@media (max-width:640px){.depth-hud{display:none}}' +
 
-        /* [NUEVO] Flecha circular "ir" en las tarjetas */
+        /* flecha circular "ir" en las tarjetas */
         '.subterranean-system .sys-level .sys-content-card .sys-access{' +
         'right:26px;top:50%;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;' +
         'border:1px solid var(--sys-border);background:var(--sys-bg);color:var(--sys-accent);' +
@@ -69,11 +72,8 @@
         'opacity:1;transform:translateY(-50%) translateX(0) scale(1.05);' +
         'background:var(--led-on);color:#191713;border-color:var(--led-on);' +
         'box-shadow:0 0 20px rgba(255,179,71,.4)}' +
-        /* marcador "estás aquí": visible fijo en la tarjeta atracada
-           (borra esta regla si no lo quieres) */
         '.subterranean-system .sys-level.floor-active .sys-content-card .sys-access{' +
         'opacity:1;transform:translateY(-50%)}' +
-        /* en móvil se oculta, igual que tu diseño original */
         '@media (max-width:768px){.subterranean-system .sys-level .sys-content-card .sys-access{display:none}}';
       document.head.appendChild(s);
     })();
