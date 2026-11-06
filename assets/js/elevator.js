@@ -1,9 +1,7 @@
 /* =========================================================
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
-   Mueve la cabina según el nivel .sys-level visible,
-   actualiza el LED (00–07), abre puertas al atracar.
-   Flechas ▲▼ + sonido doors.mp3
-   [NUEVO] HUD de profundidad + flecha circular en tarjetas
+   Cabina alta con DOS pantallas: pisos (grande) + metros.
+   Flechas ▲▼ + sonido doors.mp3 + flecha circular en tarjetas.
    ========================================================= */
 (function () {
   var initialized = false;
@@ -33,8 +31,10 @@
     initialized = true;
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
-    /* CSS de flechas, botón ♪, HUD y flecha circular (se inyecta solo) */
-       (function injectStyles() {
+    /* [NUEVO] Cabina más alta con dos pantallas separadas */
+    document.documentElement.style.setProperty('--cabin-width', '84px');
+
+    (function injectStyles() {
       if (document.getElementById('elevator-fx-styles')) return;
       var s = document.createElement('style');
       s.id = 'elevator-fx-styles';
@@ -44,25 +44,14 @@
         '.elevator-cabin.traveling-down .svg-arrow-down{opacity:1;animation:arrowBlink .6s steps(1,end) infinite}' +
         '.elevator-cabin.doors-open .svg-arrow{opacity:0!important}' +
         '@keyframes arrowBlink{0%,100%{opacity:1}50%{opacity:.15}}' +
-
-        /* botón ♪ más pequeño */
+        '#svgDepthDisplay{fill:rgba(255,179,71,.65);font-family:"JetBrains Mono",monospace;' +
+        'font-weight:600;font-size:12px;letter-spacing:1px}' +
         '.elevator-mute{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);' +
         'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.5rem;letter-spacing:.12em;' +
         'padding:3px 7px;border:1px solid #d9d3c6;background:#faf9f7;color:#817766;' +
         'cursor:pointer;transition:all .25s ease;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap}' +
         '.elevator-mute:hover{border-color:var(--led-on);color:var(--led-on)}' +
         '.elevator-mute.off{color:#b9b09c}' +
-
-        /* HUD de profundidad: esquina inferior DERECHA, con fondo */
-        '.depth-hud{position:fixed;right:24px;bottom:20px;z-index:9999;pointer-events:none;' +
-        'text-align:right;font-family:"JetBrains Mono",monospace;text-transform:uppercase;' +
-        'letter-spacing:.28em;font-size:.55rem;color:var(--sys-muted);' +
-        'background:rgba(250,249,247,.92);border:1px solid var(--sys-border);border-radius:3px;padding:7px 10px}' +
-        '.depth-hud .dh-value{display:block;margin-top:4px;font-size:.85rem;font-weight:800;' +
-        'letter-spacing:.1em;color:var(--sys-text);font-variant-numeric:tabular-nums}' +
-        '@media (max-width:640px){.depth-hud{display:none}}' +
-
-        /* flecha circular "ir" en las tarjetas */
         '.subterranean-system .sys-level .sys-content-card .sys-access{' +
         'right:26px;top:50%;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;' +
         'border:1px solid var(--sys-border);background:var(--sys-bg);color:var(--sys-accent);' +
@@ -78,20 +67,70 @@
       document.head.appendChild(s);
     })();
 
-    /* Flechas ▲▼ dentro del display del SVG */
+    /* Flechas ▲▼ dentro de la pantalla de pisos */
     (function injectArrows() {
       var svg = cabin.querySelector('svg');
       if (!svg || svg.querySelector('.svg-arrow')) return;
       var NS = 'http://www.w3.org/2000/svg';
       var up = document.createElementNS(NS, 'path');
       up.setAttribute('class', 'svg-arrow svg-arrow-up');
-      up.setAttribute('d', 'M30 27 L35 20 L40 27 Z');
+      up.setAttribute('d', 'M27 25 L32 18 L37 25 Z');
       var down = document.createElementNS(NS, 'path');
       down.setAttribute('class', 'svg-arrow svg-arrow-down');
-      down.setAttribute('d', 'M80 20 L90 20 L85 27 Z');
+      down.setAttribute('d', 'M83 18 L93 18 L88 25 Z');
       svg.appendChild(up);
       svg.appendChild(down);
     })();
+
+    /* [NUEVO] Recorte de cabina: más alta + 2 pantallas separadas */
+    (function injectScreens() {
+      var svg = cabin.querySelector('svg');
+      if (!svg || svg.querySelector('#svgDepthDisplay')) return;
+
+      /* 1) Cabina más alta: viewBox 200, marco hasta 196 */
+      svg.setAttribute('viewBox', '0 0 120 200');
+      var frame = svg.querySelector('rect[fill="url(#frameGrad)"]');
+      if (frame) frame.setAttribute('height', '192');
+
+      /* 2) Pantalla de PISOS: reutiliza el rect oscuro original */
+      var screen1 = svg.querySelector('rect[fill="#161616"]');
+      if (screen1) { screen1.setAttribute('y', '8'); screen1.setAttribute('height', '28'); }
+      display.setAttribute('y', '29');
+      display.style.fontSize = '20px';
+      display.style.letterSpacing = '1px';
+
+      /* 3) Puertas más largas (cabina alta) */
+      var doorL = svg.querySelector('.svg-door-left');
+      var doorR = svg.querySelector('.svg-door-right');
+      if (doorL) { doorL.setAttribute('y', '68'); doorL.setAttribute('height', '118'); }
+      if (doorR) { doorR.setAttribute('y', '68'); doorR.setAttribute('height', '118'); }
+
+      /* 4) Luz y circular reposicionadas */
+      var glow = svg.querySelector('.door-light');
+      if (glow) { glow.setAttribute('cy', '127'); glow.setAttribute('ry', '66'); }
+      var bulb = svg.querySelector('.cabin-light');
+      if (bulb) bulb.setAttribute('cy', '176');
+
+      /* 5) Pantalla de METROS: rect nuevo, separado de la de pisos */
+      var NS = 'http://www.w3.org/2000/svg';
+      var rect2 = document.createElementNS(NS, 'rect');
+      rect2.setAttribute('x', '24'); rect2.setAttribute('y', '40');
+      rect2.setAttribute('width', '72'); rect2.setAttribute('height', '16');
+      rect2.setAttribute('rx', '4');
+      rect2.setAttribute('fill', '#161616');
+      rect2.setAttribute('stroke', '#3a3a3a');
+      svg.appendChild(rect2);
+
+      var m = document.createElementNS(NS, 'text');
+      m.setAttribute('id', 'svgDepthDisplay');
+      m.setAttribute('x', '60');
+      m.setAttribute('y', '52');
+      m.setAttribute('text-anchor', 'middle');
+      m.textContent = '±0.0m';
+      svg.appendChild(m);
+    })();
+
+    var depthDisplay = document.getElementById('svgDepthDisplay');
 
     /* =====================================================
        MOTOR DE AUDIO — doors.mp3
@@ -161,13 +200,6 @@
     var container = document.getElementById('elevatorContainer');
     if (container) container.appendChild(muteBtn);
 
-    /* [NUEVO] HUD de profundidad */
-    var hud = document.createElement('div');
-    hud.className = 'depth-hud';
-    hud.innerHTML = '<span>Depth</span><span class="dh-value" id="hudVal">±0.0m</span>';
-    document.body.appendChild(hud);
-    var hudVal = hud.querySelector('.dh-value');
-
     var total = levels.length;
     var last = total - 1;
     var ticking = false;
@@ -203,9 +235,9 @@
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
       display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      /* [NUEVO] Profundidad en metros, en vivo */
+      /* Metros en vivo en su propia pantalla */
       var depthM = (progress / last) * 100;
-      hudVal.textContent = progress === 0 ? '±0.0m' : '−' + depthM.toFixed(1) + 'm';
+      depthDisplay.textContent = progress === 0 ? '±0.0m' : '−' + depthM.toFixed(1) + 'm';
 
       var delta = progress - lastProgress;
       if (Math.abs(delta) > 0.004) {
