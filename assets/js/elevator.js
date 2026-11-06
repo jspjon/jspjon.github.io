@@ -2,23 +2,21 @@
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
    Mueve la cabina según el nivel .sys-level visible,
    actualiza el LED (00–07), abre puertas al atracar.
-   [NUEVO] Flechas ▲▼ + SONIDOS MP3 REALES:
-     · moving.mp3 → loop con fade mientras el ascensor viaja
-     · doors.mp3  → al abrirse las puertas al atracar
+   Flechas ▲▼ + sonido: doors.mp3 al abrirse las puertas.
    ========================================================= */
 (function () {
   var initialized = false;
 
-  /* [NUEVO] CONFIGURACIÓN DE SONIDO — ajusta aquí sin tocar más nada */
+  /* CONFIGURACIÓN DE SONIDO — ajusta aquí sin tocar más nada */
   var SOUND = {
-    moveURL:     'assets/sounds/moving.mp3', // tu mp3 de cadenas/motor
-    doorsURL:    'assets/sounds/doors.mp3',  // tu mp3 de apertura de puertas
-    moveVolume:  0.18,  // 0..1 — volumen del viaje
-    doorsVolume: 0.40,  // 0..1 — volumen de las puertas
-    moveFadeIn:  0.4,   // segundos de entrada del sonido de viaje
-    moveFadeOut: 0.5,   // segundos de salida al detenerse
-    doorsOffset: 0,     // si tu mp3 de puertas tiene silencio al inicio, súbelo (ej: 0.3)
-    moveOffset:  0      // igual, para el mp3 de viaje
+    moveURL:     '',                           /* [CAMBIADO] vacío = viaje sin sonido */
+    doorsURL:    'assets/sounds/doors.mp3',    /* tu mp3 de apertura de puertas */
+    moveVolume:  0.18,
+    doorsVolume: 0.40,  /* 0..1 — sube/baja a gusto (ej: 0.3 – 0.6) */
+    moveFadeIn:  0.4,
+    moveFadeOut: 0.5,
+    doorsOffset: 0,     /* si tu mp3 tiene silencio al inicio, prueba 0.2 – 0.4 */
+    moveOffset:  0
   };
 
   function init() {
@@ -39,8 +37,7 @@
     initialized = true;
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
-    /* [NUEVO] CSS de flechas y botón ♪ (se inyecta solo; el botón
-       queda DEBAJO del riel, centrado: la cabina ya no lo tapa) */
+    /* CSS de flechas y botón ♪ (el botón queda DEBAJO del riel, centrado) */
     (function injectStyles() {
       if (document.getElementById('elevator-fx-styles')) return;
       var s = document.createElement('style');
@@ -60,7 +57,7 @@
       document.head.appendChild(s);
     })();
 
-    /* [NUEVO] Flechas ▲▼ dentro del display del SVG (sin tocar HTML) */
+    /* Flechas ▲▼ dentro del display del SVG (sin tocar HTML) */
     (function injectArrows() {
       var svg = cabin.querySelector('svg');
       if (!svg || svg.querySelector('.svg-arrow')) return;
@@ -76,13 +73,12 @@
     })();
 
     /* =====================================================
-       [NUEVO] MOTOR DE AUDIO — tus dos MP3 reales
+       MOTOR DE AUDIO — doors.mp3
        ===================================================== */
-    var soundOn = localStorage.getItem('elevSnd') !== 'off';
+    var soundOn = true;
+    try { soundOn = localStorage.getItem('elevSnd') !== 'off'; } catch (e) { /* modo privado */ }
     var actx = null, master = null;
-    var moveBuf = null, doorsBuf = null;
-    var moveSrc = null, moveGain = null;
-    var soundsReady = false;
+    var doorsBuf = null;
 
     function ensureCtx() {
       if (!soundOn) return null;
@@ -103,55 +99,24 @@
       window.addEventListener(ev, function () { if (soundOn) ensureCtx(); }, { passive: true });
     });
 
-    /* Precarga de ambos MP3 (puede fallar en silencio si falta el archivo) */
+    /* Precarga del MP3 (falla en silencio si falta el archivo) */
     (function preload() {
       var AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
+      if (!AC || !SOUND.doorsURL) return;
       if (!actx) {
         actx = new AC();
         master = actx.createGain();
         master.gain.value = 1;
         master.connect(actx.destination);
       }
-      function fetchBuffer(url, cb) {
-        fetch(url)
-          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.arrayBuffer(); })
-          .then(function (ab) { return actx.decodeAudioData(ab); })
-          .then(function (buf) { cb(null, buf); })
-          .catch(function (err) {
-            console.warn('[Ascensor] No se pudo cargar el sonido:', url, err && err.message);
-            cb(err);
-          });
-      }
-      var pending = 2;
-      function done() { pending -= 1; if (pending === 0) { soundsReady = true; console.log('[Ascensor] Sonidos cargados'); } }
-      fetchBuffer(SOUND.moveURL,  function (e, b) { if (!e) moveBuf = b;  done(); });
-      fetchBuffer(SOUND.doorsURL, function (e, b) { if (!e) doorsBuf = b; done(); });
+      fetch(SOUND.doorsURL)
+        .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.arrayBuffer(); })
+        .then(function (ab) { return actx.decodeAudioData(ab); })
+        .then(function (buf) { doorsBuf = buf; console.log('[Ascensor] Sonido de puertas cargado'); })
+        .catch(function (err) {
+          console.warn('[Ascensor] No se pudo cargar doors.mp3:', err && err.message);
+        });
     })();
-
-    /* Sonido de VIAJE: loop con fade in/out (cadenas, motor…) */
-    function moveSoundStart() {
-      if (!ensureCtx() || !moveBuf || moveSrc) return;
-      moveSrc = actx.createBufferSource();
-      moveSrc.buffer = moveBuf;
-      moveSrc.loop = true;
-      moveGain = actx.createGain();
-      moveGain.gain.setValueAtTime(0.0001, actx.currentTime);
-      moveGain.gain.linearRampToValueAtTime(SOUND.moveVolume, actx.currentTime + SOUND.moveFadeIn);
-      moveSrc.connect(moveGain); moveGain.connect(master);
-      moveSrc.start(actx.currentTime, SOUND.moveOffset);
-    }
-    function moveSoundStop() {
-      if (!moveSrc || !actx) return;
-      var s = moveSrc, g = moveGain;
-      moveSrc = null; moveGain = null;
-      try {
-        g.gain.cancelScheduledValues(actx.currentTime);
-        g.gain.setValueAtTime(g.gain.value, actx.currentTime);
-        g.gain.linearRampToValueAtTime(0.0001, actx.currentTime + SOUND.moveFadeOut);
-        s.stop(actx.currentTime + SOUND.moveFadeOut + 0.05);
-      } catch (e) { /* noop */ }
-    }
 
     /* Sonido de PUERTAS: una sola vez al abrirse al atracar */
     function doorsSound() {
@@ -164,7 +129,7 @@
       src.start(actx.currentTime, SOUND.doorsOffset);
     }
 
-    /* [NUEVO] Botón ♪ ON/OFF (persistente) */
+    /* Botón ♪ ON/OFF (persistente) */
     var muteBtn = document.createElement('button');
     muteBtn.type = 'button';
     muteBtn.className = 'elevator-mute' + (soundOn ? '' : ' off');
@@ -172,11 +137,10 @@
     muteBtn.setAttribute('aria-label', 'Sonido del ascensor');
     muteBtn.addEventListener('click', function () {
       soundOn = !soundOn;
-      localStorage.setItem('elevSnd', soundOn ? 'on' : 'off');
+      try { localStorage.setItem('elevSnd', soundOn ? 'on' : 'off'); } catch (e) { /* noop */ }
       muteBtn.textContent = soundOn ? '♪ ON' : '♪ OFF';
       muteBtn.classList.toggle('off', !soundOn);
-      if (!soundOn) moveSoundStop();
-      else ensureCtx();
+      if (soundOn) ensureCtx();
     });
     var container = document.getElementById('elevatorContainer');
     if (container) container.appendChild(muteBtn);
@@ -185,7 +149,7 @@
     var last = total - 1;
     var ticking = false;
 
-    /* [NUEVO] Estado de movimiento */
+    /* Estado de movimiento */
     var lastProgress = 0;
     var moveTimer = null;
     var lastDockedFloor = -1;
@@ -221,17 +185,15 @@
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
       display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      /* [NUEVO] Dirección + flechitas ▲▼ + sonido de viaje */
+      /* Dirección + flechitas ▲▼ */
       var delta = progress - lastProgress;
       if (Math.abs(delta) > 0.004) {
         lastMoveDir = delta > 0 ? 'down' : 'up';
         cabin.classList.add(lastMoveDir === 'down' ? 'traveling-down' : 'traveling-up');
         cabin.classList.remove(lastMoveDir === 'down' ? 'traveling-up' : 'traveling-down');
-        moveSoundStart();
         clearTimeout(moveTimer);
         moveTimer = setTimeout(function () {
           cabin.classList.remove('traveling-up', 'traveling-down');
-          moveSoundStop();
         }, 300);
       }
       lastProgress = progress;
@@ -248,7 +210,7 @@
       // Vestíbulo: con el título a la vista, las puertas siguen abiertas
       if (viewCenter <= centers[0]) isDocked = true;
 
-      /* [NUEVO] Sonido de puertas SOLO al atracar en un piso distinto */
+      /* Sonido de puertas SOLO al atracar en un piso distinto */
       if (isDocked && lastDockedFloor !== -1 && currentFloor !== lastDockedFloor) {
         doorsSound();
       }
