@@ -2,10 +2,24 @@
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
    Mueve la cabina según el nivel .sys-level visible,
    actualiza el LED (00–07), abre puertas al atracar.
-   [NUEVO] Flechas ▲▼ de dirección + sonido sintetizado.
+   [NUEVO] Flechas ▲▼ + SONIDOS MP3 REALES:
+     · moving.mp3 → loop con fade mientras el ascensor viaja
+     · doors.mp3  → al abrirse las puertas al atracar
    ========================================================= */
 (function () {
   var initialized = false;
+
+  /* [NUEVO] CONFIGURACIÓN DE SONIDO — ajusta aquí sin tocar más nada */
+  var SOUND = {
+    moveURL:     'assets/sounds/moving.mp3', // tu mp3 de cadenas/motor
+    doorsURL:    'assets/sounds/doors.mp3',  // tu mp3 de apertura de puertas
+    moveVolume:  0.18,  // 0..1 — volumen del viaje
+    doorsVolume: 0.40,  // 0..1 — volumen de las puertas
+    moveFadeIn:  0.4,   // segundos de entrada del sonido de viaje
+    moveFadeOut: 0.5,   // segundos de salida al detenerse
+    doorsOffset: 0,     // si tu mp3 de puertas tiene silencio al inicio, súbelo (ej: 0.3)
+    moveOffset:  0      // igual, para el mp3 de viaje
+  };
 
   function init() {
     if (initialized) return;
@@ -25,7 +39,8 @@
     initialized = true;
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
-    /* [NUEVO] CSS de flechas y botón de sonido (se inyecta solo) */
+    /* [NUEVO] CSS de flechas y botón ♪ (se inyecta solo; el botón
+       queda DEBAJO del riel, centrado: la cabina ya no lo tapa) */
     (function injectStyles() {
       if (document.getElementById('elevator-fx-styles')) return;
       var s = document.createElement('style');
@@ -36,9 +51,10 @@
         '.elevator-cabin.traveling-down .svg-arrow-down{opacity:1;animation:arrowBlink .6s steps(1,end) infinite}' +
         '.elevator-cabin.doors-open .svg-arrow{opacity:0!important}' +
         '@keyframes arrowBlink{0%,100%{opacity:1}50%{opacity:.15}}' +
-        '.elevator-mute{font-family:"JetBrains Mono",monospace;font-size:.55rem;letter-spacing:.15em;' +
+        '.elevator-mute{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);' +
+        'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.55rem;letter-spacing:.15em;' +
         'padding:5px 9px;border:1px solid var(--sys-border);background:var(--sys-bg);color:var(--sys-muted);' +
-        'cursor:pointer;transition:all .25s ease}' +
+        'cursor:pointer;transition:all .25s ease;box-shadow:0 2px 8px rgba(154,141,120,.12);white-space:nowrap}' +
         '.elevator-mute:hover{border-color:var(--sys-accent);color:var(--sys-accent)}' +
         '.elevator-mute.off{color:var(--sys-border)}';
       document.head.appendChild(s);
@@ -59,64 +75,96 @@
       svg.appendChild(down);
     })();
 
-    /* [NUEVO] Sonido sintetizado (Web Audio, sin archivos) */
+    /* =====================================================
+       [NUEVO] MOTOR DE AUDIO — tus dos MP3 reales
+       ===================================================== */
     var soundOn = localStorage.getItem('elevSnd') !== 'off';
-    var actx = null, humOsc = null, humGain = null;
+    var actx = null, master = null;
+    var moveBuf = null, doorsBuf = null;
+    var moveSrc = null, moveGain = null;
+    var soundsReady = false;
 
-    function audioCtx() {
+    function ensureCtx() {
       if (!soundOn) return null;
       if (!actx) {
         var AC = window.AudioContext || window.webkitAudioContext;
         if (!AC) return null;
         actx = new AC();
+        master = actx.createGain();
+        master.gain.value = 1;
+        master.connect(actx.destination);
       }
       if (actx.state === 'suspended') actx.resume();
-      return actx.state === 'running' ? actx : null;
+      return actx;
     }
-    /* Los navegadores exigen un gesto antes de sonar: primer clic/tcla desbloquea */
+
+    /* Los navegadores exigen un gesto (clic/tecla) antes de sonar */
     ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
-      window.addEventListener(ev, function () { if (soundOn) audioCtx(); }, { passive: true });
+      window.addEventListener(ev, function () { if (soundOn) ensureCtx(); }, { passive: true });
     });
 
-    function tone(freq, at, dur, type, vol) {
-      var o = actx.createOscillator(), g = actx.createGain();
-      o.type = type || 'sine'; o.frequency.value = freq;
-      g.gain.setValueAtTime(0, at);
-      g.gain.linearRampToValueAtTime(vol || 0.16, at + 0.015);
-      g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
-      o.connect(g); g.connect(actx.destination);
-      o.start(at); o.stop(at + dur + 0.05);
+    /* Precarga de ambos MP3 (puede fallar en silencio si falta el archivo) */
+    (function preload() {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      if (!actx) {
+        actx = new AC();
+        master = actx.createGain();
+        master.gain.value = 1;
+        master.connect(actx.destination);
+      }
+      function fetchBuffer(url, cb) {
+        fetch(url)
+          .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.arrayBuffer(); })
+          .then(function (ab) { return actx.decodeAudioData(ab); })
+          .then(function (buf) { cb(null, buf); })
+          .catch(function (err) {
+            console.warn('[Ascensor] No se pudo cargar el sonido:', url, err && err.message);
+            cb(err);
+          });
+      }
+      var pending = 2;
+      function done() { pending -= 1; if (pending === 0) { soundsReady = true; console.log('[Ascensor] Sonidos cargados'); } }
+      fetchBuffer(SOUND.moveURL,  function (e, b) { if (!e) moveBuf = b;  done(); });
+      fetchBuffer(SOUND.doorsURL, function (e, b) { if (!e) doorsBuf = b; done(); });
+    })();
+
+    /* Sonido de VIAJE: loop con fade in/out (cadenas, motor…) */
+    function moveSoundStart() {
+      if (!ensureCtx() || !moveBuf || moveSrc) return;
+      moveSrc = actx.createBufferSource();
+      moveSrc.buffer = moveBuf;
+      moveSrc.loop = true;
+      moveGain = actx.createGain();
+      moveGain.gain.setValueAtTime(0.0001, actx.currentTime);
+      moveGain.gain.linearRampToValueAtTime(SOUND.moveVolume, actx.currentTime + SOUND.moveFadeIn);
+      moveSrc.connect(moveGain); moveGain.connect(master);
+      moveSrc.start(actx.currentTime, SOUND.moveOffset);
     }
-    function chime(dir) {              /* “din-don” clásico al atracar */
-      if (!audioCtx()) return;
-      var t = actx.currentTime;
-      if (dir === 'up') { tone(659.25, t, 0.35); tone(880, t + 0.18, 0.55); }   /* sube:  E5→A5 */
-      else              { tone(880,    t, 0.35); tone(659.25, t + 0.18, 0.55); } /* baja:  A5→E5 */
-    }
-    function tick() {                  /* tic de botón del panel */
-      if (!audioCtx()) return;
-      tone(1318.5, actx.currentTime, 0.07, 'square', 0.05);
-    }
-    function humStart() {              /* zumbido suave del motor */
-      if (!audioCtx() || humOsc) return;
-      humOsc = actx.createOscillator(); humGain = actx.createGain();
-      var f = actx.createBiquadFilter();
-      humOsc.type = 'sawtooth'; humOsc.frequency.value = 55;
-      f.type = 'lowpass'; f.frequency.value = 160;
-      humGain.gain.setValueAtTime(0, actx.currentTime);
-      humGain.gain.linearRampToValueAtTime(0.02, actx.currentTime + 0.5);
-      humOsc.connect(f); f.connect(humGain); humGain.connect(actx.destination);
-      humOsc.start();
-    }
-    function humStop() {
-      if (!humOsc || !actx) return;
-      var t = actx.currentTime;
-      humGain.gain.linearRampToValueAtTime(0, t + 0.3);
-      humOsc.stop(t + 0.35);
-      humOsc = null; humGain = null;
+    function moveSoundStop() {
+      if (!moveSrc || !actx) return;
+      var s = moveSrc, g = moveGain;
+      moveSrc = null; moveGain = null;
+      try {
+        g.gain.cancelScheduledValues(actx.currentTime);
+        g.gain.setValueAtTime(g.gain.value, actx.currentTime);
+        g.gain.linearRampToValueAtTime(0.0001, actx.currentTime + SOUND.moveFadeOut);
+        s.stop(actx.currentTime + SOUND.moveFadeOut + 0.05);
+      } catch (e) { /* noop */ }
     }
 
-    /* [NUEVO] Botón ♪ ON/OFF (queda a la izquierda del riel) */
+    /* Sonido de PUERTAS: una sola vez al abrirse al atracar */
+    function doorsSound() {
+      if (!ensureCtx() || !doorsBuf) return;
+      var src = actx.createBufferSource();
+      src.buffer = doorsBuf;
+      var g = actx.createGain();
+      g.gain.value = SOUND.doorsVolume;
+      src.connect(g); g.connect(master);
+      src.start(actx.currentTime, SOUND.doorsOffset);
+    }
+
+    /* [NUEVO] Botón ♪ ON/OFF (persistente) */
     var muteBtn = document.createElement('button');
     muteBtn.type = 'button';
     muteBtn.className = 'elevator-mute' + (soundOn ? '' : ' off');
@@ -127,7 +175,8 @@
       localStorage.setItem('elevSnd', soundOn ? 'on' : 'off');
       muteBtn.textContent = soundOn ? '♪ ON' : '♪ OFF';
       muteBtn.classList.toggle('off', !soundOn);
-      if (!soundOn) { humStop(); } else { if (audioCtx()) tick(); }
+      if (!soundOn) moveSoundStop();
+      else ensureCtx();
     });
     var container = document.getElementById('elevatorContainer');
     if (container) container.appendChild(muteBtn);
@@ -136,7 +185,7 @@
     var last = total - 1;
     var ticking = false;
 
-    /* [NUEVO] Estado de movimiento y sonido */
+    /* [NUEVO] Estado de movimiento */
     var lastProgress = 0;
     var moveTimer = null;
     var lastDockedFloor = -1;
@@ -172,17 +221,17 @@
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
       display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      /* [NUEVO] Dirección + flechitas ▲▼ mientras hay movimiento */
+      /* [NUEVO] Dirección + flechitas ▲▼ + sonido de viaje */
       var delta = progress - lastProgress;
       if (Math.abs(delta) > 0.004) {
         lastMoveDir = delta > 0 ? 'down' : 'up';
         cabin.classList.add(lastMoveDir === 'down' ? 'traveling-down' : 'traveling-up');
         cabin.classList.remove(lastMoveDir === 'down' ? 'traveling-up' : 'traveling-down');
-        humStart();
+        moveSoundStart();
         clearTimeout(moveTimer);
         moveTimer = setTimeout(function () {
           cabin.classList.remove('traveling-up', 'traveling-down');
-          humStop();
+          moveSoundStop();
         }, 300);
       }
       lastProgress = progress;
@@ -199,9 +248,9 @@
       // Vestíbulo: con el título a la vista, las puertas siguen abiertas
       if (viewCenter <= centers[0]) isDocked = true;
 
-      /* [NUEVO] “Din-don” solo al atracar en un piso DISTINTO al anterior */
+      /* [NUEVO] Sonido de puertas SOLO al atracar en un piso distinto */
       if (isDocked && lastDockedFloor !== -1 && currentFloor !== lastDockedFloor) {
-        chime(lastMoveDir);
+        doorsSound();
       }
       if (isDocked) lastDockedFloor = currentFloor;
 
@@ -217,10 +266,9 @@
       }
     }
 
-    // Clic en un marcador → viaje suave a ese nivel (+ tic de botón)
+    // Clic en un marcador → viaje suave a ese nivel
     markers.forEach(function (marker, i) {
       marker.addEventListener('click', function () {
-        tick(); /* [NUEVO] */
         levels[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     });
