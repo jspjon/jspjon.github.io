@@ -221,16 +221,18 @@ PROFILE SECTION (Tu diseño original)
 
 <!-- =========================================
 [NUEVO] ASCENSOR SVG — WIDGET FIJO LATERAL
+8 niveles · 100/7 = 14.29% por piso
 ========================================= -->
 <div class="elevator-container" id="elevatorContainer">
   <div class="elevator-shaft" id="elevatorShaft">
     <div class="floor-marker" data-floor="0" data-label="GROUND"   style="top: 0%"></div>
-    <div class="floor-marker" data-floor="1" data-label="LEVEL -01" style="top: 16.66%"></div>
-    <div class="floor-marker" data-floor="2" data-label="LEVEL -02" style="top: 33.33%"></div>
-    <div class="floor-marker" data-floor="3" data-label="LEVEL -03" style="top: 50%"></div>
-    <div class="floor-marker" data-floor="4" data-label="LEVEL -04" style="top: 66.66%"></div>
-    <div class="floor-marker" data-floor="5" data-label="LEVEL -05" style="top: 83.33%"></div>
-    <div class="floor-marker" data-floor="6" data-label="LEVEL -06" style="top: 100%"></div>
+    <div class="floor-marker" data-floor="1" data-label="LEVEL -01" style="top: 14.29%"></div>
+    <div class="floor-marker" data-floor="2" data-label="LEVEL -02" style="top: 28.57%"></div>
+    <div class="floor-marker" data-floor="3" data-label="LEVEL -03" style="top: 42.86%"></div>
+    <div class="floor-marker" data-floor="4" data-label="LEVEL -04" style="top: 57.14%"></div>
+    <div class="floor-marker" data-floor="5" data-label="LEVEL -05" style="top: 71.43%"></div>
+    <div class="floor-marker" data-floor="6" data-label="LEVEL -06" style="top: 85.71%"></div>
+    <div class="floor-marker" data-floor="7" data-label="LEVEL -07" style="top: 100%"></div>
 
     <div class="elevator-cabin" id="elevatorCabin">
       <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg" aria-label="Ascensor">
@@ -266,7 +268,7 @@ MAIN SUBTERRANEAN SYSTEM
   <div class="sys-header">
     <h2>Subterranean Profile</h2>
     <h1><span class="sys-welcome">Welcome to my website!</span><span class="sys-main-title">Underground Exploration System</span></h1>
-    <p>Navigate through seven subterranean levels of academic architecture. Each level represents a distinct domain of research, teaching, and professional practice.</p>
+    <p>Navigate through eight subterranean levels of academic architecture. Each level represents a distinct domain of research, teaching, and professional practice.</p>
   </div>
 
   <div class="sys-shaft">
@@ -275,35 +277,39 @@ MAIN SUBTERRANEAN SYSTEM
       <a href="/" class="sys-content-card"><span class="sys-tag">Main Entrance</span><h3 class="sys-title">Jonathan Simon P.</h3><p class="sys-desc">Interdisciplinary scholar specializing in law, economics, finance, accounting, and public policy. The foundation of the structure.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-01">
-      <div class="sys-depth-marker"><span class="depth-number">01</span><span class="depth-elevation">DEPTH -16.7m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">01</span><span class="depth-elevation">DEPTH -14.3m</span></div>
       <a href="/about-me/" class="sys-content-card"><span class="sys-tag">Academic Profile</span><h3 class="sys-title">About Me</h3><p class="sys-desc">Academic background, professional experience, research interests, and intellectual pursuits.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-02">
-      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">DEPTH -33.3m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">02</span><span class="depth-elevation">DEPTH -28.6m</span></div>
       <a href="/essays-op-eds/" class="sys-content-card"><span class="sys-tag">Signal Transmission</span><h3 class="sys-title">Essays & Op-Eds</h3><p class="sys-desc">Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-03">
-      <div class="sys-depth-marker"><span class="depth-number">03</span><span class="depth-elevation">DEPTH -50.0m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">03</span><span class="depth-elevation">DEPTH -42.9m</span></div>
       <a href="/mentorship/" class="sys-content-card"><span class="sys-tag">Guidance Center</span><h3 class="sys-title">Mentorship</h3><p class="sys-desc">Academic guidance and professional mentorship programs supporting students across disciplines.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-04">
-      <div class="sys-depth-marker"><span class="depth-number">04</span><span class="depth-elevation">DEPTH -66.7m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">04</span><span class="depth-elevation">DEPTH -57.1m</span></div>
       <a href="/portfolio/" class="sys-content-card"><span class="sys-tag">Project Hall</span><h3 class="sys-title">Portfolio</h3><p class="sys-desc">Selected research projects, case studies, and applied economic analyses demonstrating methodological rigor.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-05">
-      <div class="sys-depth-marker"><span class="depth-number">05</span><span class="depth-elevation">DEPTH -83.3m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">05</span><span class="depth-elevation">DEPTH -71.4m</span></div>
       <a href="/books/" class="sys-content-card"><span class="sys-tag">Works Archive</span><h3 class="sys-title">Books</h3><p class="sys-desc">Scholarly books, monographs, and edited volumes exploring economic theory and institutional analysis.</p><span class="sys-access">→</span></a>
     </div>
     <div class="sys-level" id="level-06">
-      <div class="sys-depth-marker"><span class="depth-number">06</span><span class="depth-elevation">DEPTH -100.0m</span></div>
+      <div class="sys-depth-marker"><span class="depth-number">06</span><span class="depth-elevation">DEPTH -85.7m</span></div>
       <a href="/cv/" class="sys-content-card"><span class="sys-tag">Primary Access</span><h3 class="sys-title">Curriculum Vitae</h3><p class="sys-desc">Comprehensive professional dossier documenting academic credentials, research experience, and achievements.</p><span class="sys-access">→</span></a>
+    </div>
+    <div class="sys-level" id="level-07">
+      <div class="sys-depth-marker"><span class="depth-number">07</span><span class="depth-elevation">DEPTH -100.0m</span></div>
+      <a href="/intellectual-foundations/" class="sys-content-card"><span class="sys-tag">Bedrock</span><h3 class="sys-title">Intellectual Foundations</h3><p class="sys-desc">The core ideas, thinkers, and intellectual traditions underpinning the entire structure: classical liberalism, the Austrian and Chicago schools, and the foundations of economic freedom.</p><span class="sys-access">→</span></a>
     </div>
   </div>
 
   <div class="sys-footer">
     <div class="sys-status"><span class="status-dot"></span><span>System Operational</span></div>
     <div>Architecture v5.0</div>
-    <div>7 Levels · 100m Depth</div>
+    <div>8 Levels · 100m Depth</div>
   </div>
 </div>
 
