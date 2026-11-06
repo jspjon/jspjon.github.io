@@ -1,7 +1,9 @@
 /* =========================================================
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
-   Cabina alta + 2 pantallas separadas (pisos / metros).
-   Identificación de piezas por GEOMETRÍA (a prueba de todo).
+   Cabina alta + 2 pantallas (pisos / metros).
+   Interior iluminado: barra de luz de techo, degradado
+   cálido, viñeta de paredes y reflejo en el piso.
+   Piezas identificadas por GEOMETRÍA.
    ========================================================= */
 (function () {
   var initialized = false;
@@ -45,6 +47,8 @@
         '@keyframes arrowBlink{0%,100%{opacity:1}50%{opacity:.15}}' +
         '#svgDepthDisplay{fill:rgba(255,179,71,.65);font-family:"JetBrains Mono",monospace;' +
         'font-weight:600;font-size:12px;letter-spacing:1px}' +
+        '.light-strip{animation:stripPulse 3.2s ease-in-out infinite}' +
+        '@keyframes stripPulse{0%,100%{opacity:.82}50%{opacity:1}}' +
         '.elevator-mute{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);' +
         'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.5rem;letter-spacing:.12em;' +
         'padding:3px 7px;border:1px solid #d9d3c6;background:#faf9f7;color:#817766;' +
@@ -82,9 +86,7 @@
     })();
 
     /* =====================================================
-       [CORREGIDO] Recorte de cabina por GEOMETRÍA:
-       frame = x4 w112 · interior = x16 w88 · puertas = w44
-       pantallas = x24 w72 (1 o 2, las reubica todas)
+       Recorte de cabina por GEOMETRÍA
        ===================================================== */
     (function injectScreens() {
       var svg = cabin.querySelector('svg');
@@ -107,22 +109,17 @@
         }
       }
 
-      /* 1) Cabina más alta */
       svg.setAttribute('viewBox', '0 0 120 200');
       if (frame) frame.setAttribute('height', '192');
 
-      /* 2) Pantalla de PISOS */
       if (screens[0]) { screens[0].setAttribute('y', '8'); screens[0].setAttribute('height', '28'); }
       display.setAttribute('y', '29');
       display.style.fontSize = '20px';
       display.style.letterSpacing = '1px';
 
-      /* 3) Puertas largas */
       if (doorL) { doorL.setAttribute('y', '68'); doorL.setAttribute('height', '118'); }
       if (doorR) { doorR.setAttribute('y', '68'); doorR.setAttribute('height', '118'); }
 
-      /* 4) Interior oscuro: se MUEVE junto con las puertas
-            (y si tu archivo no lo tiene, se crea ya alineado) */
       var NS = 'http://www.w3.org/2000/svg';
       if (!backdrop) {
         backdrop = document.createElementNS(NS, 'rect');
@@ -136,14 +133,11 @@
       backdrop.setAttribute('y', '68');
       backdrop.setAttribute('height', '118');
 
-      /* 5) Luz y bombillo repositados */
       var glow = svg.querySelector('.door-light');
       if (glow) { glow.setAttribute('cy', '127'); glow.setAttribute('ry', '66'); }
       var bulb = svg.querySelector('.cabin-light');
-      if (bulb) bulb.setAttribute('cy', '176');
+      if (bulb) bulb.parentNode.removeChild(bulb); /* [CAMBIADO] la luz ahora es la barra de techo */
 
-      /* 6) Pantalla de METROS: la segunda pantalla si existe;
-            si no, se crea nueva */
       var metersScreen;
       if (screens[1]) {
         metersScreen = screens[1];
@@ -166,6 +160,119 @@
       m.setAttribute('text-anchor', 'middle');
       m.textContent = '±0.0m';
       svg.appendChild(m);
+    })();
+
+    /* =====================================================
+       [NUEVO] INTERIOR ILUMINADO — estilo cabina real:
+       degradado cálido, barra de luz de techo, viñeta
+       de paredes, líneas de panel y reflejo en el piso.
+       Todo se pinta DEBAJO de las puertas (tapado cerrado).
+       ===================================================== */
+    (function injectInterior() {
+      var svg = cabin.querySelector('svg');
+      if (!svg || svg.querySelector('#intBase')) return;
+
+      var NS = 'http://www.w3.org/2000/svg';
+      var defs = svg.querySelector('defs');
+      if (!defs) {
+        defs = document.createElementNS(NS, 'defs');
+        svg.insertBefore(defs, svg.firstChild);
+      }
+
+      /* Degradado vertical del interior: techo dorado → piso oscuro */
+      var intGrad = document.createElementNS(NS, 'linearGradient');
+      intGrad.setAttribute('id', 'intGrad');
+      intGrad.setAttribute('x1', '0'); intGrad.setAttribute('y1', '0');
+      intGrad.setAttribute('x2', '0'); intGrad.setAttribute('y2', '1');
+      [[0, '#d9a95e'], [0.18, '#8a6538'], [0.55, '#453117'], [1, '#1c1309']].forEach(function (st) {
+        var stop = document.createElementNS(NS, 'stop');
+        stop.setAttribute('offset', st[0]);
+        stop.setAttribute('stop-color', st[1]);
+        intGrad.appendChild(stop);
+      });
+      defs.appendChild(intGrad);
+
+      /* Viñeta horizontal: paredes que se oscurecen a los lados */
+      var intShade = document.createElementNS(NS, 'linearGradient');
+      intShade.setAttribute('id', 'intShade');
+      intShade.setAttribute('x1', '0'); intShade.setAttribute('y1', '0');
+      intShade.setAttribute('x2', '1'); intShade.setAttribute('y2', '0');
+      [['0', 'rgba(0,0,0,.55)'], ['0.16', 'rgba(0,0,0,0)'], ['0.84', 'rgba(0,0,0,0)'], ['1', 'rgba(0,0,0,.55)']].forEach(function (st) {
+        var stop = document.createElementNS(NS, 'stop');
+        stop.setAttribute('offset', st[0]);
+        stop.setAttribute('stop-color', st[1]);
+        intShade.appendChild(stop);
+      });
+      defs.appendChild(intShade);
+
+      var doorL = svg.querySelector('.svg-door-left');
+      var anchor = doorL || null;
+
+      function add(el) {
+        if (anchor) svg.insertBefore(el, anchor);
+        else svg.appendChild(el);
+      }
+
+      /* Base del interior */
+      var base = document.createElementNS(NS, 'rect');
+      base.setAttribute('id', 'intBase');
+      base.setAttribute('x', '16'); base.setAttribute('y', '68');
+      base.setAttribute('width', '88'); base.setAttribute('height', '118');
+      base.setAttribute('fill', 'url(#intGrad)');
+      add(base);
+
+      /* Resplandor bajo la barra de luz */
+      var bloom1 = document.createElementNS(NS, 'ellipse');
+      bloom1.setAttribute('cx', '60'); bloom1.setAttribute('cy', '79');
+      bloom1.setAttribute('rx', '36'); bloom1.setAttribute('ry', '11');
+      bloom1.setAttribute('fill', 'rgba(255,224,150,.32)');
+      add(bloom1);
+
+      /* Barra de luz de techo */
+      var strip = document.createElementNS(NS, 'rect');
+      strip.setAttribute('class', 'light-strip');
+      strip.setAttribute('x', '38'); strip.setAttribute('y', '73');
+      strip.setAttribute('width', '44'); strip.setAttribute('height', '5');
+      strip.setAttribute('rx', '2.5');
+      strip.setAttribute('fill', '#ffedbe');
+      add(strip);
+
+      /* Segundo halo (luz que baja por la cabina) */
+      var bloom2 = document.createElementNS(NS, 'ellipse');
+      bloom2.setAttribute('cx', '60'); bloom2.setAttribute('cy', '94');
+      bloom2.setAttribute('rx', '30'); bloom2.setAttribute('ry', '14');
+      bloom2.setAttribute('fill', 'rgba(255,214,130,.15)');
+      add(bloom2);
+
+      /* Líneas de panel en las paredes */
+      ['28', '36', '84', '92'].forEach(function (lx) {
+        var l = document.createElementNS(NS, 'line');
+        l.setAttribute('x1', lx); l.setAttribute('x2', lx);
+        l.setAttribute('y1', '82'); l.setAttribute('y2', '166');
+        l.setAttribute('stroke', 'rgba(255,220,160,.09)');
+        l.setAttribute('stroke-width', '1');
+        add(l);
+      });
+
+      /* Reflejo de la luz en el piso */
+      var refl1 = document.createElementNS(NS, 'ellipse');
+      refl1.setAttribute('cx', '60'); refl1.setAttribute('cy', '181');
+      refl1.setAttribute('rx', '32'); refl1.setAttribute('ry', '6');
+      refl1.setAttribute('fill', 'rgba(255,214,130,.15)');
+      add(refl1);
+
+      var refl2 = document.createElementNS(NS, 'ellipse');
+      refl2.setAttribute('cx', '60'); refl2.setAttribute('cy', '180');
+      refl2.setAttribute('rx', '19'); refl2.setAttribute('ry', '3.5');
+      refl2.setAttribute('fill', 'rgba(255,214,130,.22)');
+      add(refl2);
+
+      /* Viñeta de paredes (encima de todo el interior) */
+      var shade = document.createElementNS(NS, 'rect');
+      shade.setAttribute('x', '16'); shade.setAttribute('y', '68');
+      shade.setAttribute('width', '88'); shade.setAttribute('height', '118');
+      shade.setAttribute('fill', 'url(#intShade)');
+      add(shade);
     })();
 
     var depthDisplay = document.getElementById('svgDepthDisplay');
