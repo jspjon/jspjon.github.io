@@ -2,21 +2,17 @@
    ASCENSOR SVG — Sistema Subterráneo (8 niveles)
    Mueve la cabina según el nivel .sys-level visible,
    actualiza el LED (00–07), abre puertas al atracar.
-   Flechas ▲▼ + sonido: doors.mp3 al abrirse las puertas.
+   Flechas ▲▼ + sonido doors.mp3
+   [NUEVO] HUD de profundidad + flecha circular en tarjetas
    ========================================================= */
 (function () {
   var initialized = false;
 
-  /* CONFIGURACIÓN DE SONIDO — ajusta aquí sin tocar más nada */
+  /* CONFIGURACIÓN DE SONIDO */
   var SOUND = {
-    moveURL:     '',                           /* [CAMBIADO] vacío = viaje sin sonido */
-    doorsURL:    'assets/sounds/doors.mp3',    /* tu mp3 de apertura de puertas */
-    moveVolume:  0.18,
-    doorsVolume: 0.20,  /* 0..1 — sube/baja a gusto (ej: 0.3 – 0.6) */
-    moveFadeIn:  0.4,
-    moveFadeOut: 0.5,
-    doorsOffset: 0,     /* si tu mp3 tiene silencio al inicio, prueba 0.2 – 0.4 */
-    moveOffset:  0
+    doorsURL:    'assets/sounds/doors.mp3',
+    doorsVolume: 0.20,
+    doorsOffset: 0
   };
 
   function init() {
@@ -37,7 +33,7 @@
     initialized = true;
     console.log('[Ascensor] Listo — ' + levels.length + ' pisos detectados');
 
-    /* CSS de flechas y botón ♪ (el botón queda DEBAJO del riel, centrado) */
+    /* CSS de flechas, botón ♪, HUD y flecha circular (se inyecta solo) */
     (function injectStyles() {
       if (document.getElementById('elevator-fx-styles')) return;
       var s = document.createElement('style');
@@ -50,24 +46,49 @@
         '@keyframes arrowBlink{0%,100%{opacity:1}50%{opacity:.15}}' +
         '.elevator-mute{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%);' +
         'z-index:5;font-family:"JetBrains Mono",monospace;font-size:.55rem;letter-spacing:.15em;' +
-        'padding:5px 9px;border:1px solid var(--sys-border);background:var(--sys-bg);color:var(--sys-muted);' +
-        'cursor:pointer;transition:all .25s ease;box-shadow:0 2px 8px rgba(154,141,120,.12);white-space:nowrap}' +
-        '.elevator-mute:hover{border-color:var(--sys-accent);color:var(--sys-accent)}' +
-        '.elevator-mute.off{color:var(--sys-border)}';
+        'padding:5px 9px;border:1px solid #d9d3c6;background:#faf9f7;color:#817766;' +
+        'cursor:pointer;transition:all .25s ease;box-shadow:0 2px 8px rgba(0,0,0,.18);white-space:nowrap}' +
+        '.elevator-mute:hover{border-color:var(--led-on);color:var(--led-on)}' +
+        '.elevator-mute.off{color:#b9b09c}' +
+
+        /* [NUEVO] HUD de profundidad (abajo a la izquierda) */
+        '.depth-hud{position:fixed;left:24px;bottom:20px;z-index:9998;pointer-events:none;' +
+        'font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.28em;' +
+        'font-size:.55rem;color:var(--sys-muted)}' +
+        '.depth-hud .dh-value{display:block;margin-top:4px;font-size:.95rem;font-weight:800;' +
+        'letter-spacing:.1em;color:var(--sys-text);font-variant-numeric:tabular-nums}' +
+        '@media (max-width:640px){.depth-hud{display:none}}' +
+
+        /* [NUEVO] Flecha circular "ir" en las tarjetas */
+        '.subterranean-system .sys-level .sys-content-card .sys-access{' +
+        'right:26px;top:50%;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;' +
+        'border:1px solid var(--sys-border);background:var(--sys-bg);color:var(--sys-accent);' +
+        'font-size:1rem;transform:translateY(-50%) translateX(-10px);' +
+        'box-shadow:0 2px 10px -6px rgba(42,42,42,.25)}' +
+        '.subterranean-system .sys-level .sys-content-card:hover .sys-access{' +
+        'opacity:1;transform:translateY(-50%) translateX(0) scale(1.05);' +
+        'background:var(--led-on);color:#191713;border-color:var(--led-on);' +
+        'box-shadow:0 0 20px rgba(255,179,71,.4)}' +
+        /* marcador "estás aquí": visible fijo en la tarjeta atracada
+           (borra esta regla si no lo quieres) */
+        '.subterranean-system .sys-level.floor-active .sys-content-card .sys-access{' +
+        'opacity:1;transform:translateY(-50%)}' +
+        /* en móvil se oculta, igual que tu diseño original */
+        '@media (max-width:768px){.subterranean-system .sys-level .sys-content-card .sys-access{display:none}}';
       document.head.appendChild(s);
     })();
 
-    /* Flechas ▲▼ dentro del display del SVG (sin tocar HTML) */
+    /* Flechas ▲▼ dentro del display del SVG */
     (function injectArrows() {
       var svg = cabin.querySelector('svg');
       if (!svg || svg.querySelector('.svg-arrow')) return;
       var NS = 'http://www.w3.org/2000/svg';
       var up = document.createElementNS(NS, 'path');
       up.setAttribute('class', 'svg-arrow svg-arrow-up');
-      up.setAttribute('d', 'M30 27 L35 20 L40 27 Z');      /* ▲ izquierda del LED */
+      up.setAttribute('d', 'M30 27 L35 20 L40 27 Z');
       var down = document.createElementNS(NS, 'path');
       down.setAttribute('class', 'svg-arrow svg-arrow-down');
-      down.setAttribute('d', 'M80 20 L90 20 L85 27 Z');    /* ▼ derecha del LED */
+      down.setAttribute('d', 'M80 20 L90 20 L85 27 Z');
       svg.appendChild(up);
       svg.appendChild(down);
     })();
@@ -77,8 +98,7 @@
        ===================================================== */
     var soundOn = true;
     try { soundOn = localStorage.getItem('elevSnd') !== 'off'; } catch (e) { /* modo privado */ }
-    var actx = null, master = null;
-    var doorsBuf = null;
+    var actx = null, master = null, doorsBuf = null;
 
     function ensureCtx() {
       if (!soundOn) return null;
@@ -93,13 +113,10 @@
       if (actx.state === 'suspended') actx.resume();
       return actx;
     }
-
-    /* Los navegadores exigen un gesto (clic/tecla) antes de sonar */
     ['pointerdown', 'keydown', 'touchstart'].forEach(function (ev) {
       window.addEventListener(ev, function () { if (soundOn) ensureCtx(); }, { passive: true });
     });
 
-    /* Precarga del MP3 (falla en silencio si falta el archivo) */
     (function preload() {
       var AC = window.AudioContext || window.webkitAudioContext;
       if (!AC || !SOUND.doorsURL) return;
@@ -118,7 +135,6 @@
         });
     })();
 
-    /* Sonido de PUERTAS: una sola vez al abrirse al atracar */
     function doorsSound() {
       if (!ensureCtx() || !doorsBuf) return;
       var src = actx.createBufferSource();
@@ -145,11 +161,17 @@
     var container = document.getElementById('elevatorContainer');
     if (container) container.appendChild(muteBtn);
 
+    /* [NUEVO] HUD de profundidad */
+    var hud = document.createElement('div');
+    hud.className = 'depth-hud';
+    hud.innerHTML = '<span>Depth</span><span class="dh-value" id="hudVal">±0.0m</span>';
+    document.body.appendChild(hud);
+    var hudVal = hud.querySelector('.dh-value');
+
     var total = levels.length;
     var last = total - 1;
     var ticking = false;
 
-    /* Estado de movimiento */
     var lastProgress = 0;
     var moveTimer = null;
     var lastDockedFloor = -1;
@@ -158,17 +180,15 @@
     function update() {
       var viewCenter = window.scrollY + window.innerHeight / 2;
 
-      // Centro vertical (en coordenadas del documento) de cada nivel
       var centers = levels.map(function (l) {
         return l.getBoundingClientRect().top + window.scrollY + l.offsetHeight / 2;
       });
 
-      // Progreso continuo 0..last según el centro de la ventana
       var progress;
       if (Math.sign(centers[0] - viewCenter) !== -1) {
-        progress = 0;                     // todavía sobre el piso 0 (GROUND)
+        progress = 0;
       } else if (Math.sign(centers[last] - viewCenter) !== 1) {
-        progress = last;                  // ya pasó el último piso (perfil, footer)
+        progress = last;
       } else {
         var i = 0;
         while (Math.sign(centers[i + 1] - viewCenter) === -1) i += 1;
@@ -177,15 +197,16 @@
         progress = i + t;
       }
 
-      // Mover la cabina dentro del riel
       var maxTranslate = Math.max(0, shaft.offsetHeight - cabin.offsetHeight);
       cabin.style.transform = 'translate(-50%, ' + ((progress / last) * maxTranslate) + 'px)';
 
-      // Piso actual → LED del SVG (00 a -07)
       var currentFloor = Math.min(Math.max(Math.round(progress), 0), last);
       display.textContent = currentFloor === 0 ? '00' : '-0' + currentFloor;
 
-      /* Dirección + flechitas ▲▼ */
+      /* [NUEVO] Profundidad en metros, en vivo */
+      var depthM = (progress / last) * 100;
+      hudVal.textContent = progress === 0 ? '±0.0m' : '−' + depthM.toFixed(1) + 'm';
+
       var delta = progress - lastProgress;
       if (Math.abs(delta) > 0.004) {
         lastMoveDir = delta > 0 ? 'down' : 'up';
@@ -198,8 +219,6 @@
       }
       lastProgress = progress;
 
-      // ¿Atracado? Se mide sobre la TARJETA del piso (no sobre la fila),
-      // porque la tarjeta del piso 00 va pegada al título, arriba de su fila
       var cardEl = levels[currentFloor].querySelector('.sys-content-card');
       var isDocked = false;
       if (cardEl) {
@@ -207,10 +226,8 @@
         var dist = Math.abs((cr.top + cr.height / 2) - window.innerHeight / 2);
         isDocked = Math.sign(dist - window.innerHeight * 0.13) === -1;
       }
-      // Vestíbulo: con el título a la vista, las puertas siguen abiertas
       if (viewCenter <= centers[0]) isDocked = true;
 
-      /* Sonido de puertas SOLO al atracar en un piso distinto */
       if (isDocked && lastDockedFloor !== -1 && currentFloor !== lastDockedFloor) {
         doorsSound();
       }
@@ -228,7 +245,6 @@
       }
     }
 
-    // Clic en un marcador → viaje suave a ese nivel
     markers.forEach(function (marker, i) {
       marker.addEventListener('click', function () {
         levels[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -241,7 +257,6 @@
     update();
   }
 
-  // Triple arranque para sobrevivir a cualquier orden de carga
   init();
   document.addEventListener('DOMContentLoaded', init);
   window.addEventListener('load', init);
