@@ -75,7 +75,7 @@ A selection of essays, articles, and opinion pieces on political economy, social
 
   <p class="description">An examination of Venezuela’s economic collapse under Chávez and Maduro through Ludwig von Mises’s theory of economic calculation. The essay explores how the suppression of private property and market prices undermined economic coordination, voluntary cooperation, and individual freedom.</p>
 
-  <a class="essay-link" href="https://mises.org/" target="_blank" rel="noopener noreferrer">Read original essay ↗</a>
+  <a class="essay-link" href="https://mises.org/mises-wire/destruction-venezuelas-economy-under-chavez-and-maduro/" target="_blank" rel="noopener noreferrer">Read original essay ↗</a>
 </article>
 
 </div>
