@@ -186,7 +186,7 @@ author_profile: false
     <p class="f-big" data-reveal><em>Fin.</em></p>
     <div class="f-meta" data-reveal>
       <span>SET IN CORMORANT GARAMOND &amp; JETBRAINS MONO</span>
-      <span>BOOK COVERS VIA GOOGLE BOOKS API</span>
+      <span>COVERS VIA OPENLIBRARY &amp; GOOGLE BOOKS</span>
       <a href="#top" data-cursor-label="TOP">BACK TO TOP ↑</a>
     </div>
   </footer>
@@ -273,34 +273,20 @@ author_profile: false
            '<div class="p-mid"><h3 class="p-title">' + esc(b.t) + '</h3><span class="p-rule"></span><span class="p-au">' + esc(b.a) + '</span></div>';
   }
 
-  /* ===== covers: Google Books (con country — requerido sin API key) + Open Library fallback ===== */
-  function gbooksURL(b) {
-    return b.gid ? "https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api" : null;
+  /* ===== portadas: ISBN en OL → búsqueda OL → Google Books. Verifica cada URL con un Image real ===== */
+  function verify(url) {
+    if (!url) return Promise.resolve(null);
+    return new Promise(function (res) {
+      var im = new Image();
+      im.onload = function () { res(url); };
+      im.onerror = function () { res(null); };
+      im.src = url;
+    });
   }
-  function coverURL(b) {
-    if (b.gid) return Promise.resolve(gbooksURL(b));
-    if (b._gid !== undefined) return Promise.resolve(b._gid ? gbooksURL(b) : null);
-    var main = b.t.split(":")[0].trim();
-    var au = b.a.split(/\s+and\s+/i)[0].split(",")[0].trim();
-    var q = encodeURIComponent('intitle:"' + main + '" inauthor:"' + au + '"');
-    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + q + "&maxResults=5&printType=books&country=US")
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        var gid = null;
-        var items = (d && d.items) || [];
-        for (var k = 0; k < items.length; k++) {
-          var v = items[k].volumeInfo || {};
-          if (!v.imageLinks) continue;
-          if (!gid) gid = items[k].id;
-          var vt = (v.title || "").toLowerCase();
-          if (vt.indexOf(main.toLowerCase().slice(0, 12)) > -1) { gid = items[k].id; break; }
-        }
-        b._gid = gid;
-        return gid ? gbooksURL(b) : null;
-      })
-      .catch(function () { b._gid = null; return null; });
+  function olByIsbn(b) {
+    return b.isbn ? "https://covers.openlibrary.org/b/isbn/" + String(b.isbn).replace(/[^0-9Xx]/g, "") + "-L.jpg" : null;
   }
-  function olCoverURL(b) {
+  function olSearch(b) {
     if (b._ol !== undefined) return Promise.resolve(b._ol);
     var q = encodeURIComponent(b.t + " " + b.a);
     return fetch("https://openlibrary.org/search.json?q=" + q + "&fields=cover_i&limit=1")
@@ -311,6 +297,34 @@ author_profile: false
         return b._ol;
       })
       .catch(function () { b._ol = null; return null; });
+  }
+  function gSearch(b) {
+    if (b._g !== undefined) return Promise.resolve(b._g);
+    var main = b.t.split(":")[0].trim();
+    var au = b.a.split(/\s+and\s+/i)[0].split(",")[0].trim();
+    var q = encodeURIComponent('intitle:"' + main + '" inauthor:"' + au + '"');
+    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + q + "&maxResults=5&printType=books&country=US")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var gid = null, items = (d && d.items) || [];
+        for (var k = 0; k < items.length; k++) {
+          var v = items[k].volumeInfo || {};
+          if (!v.imageLinks) continue;
+          if (!gid) gid = items[k].id;
+          var vt = (v.title || "").toLowerCase();
+          if (vt.indexOf(main.toLowerCase().slice(0, 12)) > -1) { gid = items[k].id; break; }
+        }
+        b._g = gid ? ("https://books.google.com/books/content?id=" + gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api").replace(/^http:/, "https:") : null;
+        return b._g;
+      })
+      .catch(function () { b._g = null; return null; });
+  }
+  function resolveCover(b) {
+    if (b._cov !== undefined) return Promise.resolve(b._cov);
+    return verify(olByIsbn(b))
+      .then(function (u) { if (u) return u; return olSearch(b); })
+      .then(function (u) { if (u) return u; return gSearch(b); })
+      .then(function (u) { b._cov = u; return u; });
   }
 
   /* ===== loader ===== */
@@ -369,16 +383,18 @@ author_profile: false
       plateVars(mini, i); mini.innerHTML = plateInner(b, i);
       mini.style.height = "272px"; mini.style.aspectRatio = "auto";
       card.appendChild(mini); peek.appendChild(card); peek.classList.add("on");
-      coverURL(b).then(function (url) {
-        if (!url || peek.dataset.i !== String(i)) return;
-        var img = document.createElement("img");
-        img.className = "peek-img"; img.alt = ""; img.src = url;
-        img.addEventListener("load", function () {
-          if (peek.dataset.i === String(i)) img.classList.add("show");
+      if (b._cov) {
+        var im0 = document.createElement("img"); im0.className = "peek-img"; im0.src = b._cov;
+        im0.addEventListener("load", function () { if (peek.dataset.i === String(i)) im0.classList.add("show"); });
+        card.appendChild(im0);
+      } else {
+        resolveCover(b).then(function (url) {
+          if (!url || peek.dataset.i !== String(i)) return;
+          var im = document.createElement("img"); im.className = "peek-img"; im.src = url;
+          im.addEventListener("load", function () { if (peek.dataset.i === String(i)) im.classList.add("show"); });
+          card.appendChild(im);
         });
-        img.addEventListener("error", function () { img.remove(); });
-        card.appendChild(img);
-      });
+      }
     });
     li.addEventListener("mouseleave", function () { peek.classList.remove("on"); });
     li.addEventListener("click", function () { openBook(i, li); });
@@ -419,22 +435,12 @@ author_profile: false
     document.body.classList.add("locked");
     document.getElementById("ov-close").focus();
 
-    /* portada real: Google Books → Open Library → placa generada */
-    var put = function (url) {
+    resolveCover(b).then(function (url) {
       if (!url || current !== i || !modal.classList.contains("open")) return;
-      var hi = url.replace("zoom=2", "zoom=3");
       var img = document.createElement("img");
-      img.className = "ov-real"; img.alt = "Cover of " + b.t; img.src = hi;
-      img.addEventListener("load", function () { img.classList.add("show"); });
-      img.addEventListener("error", function () {
-        if (img.dataset.retry !== "1") { img.dataset.retry = "1"; img.src = url; }
-        else img.remove();
-      });
+      img.className = "ov-real"; img.alt = "Cover of " + b.t; img.src = url;
+      img.addEventListener("load", function () { if (current === i) img.classList.add("show"); });
       ovArt.appendChild(img);
-    };
-    coverURL(b).then(function (url) {
-      if (url) { put(url); return; }
-      olCoverURL(b).then(function (u2) { if (u2) put(u2); });
     });
   }
   function closeBook() {
@@ -456,7 +462,13 @@ author_profile: false
   });
   tiltEl.addEventListener("mouseleave", function () { ovArt.style.transform = "rotateY(0) rotateX(0)"; });
 
-  /* ===== prefetch covers after idle ===== */
-  setTimeout(function () { BOOKS.forEach(function (b) { coverURL(b); }); }, 3000);
+  /* ===== resolver portadas en segundo plano (suave, 1 cada 300ms) ===== */
+  setTimeout(function () {
+    var qi = 0;
+    (function nextQ() {
+      if (qi >= BOOKS.length) return;
+      resolveCover(BOOKS[qi++]).then(function () { setTimeout(nextQ, 300); });
+    })();
+  }, 2500);
 })();
 </script>
