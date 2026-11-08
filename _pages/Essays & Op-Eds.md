@@ -171,7 +171,7 @@ A selection of essays, articles, and opinion pieces on political economy, social
 
     <a class="essay-link" href="https://mises.org/mises-wire/trap-class-consciousness" target="_blank" rel="noopener noreferrer">
       <span>Read original essay ↗</span>
-      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.svg' | relative_url }}" alt="Mises Institute" loading="lazy">
+      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.png' | relative_url }}" alt="Mises Institute" loading="lazy">
     </a>
   </article>
 
@@ -189,7 +189,7 @@ A selection of essays, articles, and opinion pieces on political economy, social
 
     <a class="essay-link" href="https://mises.org/mises-wire/silent-theft-how-castros-regime-stole-aurelio-baldors-life-work-and-legacy" target="_blank" rel="noopener noreferrer">
       <span>Read original essay ↗</span>
-      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.svg' | relative_url }}" alt="Mises Institute" loading="lazy">
+      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.png' | relative_url }}" alt="Mises Institute" loading="lazy">
     </a>
   </article>
 
@@ -207,7 +207,7 @@ A selection of essays, articles, and opinion pieces on political economy, social
 
     <a class="essay-link" href="https://mises.org/mises-wire/destruction-venezuelas-economy-under-chavez-and-maduro/" target="_blank" rel="noopener noreferrer">
       <span>Read original essay ↗</span>
-      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.svg' | relative_url }}" alt="Mises Institute" loading="lazy">
+      <img class="essay-logo" src="{{ '/assets/images/mises-institute-logo.png' | relative_url }}" alt="Mises Institute" loading="lazy">
     </a>
   </article>
 
