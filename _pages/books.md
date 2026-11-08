@@ -1,6 +1,6 @@
 ---
 title: "32 Books to Read 📚"
-layout: single
+layout: archive
 permalink: /books/
 author_profile: false
 ---
