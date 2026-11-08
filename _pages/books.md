@@ -31,13 +31,15 @@ author_profile: false
   .l-t { font-size: .62rem; letter-spacing: .34em; color: var(--muted); }
   .l-c { font-family: "Cormorant Garamond", Georgia, serif; font-size: 3.4rem; line-height: 1; }
 
- .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 500; }
- .cur-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px rgba(244,240,230,.9); }
- .cur-ring { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(23,19,14,.5); box-shadow: 0 0 0 1px rgba(244,240,230,.55); display: grid; place-items: center;
-  transition: width .3s ease, height .3s ease, background .3s ease, border-color .3s ease; }
- .cur-ring span { font-size: .48rem; letter-spacing: .24em; color: var(--paper); opacity: 0; transition: opacity .25s ease; }
- .cur-ring.big { width: 86px; height: 86px; background: rgba(23,19,14,.30); backdrop-filter: blur(3px); border-color: transparent; box-shadow: none; }
- .cur-ring.big span { opacity: 1; }
+  .cur-dot, .cur-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 21000; }
+  .cur-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px rgba(244,240,230,.9); }
+  .cur-ring { width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(23,19,14,.5); box-shadow: 0 0 0 1px rgba(244,240,230,.55); display: grid; place-items: center;
+    transition: width .3s ease, height .3s ease, background .3s ease, border-color .3s ease; }
+  .cur-ring span { font-size: .48rem; letter-spacing: .24em; color: var(--paper); opacity: 0; transition: opacity .25s ease; }
+  .cur-ring.big { width: 86px; height: 86px; background: rgba(23,19,14,.30); backdrop-filter: blur(3px); border-color: transparent; box-shadow: none; }
+  .cur-ring.big span { opacity: 1; }
+  @media (hover: none), (pointer: coarse) { .cur-dot, .cur-ring { display: none; } }
+  @media (hover: hover) and (pointer: fine) { body, a, button, summary { cursor: none; } }
 
   .peek { position: fixed; top: 0; left: 0; width: 196px; z-index: 120; pointer-events: none; opacity: 0; transform: scale(.92); transition: opacity .28s ease; will-change: transform; }
   .peek.on { opacity: 1; }
@@ -95,10 +97,10 @@ author_profile: false
   .r-go { font-size: .9rem; opacity: 0; transform: translateX(-10px); transition: all .3s ease; }
   .row:hover .r-go { opacity: 1; transform: none; }
 
-  .overlay { position: fixed; inset: 0; z-index: 9999; visibility: hidden; clip-path: inset(100% 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
+  .overlay { position: fixed; inset: 0; z-index: 20000; visibility: hidden; clip-path: inset(100% 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
   .overlay.open { visibility: visible; clip-path: inset(0 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1); }
   .ov-backdrop { position: absolute; inset: 0; background: var(--ov-bg); }
-  .ov-close { position: absolute; top: 22px; right: 26px; z-index: 5; width: 46px; height: 46px; background: transparent; border: 1px solid var(--ov-line); border-radius: 50%; color: var(--ov-fg); font-family: inherit; font-size: .9rem; cursor: pointer; transition: all .25s ease; }
+  .ov-close { position: absolute; top: 22px; right: 26px; z-index: 60; width: 48px; height: 48px; background: transparent; border: 1px solid var(--ov-line); border-radius: 50%; color: var(--ov-fg); font-family: inherit; font-size: 1.05rem; cursor: pointer; transition: all .25s ease; }
   .ov-close:hover { background: var(--ov-fg); color: var(--ov-bg); }
   .ov-body { position: relative; height: 100%; overflow-y: auto; display: grid; grid-template-columns: minmax(280px, 400px) 1fr; gap: clamp(30px, 5vw, 80px); align-items: center; padding: 10vh clamp(24px, 6vw, 90px) 8vh; color: var(--ov-fg); }
   .ov-plate { perspective: 1100px; }
@@ -107,6 +109,8 @@ author_profile: false
   .ov-real { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; z-index: 1; border-radius: 2px 6px 6px 2px; }
   .ov-real.show { opacity: 1; }
   .ov-plate .p-fr { z-index: 2; }
+  .ov-exit { display: inline-block; margin: 0 0 28px; padding: 9px 16px; border: 1px solid var(--ov-line); border-radius: 3px; background: transparent; color: var(--ov-fg); font-family: inherit; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; cursor: pointer; transition: all .25s ease; }
+  .ov-exit:hover { background: var(--ov-fg); color: var(--ov-bg); }
   .ov-eyebrow { font-size: .58rem; letter-spacing: .28em; color: var(--ov-muted); margin-bottom: 22px; }
   .ov-eyebrow b { color: var(--accent); font-weight: 500; }
   .ov-title { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1.02; border: 0; padding: 0; margin: 0; }
@@ -269,14 +273,17 @@ author_profile: false
            '<div class="p-mid"><h3 class="p-title">' + esc(b.t) + '</h3><span class="p-rule"></span><span class="p-au">' + esc(b.a) + '</span></div>';
   }
 
-  /* ===== real covers via Google Books ===== */
+  /* ===== covers: Google Books (con country — requerido sin API key) + Open Library fallback ===== */
+  function gbooksURL(b) {
+    return b.gid ? "https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api" : null;
+  }
   function coverURL(b) {
-    if (b.gid) return Promise.resolve("https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api");
-    if (b._gid !== undefined) return Promise.resolve(b._gid ? ("https://books.google.com/books/content?id=" + b._gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api") : null);
+    if (b.gid) return Promise.resolve(gbooksURL(b));
+    if (b._gid !== undefined) return Promise.resolve(b._gid ? gbooksURL(b) : null);
     var main = b.t.split(":")[0].trim();
     var au = b.a.split(/\s+and\s+/i)[0].split(",")[0].trim();
-    var q = 'intitle:"' + main + '" inauthor:"' + au + '"';
-    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(q) + "&maxResults=5&printType=books")
+    var q = encodeURIComponent('intitle:"' + main + '" inauthor:"' + au + '"');
+    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + q + "&maxResults=5&printType=books&country=US")
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var gid = null;
@@ -289,9 +296,21 @@ author_profile: false
           if (vt.indexOf(main.toLowerCase().slice(0, 12)) > -1) { gid = items[k].id; break; }
         }
         b._gid = gid;
-        return gid ? ("https://books.google.com/books/content?id=" + gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api") : null;
+        return gid ? gbooksURL(b) : null;
       })
       .catch(function () { b._gid = null; return null; });
+  }
+  function olCoverURL(b) {
+    if (b._ol !== undefined) return Promise.resolve(b._ol);
+    var q = encodeURIComponent(b.t + " " + b.a);
+    return fetch("https://openlibrary.org/search.json?q=" + q + "&fields=cover_i&limit=1")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var ci = d && d.docs && d.docs[0] && d.docs[0].cover_i;
+        b._ol = ci ? "https://covers.openlibrary.org/b/id/" + ci + "-L.jpg" : null;
+        return b._ol;
+      })
+      .catch(function () { b._ol = null; return null; });
   }
 
   /* ===== loader ===== */
@@ -310,7 +329,7 @@ author_profile: false
     document.addEventListener("mousemove", function (e) { mx = e.clientX; my = e.clientY; });
     (function loop() {
       rx += (mx - rx) * 0.14; ry += (my - ry) * 0.14;
-      dot.style.transform = "translate(" + (mx - 3) + "px," + (my - 3) + "px)";
+      dot.style.transform = "translate(" + (mx - 4) + "px," + (my - 4) + "px)";
       ring.style.transform = "translate(" + (rx - ring.offsetWidth / 2) + "px," + (ry - ring.offsetHeight / 2) + "px)";
       requestAnimationFrame(loop);
     })();
@@ -385,20 +404,23 @@ author_profile: false
     current = i;
     ovArt.innerHTML = plateInner(b, i); plateVars(ovArt, i);
     ovInfo.innerHTML =
+      '<button class="ov-exit" id="ov-exit" data-cursor-label="CLOSE">← BACK TO SHELF</button>' +
       '<p class="ov-eyebrow"><b>Nº ' + pad(i + 1) + "</b> · " + esc(b.c) + "</p>" +
       '<h3 class="ov-title">' + esc(b.t) + "</h3>" +
       '<span class="ov-gold"></span>' +
       '<p class="ov-author">' + esc(b.a) + "</p>" +
       '<p class="ov-desc">' + esc(b.d) + "</p>" +
-      '<a class="bp-link ov-link" href="' + b.u + '" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>';
+      '<a class="ov-link" href="' + b.u + '" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>';
+    document.getElementById("ov-exit").addEventListener("click", closeBook);
+
     lastFocus = origin || document.activeElement;
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("locked");
     document.getElementById("ov-close").focus();
 
-    /* portada real: intenta zoom=3 (máx calidad) y cae a zoom=2 si no existe */
-    coverURL(b).then(function (url) {
+    /* portada real: Google Books → Open Library → placa generada */
+    var put = function (url) {
       if (!url || current !== i || !modal.classList.contains("open")) return;
       var hi = url.replace("zoom=2", "zoom=3");
       var img = document.createElement("img");
@@ -409,6 +431,10 @@ author_profile: false
         else img.remove();
       });
       ovArt.appendChild(img);
+    };
+    coverURL(b).then(function (url) {
+      if (url) { put(url); return; }
+      olCoverURL(b).then(function (u2) { if (u2) put(u2); });
     });
   }
   function closeBook() {
