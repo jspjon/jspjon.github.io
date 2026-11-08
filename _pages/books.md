@@ -42,6 +42,9 @@ author_profile: false
 
   .peek { position: fixed; top: 0; left: 0; width: 196px; z-index: 120; pointer-events: none; opacity: 0; transform: scale(.92); transition: opacity .28s ease; will-change: transform; }
   .peek.on { opacity: 1; }
+  .peek-card { position: relative; border-radius: 2px; overflow: hidden; box-shadow: 0 34px 60px -28px rgba(40,30,15,.55); }
+  .peek-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
+  .peek-img.show { opacity: 1; }
 
   .plate { position: relative; aspect-ratio: 3 / 4; background: linear-gradient(160deg, var(--c1), var(--c2)); color: var(--fg); padding: 18px; display: flex; flex-direction: column; overflow: hidden; }
   .p-fr { position: absolute; inset: 10px; border: 1px solid var(--fr); pointer-events: none; }
@@ -102,6 +105,9 @@ author_profile: false
   .ov-plate { perspective: 1100px; }
   .ov-plate .plate { max-width: 380px; margin: 0 auto; box-shadow: 0 60px 90px -40px rgba(0,0,0,.7); transition: transform .3s ease; }
   .ov-plate .p-title { font-size: clamp(1.8rem, 3.2vw, 2.8rem); }
+  .ov-real { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; z-index: 1; border-radius: 2px 6px 6px 2px; }
+  .ov-real.show { opacity: 1; }
+  .ov-plate .p-fr { z-index: 2; }
   .ov-eyebrow { font-size: .58rem; letter-spacing: .28em; color: var(--ov-muted); margin-bottom: 22px; }
   .ov-eyebrow b { color: var(--accent); font-weight: 500; }
   .ov-title { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1.02; border: 0; padding: 0; margin: 0; }
@@ -177,7 +183,7 @@ author_profile: false
     <p class="f-big" data-reveal><em>Fin.</em></p>
     <div class="f-meta" data-reveal>
       <span>SET IN CORMORANT GARAMOND &amp; JETBRAINS MONO</span>
-      <span>A PERSONAL READING LIST — ECONOMICS, LAW, LIBERTY</span>
+      <span>BOOK COVERS VIA GOOGLE BOOKS API</span>
       <a href="#top" data-cursor-label="TOP">BACK TO TOP ↑</a>
     </div>
   </footer>
@@ -232,13 +238,12 @@ author_profile: false
     { t: "Taxes Have Consequences", a: "Arthur B. Laffer, Brian Domitrovic, and Jeanne Sinquefield", c: "Supply-Side Economics", d: "A historical and economic examination of income taxation in the United States, exploring the relationship between tax policy, incentives, investment, economic growth, and government revenue.", u: "https://www.goodreads.com/search?q=Taxes+Have+Consequences+Arthur+Laffer" }
   ];
 
-  var library = document.getElementById("library");
   var rowsEl = document.getElementById("rows");
   var modal = document.getElementById("overlay");
   var ovArt = document.getElementById("ov-art");
   var ovInfo = document.getElementById("ov-info");
   var peek = document.getElementById("peek");
-  var lastFocus = null;
+  var lastFocus = null, current = -1;
   var fineMouse = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -263,6 +268,26 @@ author_profile: false
   function plateInner(b, i) {
     return '<span class="p-fr"></span><span class="p-no">Nº ' + pad(i + 1) + '</span><span class="p-cat">' + esc(b.c) + '</span>' +
            '<div class="p-mid"><h3 class="p-title">' + esc(b.t) + '</h3><span class="p-rule"></span><span class="p-au">' + esc(b.a) + '</span></div>';
+  }
+
+  /* ===== real covers via Google Books API ===== */
+  function gbooksURL(b) {
+    return b.gid ? "https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=3&source=gbs_api" : null;
+  }
+  function coverURL(b) {
+    if (b.gid) return Promise.resolve(gbooksURL(b));
+    if (b._gid !== undefined) return Promise.resolve(b._gid ? gbooksURL(b) : null);
+    var main = b.t.split(":")[0];
+    var q = encodeURIComponent('intitle:"' + main + '"') + "+inauthor:" + encodeURIComponent('"' + b.a + '"');
+    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + q + "&maxResults=4&printType=books")
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var gid = null;
+        (d.items || []).forEach(function (it) { if (!gid && it.volumeInfo && it.volumeInfo.imageLinks) gid = it.id; });
+        b._gid = gid;
+        return gid ? gbooksURL(b) : null;
+      })
+      .catch(function () { b._gid = null; return null; });
   }
 
   /* ===== loader ===== */
@@ -305,7 +330,7 @@ author_profile: false
   }, { threshold: 0.12 });
   document.querySelectorAll("[data-reveal]").forEach(function (el) { io.observe(el); });
 
-  /* ===== index rows + floating preview ===== */
+  /* ===== index rows + floating real cover ===== */
   BOOKS.forEach(function (b, i) {
     var li = document.createElement("li");
     li.className = "row"; li.setAttribute("data-reveal", "");
@@ -314,10 +339,23 @@ author_profile: false
                    '<span class="r-meta">' + esc(b.a) + ' · ' + esc(b.c) + '</span><span class="r-go">↗</span>';
     li.addEventListener("mouseenter", function () {
       if (!fineMouse) return;
-      peek.innerHTML = ""; var mini = document.createElement("div"); mini.className = "plate";
+      peek.dataset.i = i;
+      peek.innerHTML = "";
+      var card = document.createElement("div"); card.className = "peek-card";
+      var mini = document.createElement("div"); mini.className = "plate";
       plateVars(mini, i); mini.innerHTML = plateInner(b, i);
-      mini.style.height = "260px"; mini.style.aspectRatio = "auto";
-      peek.appendChild(mini); peek.classList.add("on");
+      mini.style.height = "272px"; mini.style.aspectRatio = "auto";
+      card.appendChild(mini); peek.appendChild(card); peek.classList.add("on");
+      coverURL(b).then(function (url) {
+        if (!url || peek.dataset.i !== String(i)) return;
+        var img = document.createElement("img");
+        img.className = "peek-img"; img.alt = ""; img.src = url;
+        img.addEventListener("load", function () {
+          if (peek.dataset.i === String(i)) img.classList.add("show");
+        });
+        img.addEventListener("error", function () { img.remove(); });
+        card.appendChild(img);
+      });
     });
     li.addEventListener("mouseleave", function () { peek.classList.remove("on"); });
     li.addEventListener("click", function () { openBook(i, li); });
@@ -340,9 +378,10 @@ author_profile: false
   /* ===== overlay ===== */
   function openBook(i, origin) {
     var b = BOOKS[i];
+    current = i;
     ovArt.innerHTML = plateInner(b, i); plateVars(ovArt, i);
     ovInfo.innerHTML =
-      '<p class="ov-eyebrow"><b>Nº ' + pad(i + 1) + "</b> · " + esc(b.c) + " · SHELF " + (i < 16 ? "A" : "B") + "</p>" +
+      '<p class="ov-eyebrow"><b>Nº ' + pad(i + 1) + "</b> · " + esc(b.c) + ' · <span class="ov-src">GOOGLE BOOKS</span></p>' +
       '<h3 class="ov-title">' + esc(b.t) + "</h3>" +
       '<span class="ov-gold"></span>' +
       '<p class="ov-author">' + esc(b.a) + "</p>" +
@@ -353,6 +392,17 @@ author_profile: false
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("locked");
     document.getElementById("ov-close").focus();
+
+    var put = function (url) {
+      if (!url || current !== i || !modal.classList.contains("open")) return;
+      var img = document.createElement("img");
+      img.className = "ov-real"; img.alt = "Cover of " + b.t; img.src = url;
+      img.addEventListener("load", function () { img.classList.add("show"); });
+      img.addEventListener("error", function () { img.remove(); });
+      ovArt.appendChild(img);
+    };
+    var direct = gbooksURL(b);
+    if (direct) put(direct); else coverURL(b).then(put);
   }
   function closeBook() {
     modal.classList.remove("open");
@@ -372,5 +422,8 @@ author_profile: false
     ovArt.style.transformStyle = "preserve-3d";
   });
   tiltEl.addEventListener("mouseleave", function () { ovArt.style.transform = "rotateY(0) rotateX(0)"; });
+
+  /* ===== prefetch covers after idle ===== */
+  setTimeout(function () { BOOKS.forEach(function (b) { coverURL(b); }); }, 3000);
 })();
 </script>
