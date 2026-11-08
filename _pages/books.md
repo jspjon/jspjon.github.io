@@ -59,10 +59,10 @@ author_profile: false
   .hero { position: relative; padding: 10vh 0 9vh; }
   .hero-ghost { position: absolute; right: -2vw; top: 2vh; font-family: "Cormorant Garamond", serif; font-size: clamp(10rem, 30vw, 26rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px rgba(23,19,14,.12); pointer-events: none; user-select: none; }
   .hero-eyebrow { font-size: .6rem; letter-spacing: .3em; color: var(--accent); margin-bottom: 3.5vh; }
-  .hero-title { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(3.2rem, 10vw, 8.6rem); line-height: .96; letter-spacing: -.01em; }
+  .hero-title { font-family: "Cormorant Garamond", serif; font-weight: 600; font-size: clamp(3.2rem, 10vw, 8.6rem); line-height: 1.05; letter-spacing: -.01em; }
   .hero-title em { font-style: italic; font-weight: 500; }
   .hero-title i { font-style: normal; color: var(--accent); }
-  .line { display: block; overflow: hidden; }
+  .line { display: block; overflow: hidden; padding: 0.06em 0.16em; margin: -0.06em -0.16em; }
   .line > span { display: block; transform: translateY(112%); transition: transform 1.1s cubic-bezier(.19,1,.22,1); }
   .line:nth-child(2) > span { transition-delay: .09s; }
   body.loaded .line > span { transform: translateY(0); }
@@ -96,12 +96,12 @@ author_profile: false
   .r-go { font-size: .9rem; opacity: 0; transform: translateX(-10px); transition: all .3s ease; }
   .row:hover .r-go { opacity: 1; transform: none; }
 
-  .overlay { position: fixed; inset: 0; z-index: 250; visibility: hidden; clip-path: inset(100% 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
+  .overlay { position: fixed; inset: 0; z-index: 9999; visibility: hidden; clip-path: inset(100% 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1), visibility 0s .7s; }
   .overlay.open { visibility: visible; clip-path: inset(0 0 0 0); transition: clip-path .7s cubic-bezier(.77,0,.18,1); }
   .ov-backdrop { position: absolute; inset: 0; background: var(--ov-bg); }
-  .ov-body { position: relative; height: 100%; overflow-y: auto; display: grid; grid-template-columns: minmax(280px, 400px) 1fr; gap: clamp(30px, 5vw, 80px); align-items: center; padding: 9vh clamp(24px, 6vw, 90px); color: var(--ov-fg); }
-  .ov-close { position: absolute; top: 26px; right: 30px; background: transparent; border: 1px solid var(--ov-line); border-radius: 50%; width: 44px; height: 44px; color: var(--ov-fg); font-family: inherit; font-size: .62rem; letter-spacing: .1em; cursor: pointer; transition: all .25s ease; }
+  .ov-close { position: absolute; top: 22px; right: 26px; z-index: 5; width: 46px; height: 46px; background: transparent; border: 1px solid var(--ov-line); border-radius: 50%; color: var(--ov-fg); font-family: inherit; font-size: .9rem; cursor: pointer; transition: all .25s ease; }
   .ov-close:hover { background: var(--ov-fg); color: var(--ov-bg); }
+  .ov-body { position: relative; height: 100%; overflow-y: auto; display: grid; grid-template-columns: minmax(280px, 400px) 1fr; gap: clamp(30px, 5vw, 80px); align-items: center; padding: 10vh clamp(24px, 6vw, 90px) 8vh; color: var(--ov-fg); }
   .ov-plate { perspective: 1100px; }
   .ov-plate .plate { max-width: 380px; margin: 0 auto; box-shadow: 0 60px 90px -40px rgba(0,0,0,.7); transition: transform .3s ease; }
   .ov-plate .p-title { font-size: clamp(1.8rem, 3.2vw, 2.8rem); }
@@ -192,8 +192,8 @@ author_profile: false
 
 <div class="overlay" id="overlay" aria-hidden="true">
   <div class="ov-backdrop" id="ov-backdrop"></div>
+  <button class="ov-close" id="ov-close" data-cursor-label="CLOSE" aria-label="Close">✕</button>
   <div class="ov-body">
-    <button class="ov-close" id="ov-close" data-cursor-label="CLOSE">CLOSE ✕</button>
     <div class="ov-plate" id="ov-plate"><div class="plate" id="ov-art"></div></div>
     <div class="ov-info" id="ov-info"></div>
   </div>
@@ -270,22 +270,27 @@ author_profile: false
            '<div class="p-mid"><h3 class="p-title">' + esc(b.t) + '</h3><span class="p-rule"></span><span class="p-au">' + esc(b.a) + '</span></div>';
   }
 
-  /* ===== real covers via Google Books API ===== */
-  function gbooksURL(b) {
-    return b.gid ? "https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=3&source=gbs_api" : null;
-  }
+  /* ===== real covers via Google Books ===== */
   function coverURL(b) {
-    if (b.gid) return Promise.resolve(gbooksURL(b));
-    if (b._gid !== undefined) return Promise.resolve(b._gid ? gbooksURL(b) : null);
-    var main = b.t.split(":")[0];
-    var q = encodeURIComponent('intitle:"' + main + '"') + "+inauthor:" + encodeURIComponent('"' + b.a + '"');
-    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + q + "&maxResults=4&printType=books")
+    if (b.gid) return Promise.resolve("https://books.google.com/books/content?id=" + b.gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api");
+    if (b._gid !== undefined) return Promise.resolve(b._gid ? ("https://books.google.com/books/content?id=" + b._gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api") : null);
+    var main = b.t.split(":")[0].trim();
+    var au = b.a.split(/\s+and\s+/i)[0].split(",")[0].trim();
+    var q = 'intitle:"' + main + '" inauthor:"' + au + '"';
+    return fetch("https://www.googleapis.com/books/v1/volumes?q=" + encodeURIComponent(q) + "&maxResults=5&printType=books")
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var gid = null;
-        (d.items || []).forEach(function (it) { if (!gid && it.volumeInfo && it.volumeInfo.imageLinks) gid = it.id; });
+        var items = (d && d.items) || [];
+        for (var k = 0; k < items.length; k++) {
+          var v = items[k].volumeInfo || {};
+          if (!v.imageLinks) continue;
+          if (!gid) gid = items[k].id;
+          var vt = (v.title || "").toLowerCase();
+          if (vt.indexOf(main.toLowerCase().slice(0, 12)) > -1) { gid = items[k].id; break; }
+        }
         b._gid = gid;
-        return gid ? gbooksURL(b) : null;
+        return gid ? ("https://books.google.com/books/content?id=" + gid + "&printsec=frontcover&img=1&zoom=2&source=gbs_api") : null;
       })
       .catch(function () { b._gid = null; return null; });
   }
@@ -381,28 +386,31 @@ author_profile: false
     current = i;
     ovArt.innerHTML = plateInner(b, i); plateVars(ovArt, i);
     ovInfo.innerHTML =
-      '<p class="ov-eyebrow"><b>Nº ' + pad(i + 1) + "</b> · " + esc(b.c) + ' · <span class="ov-src">GOOGLE BOOKS</span></p>' +
+      '<p class="ov-eyebrow"><b>Nº ' + pad(i + 1) + "</b> · " + esc(b.c) + "</p>" +
       '<h3 class="ov-title">' + esc(b.t) + "</h3>" +
       '<span class="ov-gold"></span>' +
       '<p class="ov-author">' + esc(b.a) + "</p>" +
       '<p class="ov-desc">' + esc(b.d) + "</p>" +
-      '<a class="ov-link" href="' + b.u + '" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>';
+      '<a class="bp-link ov-link" href="' + b.u + '" target="_blank" rel="noopener noreferrer">View on Goodreads ↗</a>';
     lastFocus = origin || document.activeElement;
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.body.classList.add("locked");
     document.getElementById("ov-close").focus();
 
-    var put = function (url) {
+    /* portada real: intenta zoom=3 (máx calidad) y cae a zoom=2 si no existe */
+    coverURL(b).then(function (url) {
       if (!url || current !== i || !modal.classList.contains("open")) return;
+      var hi = url.replace("zoom=2", "zoom=3");
       var img = document.createElement("img");
-      img.className = "ov-real"; img.alt = "Cover of " + b.t; img.src = url;
+      img.className = "ov-real"; img.alt = "Cover of " + b.t; img.src = hi;
       img.addEventListener("load", function () { img.classList.add("show"); });
-      img.addEventListener("error", function () { img.remove(); });
+      img.addEventListener("error", function () {
+        if (img.dataset.retry !== "1") { img.dataset.retry = "1"; img.src = url; }
+        else img.remove();
+      });
       ovArt.appendChild(img);
-    };
-    var direct = gbooksURL(b);
-    if (direct) put(direct); else coverURL(b).then(put);
+    });
   }
   function closeBook() {
     modal.classList.remove("open");
