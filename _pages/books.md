@@ -1,8 +1,9 @@
 ---
 title: "32 Books to Read 📚"
-layout: archive
+layout: single
 permalink: /books/
 author_profile: false
+classes: wide
 ---
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
