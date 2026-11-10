@@ -82,6 +82,11 @@ const REF_CSS = `
   .ref-card{opacity:1;transform:none;transition:none}
   .ref-dot{animation:none}
 }
+
+/* ---------- Reclamar el hueco vacío de la derecha (reservado por el tema para el índice/TOC, que no usas) ---------- */
+@media(min-width:1024px){
+  .page,.archive{padding-right:0 !important}
+}
 `;
 
 /* ---------- 2. DATOS — 40 referentes ---------- */
@@ -128,7 +133,7 @@ const PLATES=[
   work:"Principles of Economics · 1871",
   files:["Carl Menger.jpg"], pos:[50,20] },
 
-{ no:"REF.07", name:"Vilfredo Pareto", slug:"vilfredo-pareto", dates:"1848–1923", origin:"Paris, France",
+{ no:"REF.07", name:"Vilfredo Pareto", slug:"vilfredo-pareto", dates:"1848–1921", origin:"Paris, France",
   role:"Lausanne School · Welfare Economics",
   desc:"Engineer, sociologist and economist of the Lausanne school. The Pareto optimum, the 80/20 principle and the circulation of elites all bear his name.",
   quote:"History is a graveyard of aristocracies.",
