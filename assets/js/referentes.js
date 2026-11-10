@@ -17,7 +17,7 @@ const REF_CSS = `
 }
 
 /* ---------- Cabecera ---------- */
-.ref-header{text-align:center;max-width:1080px;margin:0 auto 6px;padding:0 20px 30px;border-bottom:1px solid var(--ref-border)}
+.ref-header{text-align:center;margin:0 auto 6px;padding:0 20px 30px;border-bottom:1px solid var(--ref-border)}
 .ref-header h2{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ref-accent);font-weight:500;margin-bottom:24px}
 .ref-header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.4;margin-bottom:20px}
 .ref-welcome{display:block;font-size:.55em;font-weight:500;letter-spacing:.02em;color:var(--ref-muted);margin-bottom:12px}
@@ -35,7 +35,7 @@ const REF_CSS = `
 .btn-src:hover{border-color:var(--ref-accent);color:var(--ref-accent)}
 
 /* ---------- Muro de placas ---------- */
-.ref-grid{max-width:1080px;margin:52px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.ref-grid{margin:52px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
 .ref-card{
   position:relative;overflow:hidden;display:flex;flex-direction:column;
   background:var(--ref-bg);border:1px solid var(--ref-border);
@@ -67,7 +67,7 @@ const REF_CSS = `
 .ref-actions{display:flex;justify-content:center;padding:13px 18px;border-top:1px solid var(--ref-border)}
 
 /* ---------- Pie ---------- */
-.ref-footer{max-width:1080px;margin:44px auto 0;padding:20px;border-top:1px solid var(--ref-border);display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:var(--ref-muted);letter-spacing:.15em;text-transform:uppercase;flex-wrap:wrap;gap:14px}
+.ref-footer{margin:44px auto 0;padding:20px;border-top:1px solid var(--ref-border);display:flex;justify-content:space-between;align-items:center;font-size:.62rem;color:var(--ref-muted);letter-spacing:.15em;text-transform:uppercase;flex-wrap:wrap;gap:14px}
 .ref-status{display:flex;align-items:center;gap:8px}
 .ref-dot{width:6px;height:6px;border-radius:50%;background:var(--ref-accent);animation:refPulse 2.5s ease-in-out infinite}
 @keyframes refPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(154,141,120,.4)}50%{opacity:.5;box-shadow:0 0 0 4px rgba(154,141,120,0)}}
