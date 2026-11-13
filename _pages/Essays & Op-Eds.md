@@ -5,9 +5,30 @@ layout: archive
 author_profile: true
 ---
 
-A selection of essays, articles, and opinion pieces on political economy, social theory, and individual liberty.
+<!-- JETBRAINS MONO FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+/* =========================================
+HEADER DEL SISTEMA (versión compacta)
+========================================= */
+/* El título del theme, fuera... */
+h1 { display: none; }
+/* ...pero el nuestro, dentro */
+.am-header h1 { display: block !important; }
+.am-header { text-align: center; margin: 0 auto 6px; padding: 0 20px 24px; border-bottom: 1px solid #e5e1d9; }
+.am-header h2 { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: #9a8d78; font-weight: 500; margin-bottom: 18px; }
+.am-header h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.3; margin-bottom: 14px; color: #2a2a2a; }
+.am-welcome { display: block; font-size: .55em; font-weight: 500; letter-spacing: .02em; color: #817766; margin-bottom: 8px; }
+.am-main-title { display: block; font-size: 1em; font-weight: 700; letter-spacing: -.02em; }
+.am-header > p { font-size: .78rem; color: #817766; max-width: 700px; margin: 0 auto; line-height: 1.75; }
+.am-depth { display: inline-block; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: #9a8d78; padding: 5px 12px; border: 1px solid #e5e1d9; background: rgba(154,141,120,.05); margin-top: 18px; }
+
+/* =========================================
+ESSAYS
+========================================= */
   .essay-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -154,6 +175,14 @@ A selection of essays, articles, and opinion pieces on political economy, social
     }
   }
 </style>
+
+<!-- CABECERA DEL SISTEMA -->
+<header class="am-header">
+  <h2>Signal Transmission</h2>
+  <h1><span class="am-welcome">Political Economy · Social Theory · Individual Liberty</span><span class="am-main-title">Essays &amp; Op-Eds</span></h1>
+  <p>Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform — selected writing beyond formal academic publications.</p>
+  <span class="am-depth">03 Published · Mises Institute — Mises Wire</span>
+</header>
 
 <div class="essay-grid">
 
