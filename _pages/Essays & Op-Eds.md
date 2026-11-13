@@ -120,22 +120,20 @@ ESSAYS
   opacity: 0.8;
 }
 
+/* Logo SIEMPRE igual — sin cambios al hacer hover.
+   multiply funde el blanco del SVG con la card. */
 .essay .essay-link .essay-logo {
   height: 15px;
   width: auto;
   flex-shrink: 0;
   opacity: 0.55;
   filter: grayscale(1);
-  transition: opacity 0.2s ease;
+  mix-blend-mode: multiply;
 }
 
 .essay .essay-link:hover {
   opacity: 1;
   text-decoration: underline;
-}
-
-.essay .essay-link:hover .essay-logo {
-  opacity: 0.95;
 }
 
 .essays-note {
@@ -181,7 +179,7 @@ ESSAYS
   <h2>Signal Transmission</h2>
   <h1><span class="am-welcome">Political Economy · Social Theory · Individual Liberty</span><span class="am-main-title">Essays &amp; Op-Eds</span></h1>
   <p>Analytical essays and opinion pieces addressing contemporary economic policy and institutional reform — selected writing beyond formal academic publications.</p>
-  <span class="am-depth">04 Essays · 03 Published</span>
+  <span class="am-depth">04 Published · Mises Institute — Mises Wire</span>
 </header>
 
 <div class="essay-grid">
@@ -248,9 +246,14 @@ ESSAYS
 
     <h3>The Parasite Prophet: Debt, Racism, Speculation, Resentment, and the Contradictions of Karl Marx</h3>
 
-    <p class="publication">Jonathan Simon P.</p>
+    <p class="publication">Jonathan Simon P. · Mises Institute · Mises Wire</p>
 
     <p class="description">Few figures embody a deeper contradiction between doctrine and conduct. Behind the revolutionary prophet who denounced the bourgeois order lies a man consumed by frustration, steeped in racial prejudice, and dependent on the fortunes of others — one of the most damning paradoxes of his legacy.</p>
+
+    <a class="essay-link" href="https://mises.org/mises-wire" target="_blank" rel="noopener noreferrer">
+      <span>Read on Mises Wire ↗</span>
+      <img class="essay-logo" src="https://upload.wikimedia.org/wikipedia/commons/8/86/Mises_Institute_logo.svg" alt="Mises Institute" loading="lazy">
+    </a>
   </article>
 
 </div>
