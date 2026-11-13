@@ -98,17 +98,6 @@ html.dark-mode .ref-system{
   --ref-frame:rgba(233,226,214,.15);
   --ref-sys-bg:transparent;
 }
-@media (prefers-color-scheme: dark){
-  .ref-system{
-    --ref-bg:#211e19; --ref-border:#3b3529; --ref-accent:#c9b48c; --ref-muted:#a89d88;
-    --ref-text:#ece5d6; --ref-num:#c9b48c;
-    --ref-plate-hi:#2a261f; --ref-plate-lo:#211e19;
-    --ref-photo-bg:#26221c;
-    --ref-noimg-hi:#2a261f; --ref-noimg-lo:#1c1915;
-    --ref-frame:rgba(233,226,214,.15);
-    --ref-sys-bg:transparent;
-  }
-}
 
 @media(max-width:560px){
   .ref-grid{padding:0 14px}
