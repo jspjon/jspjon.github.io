@@ -9,101 +9,65 @@ redirect_from:
 
 {% include base_path %}
 
-<style>
+<!-- JETBRAINS MONO FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<style>
+/* =========================================
+HEADER DEL SISTEMA (versión compacta)
+========================================= */
+/* El título del theme, fuera... */
+h1 { display: none; }
+/* ...pero el nuestro, dentro */
+.am-header h1 { display: block !important; }
+.am-header { text-align: center; margin: 0 auto 6px; padding: 0 20px 24px; border-bottom: 1px solid #e5e1d9; }
+.am-header h2 { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: #9a8d78; font-weight: 500; margin-bottom: 18px; }
+.am-header h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.3; margin-bottom: 14px; color: #2a2a2a; }
+.am-welcome { display: block; font-size: .55em; font-weight: 500; letter-spacing: .02em; color: #817766; margin-bottom: 8px; }
+.am-main-title { display: block; font-size: 1em; font-weight: 700; letter-spacing: -.02em; }
+.am-header > p { font-size: .78rem; color: #817766; max-width: 700px; margin: 0 auto; line-height: 1.75; }
+.am-depth { display: inline-block; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: #9a8d78; padding: 5px 12px; border: 1px solid #e5e1d9; background: rgba(154,141,120,.05); margin-top: 18px; }
+
+/* =========================================
+CURRICULUM VITAE (escala Essays)
+========================================= */
 .cv-page {
   --line: #e5e1d9;
   --muted: #817766;
   --accent: #9a8d78;
 
-  margin: 34px 0 50px;
+  margin: 0 0 36px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.91rem;
+  font-size: 0.75rem;
   line-height: 1.9;
-}
-
-/* HERO / INTRO */
-
-.cv-hero {
-  padding: 38px 38px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  margin-bottom: 48px;
-}
-
-.cv-eyebrow {
-  margin: 0 0 25px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
-  color: var(--accent);
-  font-size: 0.76rem;
-  letter-spacing: .13em;
-  text-transform: uppercase;
-}
-
-.cv-hero h2 {
-  margin: 0 0 14px;
-  padding: 0;
-  border: 0;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 2rem;
-  line-height: 1.5;
-  font-weight: 600;
-}
-
-.cv-tagline {
-  color: var(--muted);
-  font-size: .86rem;
-  letter-spacing: .04em;
-  margin-bottom: 25px;
-}
-
-.cv-intro {
-  max-width: 820px;
-  font-size: .91rem;
-  line-height: 2;
-}
-
-.cv-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 25px;
-}
-
-.cv-meta span,
-.cv-abbr {
-  display: inline-block;
-  padding: 5px 10px;
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  color: var(--muted);
-  font-size: .75rem;
 }
 
 /* SECTIONS */
 
 .cv-section {
-  margin-top: 52px;
+  margin-top: 36px;
 }
 
 .cv-heading {
   display: flex;
   align-items: baseline;
   gap: 15px;
-  margin: 0 0 26px;
-  padding-bottom: 15px;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
   font-family: "JetBrains Mono", monospace;
-  font-size: 1.25rem;
+  font-size: 1.12rem;
   line-height: 1.7;
   font-weight: 600;
 }
 
 .cv-number {
   color: var(--accent);
-  font-size: .82rem;
+  font-size: .72rem;
   font-weight: 400;
+  letter-spacing: 0.08em;
 }
 
 /* EDUCATION 🎓 - Cuadros con logo a la derecha */
@@ -114,11 +78,11 @@ redirect_from:
   justify-content: space-between;
   align-items: center;
   gap: 25px;
-  padding: 24px 28px;
+  padding: 24px 22px 20px;
   border: 1px solid var(--line);
   border-radius: 4px;
-  margin-bottom: 17px;
-  background-color: #fff;
+  margin-bottom: 14px;
+  background-color: transparent;
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -141,23 +105,26 @@ redirect_from:
 
 .cv-entry .cv-date {
   color: var(--accent);
-  font-size: 0.83rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   margin-bottom: 2px;
 }
 
 .cv-entry h3 {
-  margin: 0;
+  margin: 0 0 4px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 1.17rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  line-height: 1.7;
   font-weight: 600;
 }
 
 .cv-institution {
   margin: 0;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  font-weight: 600;
+  opacity: 0.8;
 }
 
 .cv-abbr {
@@ -166,14 +133,15 @@ redirect_from:
   border: 1px solid var(--line);
   border-radius: 3px;
   color: var(--accent);
-  font-size: 0.72rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
   white-space: nowrap;
 }
 
 .cv-detail {
   margin: 4px 0 0;
-  font-size: 0.86rem;
-  line-height: 1.6;
+  font-size: 0.75rem;
+  line-height: 1.9;
   color: var(--muted);
 }
 
@@ -187,6 +155,7 @@ redirect_from:
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 4px;
+  background: #fff;
   transition: border-color 0.25s ease;
 }
 
@@ -207,11 +176,11 @@ redirect_from:
 
 .cv-experience-list {
   display: grid;
-  gap: 17px;
+  gap: 14px;
 }
 
 .cv-card {
-  padding: 27px 28px;
+  padding: 24px 22px 20px;
   border: 1px solid var(--line);
   border-radius: 4px;
   transition: border-color .25s ease,
@@ -232,39 +201,44 @@ redirect_from:
 
 .cv-card h3,
 .cv-skill h3 {
-  margin: 0 0 9px;
+  margin: 0 0 10px;
   font-family: "JetBrains Mono", monospace;
-  font-size: 1.02rem;
+  font-size: 1rem;
   line-height: 1.7;
   font-weight: 600;
 }
 
 .cv-card-date {
   color: var(--muted);
-  font-size: .79rem;
+  font-size: .62rem;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .cv-org {
-  margin: 0 0 15px;
+  margin: 0 0 16px;
   color: var(--muted);
-  font-size: .85rem;
+  font-size: .78rem;
+  line-height: 1.7;
+  opacity: 0.8;
 }
 
 .cv-label {
   display: block;
   margin: 17px 0 8px;
-  color: var(--accent);
-  font-size: .73rem;
-  letter-spacing: .09em;
+  color: var(--muted);
+  font-size: .62rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .cv-list {
   margin: 0;
   padding-left: 21px;
-  font-size: .86rem;
-  line-height: 2;
+  font-size: .75rem;
+  line-height: 1.9;
 }
 
 .cv-list li {
@@ -276,7 +250,8 @@ redirect_from:
   padding-top: 13px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: .79rem;
+  font-size: .68rem;
+  line-height: 1.9;
 }
 
 /* RESEARCH / SKILLS */
@@ -284,11 +259,11 @@ redirect_from:
 .cv-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 17px;
+  gap: 14px;
 }
 
 .cv-skill {
-  padding: 24px 25px;
+  padding: 24px 22px 20px;
   border: 1px solid var(--line);
   border-radius: 4px;
   transition: border-color .25s ease;
@@ -300,8 +275,9 @@ redirect_from:
 
 .cv-skill p {
   margin: 0;
-  font-size: .85rem;
-  line-height: 2;
+  font-size: .75rem;
+  line-height: 1.9;
+  opacity: 0.8;
 }
 
 /* LANGUAGES */
@@ -317,7 +293,7 @@ redirect_from:
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 19px 20px;
+  padding: 17px 18px;
   border: 1px solid var(--line);
   border-radius: 4px;
 }
@@ -327,10 +303,10 @@ redirect_from:
   flex-direction: column;
   align-items: center;
 }
-  
+
 .cv-language strong {
   display: block;
-  font-size: .91rem;
+  font-size: .85rem;
   margin-bottom: 4px;
   text-align: center;
 }
@@ -338,15 +314,9 @@ redirect_from:
 .cv-language span {
   display: block;
   color: var(--muted);
-  font-size: .79rem;
+  font-size: .68rem;
   text-align: center;
   margin: 0;
-}
-  
-.cv-language span {
-  color: var(--muted);
-  font-size: .79rem;
-  text-align: center;
 }
 
 .cv-language-flag {
@@ -368,8 +338,8 @@ redirect_from:
 .cv-generated li {
   padding: 17px 0;
   border-bottom: 1px solid var(--line);
-  font-size: .86rem;
-  line-height: 2;
+  font-size: .75rem;
+  line-height: 1.9;
 }
 
 .cv-generated li:last-child {
@@ -379,11 +349,12 @@ redirect_from:
 /* FOOTER */
 
 .cv-footer {
-  margin-top: 48px;
-  padding-top: 18px;
+  margin-top: 30px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: .77rem;
+  font-size: .68rem;
+  line-height: 1.9;
 }
 
 /* PDF */
@@ -395,16 +366,8 @@ redirect_from:
 /* RESPONSIVE */
 
 @media (max-width: 768px) {
-  .cv-hero {
-    padding: 25px 21px;
-  }
-
-  .cv-hero h2 {
-    font-size: 1.55rem;
-  }
-
   .cv-heading {
-    font-size: 1.08rem;
+    font-size: 1rem;
   }
 
   .cv-entry {
@@ -415,7 +378,7 @@ redirect_from:
   }
 
   .cv-entry h3 {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
   .cv-logo-box {
@@ -425,7 +388,7 @@ redirect_from:
   }
 
   .cv-card {
-    padding: 21px;
+    padding: 21px 19px;
   }
 
   .cv-card-top {
@@ -438,15 +401,22 @@ redirect_from:
   }
 
   .cv-section {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   #cv-pdf iframe {
     min-height: 550px;
   }
 }
-  
 </style>
+
+<!-- CABECERA DEL SISTEMA -->
+<header class="am-header">
+  <h2>Primary Access</h2>
+  <h1><span class="am-welcome">Education · Experience · Research</span><span class="am-main-title">Curriculum Vitae</span></h1>
+  <p>Comprehensive professional dossier documenting academic credentials, research experience, and achievements.</p>
+  <span class="am-depth">10 Sections · Updated 2026</span>
+</header>
 
 <div class="cv-page">
 
@@ -467,7 +437,7 @@ redirect_from:
         <p class="cv-detail">Legal Specializations · Corporate, International & Tax Law</p>
       </div>
       <div class="cv-logo-box">
-<img src="{{ base_path }}/images/uach-logo.png" alt="UACH Logo" class="cv-university-logo">
+        <img src="{{ base_path }}/images/uach-logo.png" alt="UACH Logo" class="cv-university-logo">
       </div>
     </div>
 
@@ -483,7 +453,7 @@ redirect_from:
         <p class="cv-detail">Major in Finance.</p>
       </div>
       <div class="cv-logo-box">
-<img src="{{ base_path }}/images/tecmilenio-logo.png" alt="Tecmilenio Logo" class="cv-university-logo">
+        <img src="{{ base_path }}/images/tecmilenio-logo.png" alt="Tecmilenio Logo" class="cv-university-logo">
       </div>
     </div>
 
@@ -499,7 +469,8 @@ redirect_from:
         <p class="cv-detail">Major in Taxation.</p>
       </div>
       <div class="cv-logo-box">
-<img src="{{ base_path }}/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">      </div>
+        <img src="{{ base_path }}/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">
+      </div>
     </div>
   </section>
 
@@ -621,40 +592,39 @@ redirect_from:
       <span class="cv-number">05</span> Languages
     </h2>
 
-   <div class="cv-language-list">
+    <div class="cv-language-list">
 
-  <div class="cv-language">
-    <div>
-      <strong>Spanish</strong>
-      <span>Fluent</span>
+      <div class="cv-language">
+        <div>
+          <strong>Spanish</strong>
+          <span>Fluent</span>
+        </div>
+        <img src="{{ base_path }}/images/flag-spain.svg"
+             alt="Spanish flag"
+             class="cv-language-flag">
+      </div>
+
+      <div class="cv-language">
+        <div>
+          <strong>Italian</strong>
+          <span>Fluent</span>
+        </div>
+        <img src="{{ base_path }}/images/flag-italy.svg"
+             alt="Italian flag"
+             class="cv-language-flag">
+      </div>
+
+      <div class="cv-language">
+        <div>
+          <strong>English</strong>
+          <span>Fluent</span>
+        </div>
+        <img src="{{ base_path }}/images/flag-uk.svg"
+             alt="English flag"
+             class="cv-language-flag">
+      </div>
+
     </div>
-    <img src="{{ base_path }}/images/flag-spain.svg"
-         alt="Spanish flag"
-         class="cv-language-flag">
-  </div>
-
-  <div class="cv-language">
-    <div>
-      <strong>Italian</strong>
-      <span>Fluent</span>
-    </div>
-    <img src="{{ base_path }}/images/flag-italy.svg"
-         alt="Italian flag"
-         class="cv-language-flag">
-  </div>
-
-  <div class="cv-language">
-    <div>
-      <strong>English</strong>
-      <span>Fluent</span>
-    </div>
-    <img src="{{ base_path }}/images/flag-uk.svg"
-         alt="English flag"
-         class="cv-language-flag">
-  </div>
-
-  </div>
-
   </section>
 
   <section class="cv-section">
@@ -696,7 +666,7 @@ redirect_from:
       </p>
     </article>
 
-    <article class="cv-card" style="margin-top: 12px;">
+    <article class="cv-card" style="margin-top: 14px;">
       <h3>Example Research Recognition</h3>
       <p class="cv-org">Example Academic Institution · 20XX</p>
       <p class="cv-detail">
@@ -719,7 +689,7 @@ redirect_from:
       </p>
     </article>
 
-    <article class="cv-card" style="margin-top: 12px;">
+    <article class="cv-card" style="margin-top: 14px;">
       <h3>Example Academic Committee Member</h3>
       <p class="cv-org">Example Academic Organization · 20XX–20XX</p>
       <p class="cv-detail">
@@ -729,43 +699,42 @@ redirect_from:
     </article>
   </section>
 
-  
-<section class="cv-section" id="cv-pdf">
-  <h2 class="cv-heading">
-    <span class="cv-number">10</span>
-    Curriculum Vitae — PDF
-  </h2>
+  <section class="cv-section" id="cv-pdf">
+    <h2 class="cv-heading">
+      <span class="cv-number">10</span>
+      Curriculum Vitae — PDF
+    </h2>
 
-  <p class="cv-detail" style="margin-bottom: 18px;">
-    View or download the complete academic curriculum vitae.
-  </p>
+    <p class="cv-detail" style="margin-bottom: 18px;">
+      View or download the complete academic curriculum vitae.
+    </p>
 
-  <div style="border: 1px solid #e5e1d9; border-radius: 4px; overflow: hidden;">
-    <iframe
-      src="{{ base_path }}/files/Jonathan_CV.pdf"
-      title="Academic Curriculum Vitae"
-      width="100%"
-      height="800"
-      style="display: block; border: 0; background: #fff;"
-      loading="lazy">
-    </iframe>
-  </div>
+    <div style="border: 1px solid #e5e1d9; border-radius: 4px; overflow: hidden;">
+      <iframe
+        src="{{ base_path }}/files/Jonathan_CV.pdf"
+        title="Academic Curriculum Vitae"
+        width="100%"
+        height="800"
+        style="display: block; border: 0; background: #fff;"
+        loading="lazy">
+      </iframe>
+    </div>
 
-  <p style="margin-top: 18px;">
-    <a
-      href="{{ base_path }}/files/Jonathan_CV.pdf"
-      target="_blank"
-      rel="noopener noreferrer">
-      Open PDF in a new tab ↗
-    </a>
-    &nbsp; · &nbsp;
-    <a
-      href="{{ base_path }}/files/Jonathan_CV.pdf"
-      download>
-      Download CV ↓
-    </a>
-  </p>
-</section>
+    <p style="margin-top: 18px;">
+      <a
+        href="{{ base_path }}/files/Jonathan_CV.pdf"
+        target="_blank"
+        rel="noopener noreferrer">
+        Open PDF in a new tab ↗
+      </a>
+      &nbsp; · &nbsp;
+      <a
+        href="{{ base_path }}/files/Jonathan_CV.pdf"
+        download>
+        Download CV ↓
+      </a>
+    </p>
+  </section>
 
   <p class="cv-footer">
     Curriculum Vitae · Academic Profile · Last updated: 2026
