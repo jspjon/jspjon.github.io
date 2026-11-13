@@ -437,27 +437,3 @@
   document.addEventListener('DOMContentLoaded', init);
   window.addEventListener('load', init);
 })();
-
-/* ---- Home / Ascensor (variables --sys-*) ---- */
-html[data-theme="dark"],
-body[data-theme="dark"],
-body.dark,
-body.dark-mode,
-body.theme-dark,
-html.dark,
-html.dark-mode {
-  --sys-bg: #211e19;
-  --sys-border: #3b3529;
-  --sys-accent: #c9b48c;
-  --sys-muted: #a89d88;
-  --sys-text: #ece5d6;
-  --sys-hover: #26221c;
-}
-
-/* Botón ♪ ON/OFF del ascensor */
-.elevator-mute {
-  background: #211e19 !important;
-  border-color: #3b3529 !important;
-  color: #a89d88 !important;
-}
-.elevator-mute.off { color: #6e6555 !important; }
