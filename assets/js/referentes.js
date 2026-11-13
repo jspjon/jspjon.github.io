@@ -9,21 +9,31 @@ const REF_CSS = `
 :root{
   --ref-bg:#faf9f7; --ref-border:#e5e1d9; --ref-accent:#9a8d78; --ref-muted:#817766;
   --ref-text:#2a2a2a; --ref-num:#a69a84;
+  --ref-plate-hi:#f3f1ec; --ref-plate-lo:#eceae4;
+  --ref-photo-bg:#e6e3dc;
+  --ref-noimg-hi:#efede7; --ref-noimg-lo:#ded9cf;
+  --ref-frame:rgba(250,249,247,.5);
+  --ref-sys-bg:transparent;
 }
 .ref-system,.ref-system *{box-sizing:border-box;margin:0;padding:0}
 .ref-system{
   font-family:"JetBrains Mono",monospace;-webkit-font-smoothing:antialiased;
-  background:#faf9f7;color:var(--ref-text);margin:20px 0 80px;
+  background:var(--ref-sys-bg);color:var(--ref-text);margin:20px 0 80px;
 }
 
-/* ---------- Cabecera ---------- */
-.ref-header{text-align:center;margin:0 auto 6px;padding:0 20px 30px;border-bottom:1px solid var(--ref-border)}
-.ref-header h2{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ref-accent);font-weight:500;margin-bottom:24px}
-.ref-header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.4;margin-bottom:20px}
-.ref-welcome{display:block;font-size:.55em;font-weight:500;letter-spacing:.02em;color:var(--ref-muted);margin-bottom:12px}
+/* ---------- El título del theme, fuera... ---------- */
+h1{display:none}
+/* ---------- ...pero el nuestro, dentro ---------- */
+.ref-header h1{display:block !important}
+
+/* ---------- Cabecera (compacta, mismo ritmo que am-header) ---------- */
+.ref-header{text-align:center;margin:0 auto 6px;padding:0 20px 24px;border-bottom:1px solid var(--ref-border)}
+.ref-header h2{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ref-accent);font-weight:500;margin-bottom:18px}
+.ref-header h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.3;margin-bottom:14px}
+.ref-welcome{display:block;font-size:.55em;font-weight:500;letter-spacing:.02em;color:var(--ref-muted);margin-bottom:8px}
 .ref-main-title{display:block;font-size:1em;font-weight:700;letter-spacing:-.02em}
-.ref-header p{font-size:.78rem;color:var(--ref-muted);max-width:700px;margin:0 auto;line-height:1.9}
-.ref-actions-top{margin-top:24px;display:flex;justify-content:center}
+.ref-header p{font-size:.78rem;color:var(--ref-muted);max-width:700px;margin:0 auto;line-height:1.75}
+.ref-actions-top{margin-top:18px;display:flex;justify-content:center}
 .ref-depth{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ref-accent);padding:5px 12px;border:1px solid var(--ref-border);background:rgba(154,141,120,.05)}
 
 /* ---------- Botón Source ---------- */
@@ -45,14 +55,14 @@ const REF_CSS = `
 .ref-card.on{opacity:1;transform:none}
 .ref-card:hover{border-color:var(--ref-accent);transform:translateY(-5px);box-shadow:0 16px 34px -14px rgba(154,141,120,.25)}
 
-.ref-plate{padding:16px 16px 12px;border-bottom:1px solid var(--ref-border);background:linear-gradient(180deg,#f3f1ec,#eceae4)}
-.ref-photo{position:relative;aspect-ratio:4/5;border:1px solid var(--ref-border);overflow:hidden;background:#e6e3dc}
+.ref-plate{padding:16px 16px 12px;border-bottom:1px solid var(--ref-border);background:linear-gradient(180deg,var(--ref-plate-hi),var(--ref-plate-lo))}
+.ref-photo{position:relative;aspect-ratio:4/5;border:1px solid var(--ref-border);overflow:hidden;background:var(--ref-photo-bg)}
 .ref-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.07) brightness(1.01);transition:filter .5s ease,transform .8s cubic-bezier(.23,1,.32,1)}
 .ref-card:hover .ref-photo img{filter:grayscale(1) contrast(1.14);transform:scale(1.03)}
-.ref-photo::after{content:"";position:absolute;inset:7px;border:1px solid rgba(250,249,247,.5);pointer-events:none;z-index:2}
+.ref-photo::after{content:"";position:absolute;inset:7px;border:1px solid var(--ref-frame);pointer-events:none;z-index:2}
 .ref-photo.noimg img{display:none}
 .ref-photo.noimg::before{content:attr(data-mono);position:absolute;inset:0;display:grid;place-items:center;font-size:2.6rem;font-weight:800;letter-spacing:.06em;color:var(--ref-accent);z-index:1}
-.ref-photo.noimg{background:linear-gradient(160deg,#efede7,#ded9cf)}
+.ref-photo.noimg{background:linear-gradient(160deg,var(--ref-noimg-hi),var(--ref-noimg-lo))}
 
 .ref-body{padding:18px 18px 16px;flex:1}
 .ref-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:8px}
@@ -71,6 +81,34 @@ const REF_CSS = `
 .ref-status{display:flex;align-items:center;gap:8px}
 .ref-dot{width:6px;height:6px;border-radius:50%;background:var(--ref-accent);animation:refPulse 2.5s ease-in-out infinite}
 @keyframes refPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(154,141,120,.4)}50%{opacity:.5;box-shadow:0 0 0 4px rgba(154,141,120,0)}}
+
+/* ---------- MODO OSCURO — Crema Nocturno 🌙 ---------- */
+html[data-theme="dark"] .ref-system,
+body[data-theme="dark"] .ref-system,
+body.dark .ref-system,
+body.dark-mode .ref-system,
+body.theme-dark .ref-system,
+html.dark .ref-system,
+html.dark-mode .ref-system{
+  --ref-bg:#211e19; --ref-border:#3b3529; --ref-accent:#c9b48c; --ref-muted:#a89d88;
+  --ref-text:#ece5d6; --ref-num:#c9b48c;
+  --ref-plate-hi:#2a261f; --ref-plate-lo:#211e19;
+  --ref-photo-bg:#26221c;
+  --ref-noimg-hi:#2a261f; --ref-noimg-lo:#1c1915;
+  --ref-frame:rgba(233,226,214,.15);
+  --ref-sys-bg:transparent;
+}
+@media (prefers-color-scheme: dark){
+  .ref-system{
+    --ref-bg:#211e19; --ref-border:#3b3529; --ref-accent:#c9b48c; --ref-muted:#a89d88;
+    --ref-text:#ece5d6; --ref-num:#c9b48c;
+    --ref-plate-hi:#2a261f; --ref-plate-lo:#211e19;
+    --ref-photo-bg:#26221c;
+    --ref-noimg-hi:#2a261f; --ref-noimg-lo:#1c1915;
+    --ref-frame:rgba(233,226,214,.15);
+    --ref-sys-bg:transparent;
+  }
+}
 
 @media(max-width:560px){
   .ref-grid{padding:0 14px}
@@ -379,6 +417,14 @@ const special=(r,f,w)=>`https://${HOST(r)}/wiki/Special:FilePath/${encodeURIComp
 const commonsPage=r=>`https://${HOST(r)}/wiki/File:${r.fileUsed||r.files[0]}`;
 
 (function build(){
+  /* fuente JetBrains Mono (auto, solo si la página no la carga ya) */
+  if(!document.querySelector('link[href*="JetBrains+Mono"]')){
+    const fontLink=document.createElement("link");
+    fontLink.rel="stylesheet";
+    fontLink.href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap";
+    document.head.appendChild(fontLink);
+  }
+
   /* estilos */
   const st=document.createElement("style");
   st.textContent=REF_CSS;
