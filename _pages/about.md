@@ -313,52 +313,6 @@ MAIN SUBTERRANEAN SYSTEM
   </div>
 </div>
 
-<!-- =========================================
-PROFILE SECTION CONTENT
-========================================= -->
-<div class="profile-wrapper">
-  <div class="profile-card">
-    <p class="profile-label">ABOUT ME</p>
-    <h2>Hi there, I'm Jonathan! 👋</h2>
-    <p class="profile-subtitle">Law · Economics · Finance · Accounting · Public Policy</p>
-    <p>I am an interdisciplinary professional whose academic background spans law, economics, finance, accounting, and public policy.</p>
-    <p>I hold a degree in Law, earned with academic distinction, a bachelor's degree in Business Administration with a concentration in Finance, and a bachelor's degree in Accounting with a concentration in Taxation. My academic training also encompasses public policy, international taxation, cross-border fiscal matters, behavioral economics, macroeconomics, and international law.</p>
-    <p>My intellectual interests encompass economic theory, taxation, law and legal institutions, financial systems, and the interaction between fiscal and monetary policy. Drawn since an early age to free-market economics and the intellectual traditions of classical liberalism and libertarian thought, I am interested in the role of market institutions, economic freedom, and institutional quality in shaping national prosperity and human welfare.</p>
-    <p>Beyond my academic pursuits, I have supported students across disciplines through mentorship and academic guidance, contributing to their intellectual growth and professional development. I am fluent in Spanish, Italian, and English.</p>
-    <div class="research-card"><h3>Languages</h3><div class="profile-languages"><span class="profile-language">Spanish</span><span class="profile-language">Italian</span><span class="profile-language">English</span></div></div>
-  </div>
-
-  <div class="profile-section">
-    <h2 class="profile-section-title">Research Interests</h2>
-    <div class="interest-grid">
-      <article class="interest-item"><span class="interest-number">01</span><h3>Economic Theory, Political Economy, and Institutional Analysis</h3><p>Economic theory, political economy, Austrian and Chicago schools of economics, classical liberalism, public choice, institutional economics, constitutional political economy, economic development, market processes, and the institutional foundations of national prosperity.</p></article>
-      <article class="interest-item"><span class="interest-number">02</span><h3>Macroeconomics, Monetary Theory & Policy</h3><p>Macroeconomic theory, inflation and price dynamics, monetary economics, central banking, fiscal policy, business cycles, financial stability, money and banking, international monetary systems and institutions, exchange rate regimes, sovereign debt, and monetary-fiscal interactions.</p></article>
-      <article class="interest-item"><span class="interest-number">03</span><h3>Public Finance & Taxation</h3><p>Tax policy, public expenditure, fiscal sustainability, fiscal federalism, international taxation, cross-border taxation, and tax institutions.</p></article>
-      <article class="interest-item"><span class="interest-number">04</span><h3>Law & Institutions</h3><p>Constitutional law, international law, corporative law, arbitration and dispute resolution, property rights, institutional quality, regulatory frameworks, and legal institutions.</p></article>
-      <article class="interest-item"><span class="interest-number">05</span><h3>Finance & Accounting</h3><p>Financial systems, corporate finance, financial reporting, accounting standards, financial analysis, and the relationship between financial institutions and economic activity.</p></article>
-      <article class="interest-item"><span class="interest-number">06</span><h3>Public Policy & Political Philosophy</h3><p>Public policy evaluation, behavioral economics, political philosophy, individual liberty, government intervention, and the relationship between institutions and human welfare.</p></article>
-      <article class="interest-item"><span class="interest-number">07</span><h3>Economic History & History of Economic Thought</h3><p>The Enlightenment, Adam Smith, classical political economy, the evolution of economic ideas, the development of market institutions, and the intellectual foundations of economic freedom.</p></article>
-      <article class="interest-item"><span class="interest-number">08</span><h3>International Economics & Development</h3><p>Global economic integration, comparative economic systems, international trade, economic freedom, institutional development, and cross-country economic analysis.</p></article>
-      <article class="interest-item"><span class="interest-number">09</span><h3>Economic Freedom & Human Prosperity</h3><p>The relationship between economic freedom, property rights, entrepreneurship, institutional quality, wealth creation, living standards, and long-term human development.</p></article>
-      <article class="interest-item"><span class="interest-number">10</span><h3>Behavioral Economics & Decision-Making</h3><p>Individual choice, incentives, bounded rationality, economic behavior, institutional influences on decision-making, and the implications of behavioral insights for public policy.</p></article>
-      <article class="interest-item"><span class="interest-number">11</span><h3>International Relations & Comparative Institutions</h3><p>International political economy, comparative institutional systems, governance, political and economic development, and the interaction between political structures and economic outcomes.</p></article>
-      <article class="interest-item"><span class="interest-number">12</span><h3>Research Methods & Applied Economic Analysis</h3><p>Empirical economic research, comparative analysis, macroeconomic indicators, policy assessment, quantitative interpretation, and evidence-based evaluation of economic outcomes.</p></article>
-      <article class="interest-item"><span class="interest-number">13</span><h3>International, Transnational & Dispute Resolution Law</h3><p>Public and private international law, transnational legal frameworks, international commercial arbitration, mediation and alternative dispute resolution (ADR), international litigation, jurisdictional conflicts, cross-border dispute resolution, international treaties, investment protection, and the recognition and enforcement of foreign judgments and arbitral awards.</p></article>
-      <article class="interest-item"><span class="interest-number">14</span><h3>Corporate, Commercial & Financial Law</h3><p>Corporate law, corporate governance, mergers and acquisitions (M&A), business and commercial law, international business transactions, domestic and international taxation, financial and economic regulation, banking and securities law, notarial law, corporate transactions, legal technology, and artificial intelligence in law (AI & Law).</p></article>
-    </div>
-  </div>
-
-  <div class="profile-section">
-    <h2 class="profile-section-title">Research & Academic Work</h2>
-    <div class="research-card">
-      <h3>Selected Research Projects</h3>
-      <p>“Macroeconomic Effects of Fiscal Consolidation and Monetary Stabilization: Evidence from Argentina, 2023–2025.”</p>
-      <p style="margin-top: 14px;">“The Invisible Hand, 250 Years Later: The Visible Hand of Freedom — Adam Smith, the Enlightenment, and the Prosperity of Nations in the 21st Century.”</p>
-      <p style="margin-top: 14px;">“Economic Freedom and Its Relationship with the Welfare, Prosperity, and Wealth of Nations in the 21st Century: A Global Analysis.”</p>
-    </div>
-  </div>
-</div>
-
 <!-- Ascensor: la lógica vive en assets/js/elevator.js para que
      kramdown y el compresor del tema no la toquen -->
 <script src="assets/js/elevator.js" defer></script>
