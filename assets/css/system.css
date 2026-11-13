@@ -1,0 +1,88 @@
+/* ============================================
+   MODO OSCURO — "Crema Nocturno" 🌙 (por botón)
+   ============================================ */
+
+:root {
+  --dk-line:   #e5e1d9;
+  --dk-text:   #2a2a2a;
+  --dk-muted:  #817766;
+  --dk-accent: #9a8d78;
+  --dk-num:    #a69a84;
+  --dk-bg:     transparent;
+}
+
+html[data-theme="dark"],
+body[data-theme="dark"],
+body.dark,
+body.dark-mode,
+body.theme-dark,
+html.dark,
+html.dark-mode {
+  --dk-line:   #3b3529;
+  --dk-text:   #ece5d6;
+  --dk-muted:  #a89d88;
+  --dk-accent: #c9b48c;
+  --dk-num:    #c9b48c;
+  --dk-bg:     rgba(233, 226, 214, 0.04);
+}
+
+/* ---- Cabecera del sistema ---- */
+.am-header { border-bottom-color: var(--dk-line) !important; }
+.am-header h1 { color: var(--dk-text) !important; }
+.am-header h2 { color: var(--dk-accent) !important; }
+.am-welcome, .am-header > p { color: var(--dk-muted) !important; }
+.am-depth {
+  color: var(--dk-accent) !important;
+  border-color: var(--dk-line) !important;
+  background: rgba(201, 180, 140, 0.07) !important;
+}
+
+/* ---- About Me ---- */
+.profile-label { color: var(--dk-muted) !important; border-bottom-color: var(--dk-line) !important; }
+.profile-subtitle { color: var(--dk-muted) !important; }
+.profile-section-title { border-bottom-color: var(--dk-line) !important; }
+.interest-item { border-color: var(--dk-line) !important; background: var(--dk-bg) !important; }
+.interest-item:hover { border-color: var(--dk-accent) !important; }
+.interest-number { color: var(--dk-num) !important; }
+.research-card { border-color: var(--dk-line) !important; }
+.profile-language { border-color: var(--dk-line) !important; }
+
+/* ---- Mentorship ---- */
+.mentor-card { border-color: var(--dk-line) !important; }
+.mentor-card:hover { border-color: var(--dk-accent) !important; }
+.mentor-divider { background: var(--dk-line) !important; }
+.mentor-section-label { color: var(--dk-muted) !important; }
+.mentor-skills { border-top-color: var(--dk-line) !important; }
+.mentor-skill { border-bottom-color: var(--dk-line) !important; }
+.mentor-skill:nth-child(odd) { border-right-color: var(--dk-line) !important; }
+.mentor-skill-number { color: var(--dk-num) !important; }
+.mentor-footer { border-top-color: var(--dk-line) !important; }
+
+/* ---- Essays ---- */
+.essay { border-color: var(--dk-line) !important; background: var(--dk-bg) !important; }
+.essay:hover { border-color: var(--dk-accent) !important; }
+.essay-number { color: var(--dk-num) !important; }
+.essay .category { color: var(--dk-muted) !important; }
+.essay .essay-link { border-top-color: var(--dk-line) !important; }
+.essays-note { border-top-color: var(--dk-line) !important; }
+/* Logo de Mises: en oscuro se invierte (blanco→fondo, trazo→claro) */
+.essay .essay-link .essay-logo {
+  mix-blend-mode: normal !important;
+  filter: grayscale(1) invert(1) !important;
+  opacity: 0.8 !important;
+}
+
+/* ---- Books ---- */
+.book { border-color: var(--dk-line) !important; background: var(--dk-bg) !important; }
+.book:hover { border-color: var(--dk-accent) !important; }
+.book-number { color: var(--dk-num) !important; }
+.book .category { color: var(--dk-muted) !important; }
+.book .book-link { border-top-color: var(--dk-line) !important; }
+.books-note { border-top-color: var(--dk-line) !important; }
+
+/* ---- CV (sus 3 variables se enganchan al tema) ---- */
+.cv-page {
+  --line:   var(--dk-line) !important;
+  --muted:  var(--dk-muted) !important;
+  --accent: var(--dk-accent) !important;
+}
