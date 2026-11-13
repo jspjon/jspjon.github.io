@@ -12,6 +12,21 @@ author_profile: true
 
 <style>
 /* =========================================
+HEADER DEL SISTEMA (mismo lenguaje que home y referentes)
+========================================= */
+/* El título del theme, fuera... */
+h1 { display: none; }
+/* ...pero el nuestro, dentro */
+.am-header h1 { display: block !important; }
+.am-header { text-align: center; margin: 0 auto 6px; padding: 0 20px 30px; border-bottom: 1px solid #e5e1d9; }
+.am-header h2 { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: #9a8d78; font-weight: 500; margin-bottom: 24px; }
+.am-header h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.4; margin-bottom: 20px; color: #2a2a2a; }
+.am-welcome { display: block; font-size: .55em; font-weight: 500; letter-spacing: .02em; color: #817766; margin-bottom: 12px; }
+.am-main-title { display: block; font-size: 1em; font-weight: 700; letter-spacing: -.02em; }
+.am-header > p { font-size: .78rem; color: #817766; max-width: 700px; margin: 0 auto; line-height: 1.9; }
+.am-depth { display: inline-block; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: #9a8d78; padding: 5px 12px; border: 1px solid #e5e1d9; background: rgba(154,141,120,.05); margin-top: 24px; }
+
+/* =========================================
 PROFILE SECTION
 ========================================= */
 .profile-wrapper { margin: 28px 0 36px; font-family: "JetBrains Mono", monospace; }
@@ -41,6 +56,15 @@ PROFILE SECTION
 </style>
 
 <div class="profile-wrapper">
+
+  <!-- CABECERA DEL SISTEMA -->
+  <header class="am-header">
+    <h2>Academic Profile</h2>
+    <h1><span class="am-welcome">Welcome to my profile</span><span class="am-main-title">Jonathan Simon P.</span></h1>
+    <p>Interdisciplinary scholar in law, economics, finance, accounting, and public policy — the degrees, the research, and the ideas that structure this site.</p>
+    <span class="am-depth">10 Research Domains · Law · Economics · Policy</span>
+  </header>
+
   <div class="profile-card">
     <p class="profile-label">ABOUT ME</p>
     <h2>Hi there, I'm Jonathan! 👋</h2>
@@ -54,18 +78,18 @@ PROFILE SECTION
 
   <div class="profile-section">
     <h2 class="profile-section-title">Research Interests</h2>
-   <div class="interest-grid">
-  <article class="interest-item"><span class="interest-number">01</span><h3>Economic Theory, Political Economy, and Institutional Analysis</h3><p>Economic theory, political economy, Austrian and Chicago schools of economics, classical liberalism, public choice, institutional economics, constitutional political economy, economic development, market processes, and the institutional foundations of economic freedom, national prosperity, and human welfare.</p></article>
-  <article class="interest-item"><span class="interest-number">02</span><h3>Macroeconomics, Monetary Theory & Policy</h3><p>Macroeconomic theory, inflation and price dynamics, monetary economics, central banking, fiscal policy, business cycles, financial stability, money and banking, international monetary systems and institutions, exchange rate regimes, sovereign debt, and monetary-fiscal interactions.</p></article>
-  <article class="interest-item"><span class="interest-number">03</span><h3>Public Finance & Taxation</h3><p>Tax policy, public expenditure, fiscal sustainability, fiscal federalism, international taxation, cross-border taxation, and tax institutions.</p></article>
-  <article class="interest-item"><span class="interest-number">04</span><h3>Law, Legal Institutions & Dispute Resolution</h3><p>Constitutional law, public and private international law, transnational legal frameworks, international commercial arbitration, mediation and alternative dispute resolution (ADR), international litigation, jurisdictional conflicts, international treaties, investment protection, enforcement of foreign judgments and arbitral awards, property rights, regulatory frameworks, and institutional quality.</p></article>
-  <article class="interest-item"><span class="interest-number">05</span><h3>Corporate, Commercial & Financial Law</h3><p>Corporate law, corporate governance, mergers and acquisitions (M&A), business and commercial law, international business transactions, domestic and international taxation, financial and economic regulation, banking and securities law, notarial law, corporate transactions, legal technology, and artificial intelligence in law (AI & Law).</p></article>
-  <article class="interest-item"><span class="interest-number">06</span><h3>Finance & Accounting</h3><p>Financial systems, corporate finance, financial reporting, accounting standards, financial analysis, and the relationship between financial institutions and economic activity.</p></article>
-  <article class="interest-item"><span class="interest-number">07</span><h3>Public Policy, Political Philosophy & Behavioral Economics</h3><p>Public policy evaluation, behavioral economics, individual choice, incentives, bounded rationality, political philosophy, individual liberty, government intervention, and the relationship between institutions and human welfare.</p></article>
-  <article class="interest-item"><span class="interest-number">08</span><h3>International Economics, Development & Comparative Institutions</h3><p>Global economic integration, international trade, comparative economic systems, international political economy, comparative institutional systems, governance, institutional development, and cross-country analysis of political structures and economic outcomes.</p></article>
-  <article class="interest-item"><span class="interest-number">09</span><h3>Economic History & History of Economic Thought</h3><p>The Enlightenment, Adam Smith, classical political economy, the evolution of economic ideas, the development of market institutions, and the intellectual foundations of economic freedom.</p></article>
-  <article class="interest-item"><span class="interest-number">10</span><h3>Research Methods & Applied Economic Analysis</h3><p>Empirical economic research, comparative analysis, macroeconomic indicators, policy assessment, quantitative interpretation, and evidence-based evaluation of economic outcomes.</p></article>
-</div>
+    <div class="interest-grid">
+      <article class="interest-item"><span class="interest-number">01</span><h3>Economic Theory, Political Economy, and Institutional Analysis</h3><p>Economic theory, political economy, Austrian and Chicago schools of economics, classical liberalism, public choice, institutional economics, constitutional political economy, economic development, market processes, and the institutional foundations of economic freedom, national prosperity, and human welfare.</p></article>
+      <article class="interest-item"><span class="interest-number">02</span><h3>Macroeconomics, Monetary Theory & Policy</h3><p>Macroeconomic theory, inflation and price dynamics, monetary economics, central banking, fiscal policy, business cycles, financial stability, money and banking, international monetary systems and institutions, exchange rate regimes, sovereign debt, and monetary-fiscal interactions.</p></article>
+      <article class="interest-item"><span class="interest-number">03</span><h3>Public Finance & Taxation</h3><p>Tax policy, public expenditure, fiscal sustainability, fiscal federalism, international taxation, cross-border taxation, and tax institutions.</p></article>
+      <article class="interest-item"><span class="interest-number">04</span><h3>Law, Legal Institutions & Dispute Resolution</h3><p>Constitutional law, public and private international law, transnational legal frameworks, international commercial arbitration, mediation and alternative dispute resolution (ADR), international litigation, jurisdictional conflicts, international treaties, investment protection, enforcement of foreign judgments and arbitral awards, property rights, regulatory frameworks, and institutional quality.</p></article>
+      <article class="interest-item"><span class="interest-number">05</span><h3>Corporate, Commercial & Financial Law</h3><p>Corporate law, corporate governance, mergers and acquisitions (M&A), business and commercial law, international business transactions, domestic and international taxation, financial and economic regulation, banking and securities law, notarial law, corporate transactions, legal technology, and artificial intelligence in law (AI & Law).</p></article>
+      <article class="interest-item"><span class="interest-number">06</span><h3>Finance & Accounting</h3><p>Financial systems, corporate finance, financial reporting, accounting standards, financial analysis, and the relationship between financial institutions and economic activity.</p></article>
+      <article class="interest-item"><span class="interest-number">07</span><h3>Public Policy, Political Philosophy & Behavioral Economics</h3><p>Public policy evaluation, behavioral economics, individual choice, incentives, bounded rationality, political philosophy, individual liberty, government intervention, and the relationship between institutions and human welfare.</p></article>
+      <article class="interest-item"><span class="interest-number">08</span><h3>International Economics, Development & Comparative Institutions</h3><p>Global economic integration, international trade, comparative economic systems, international political economy, comparative institutional systems, governance, institutional development, and cross-country analysis of political structures and economic outcomes.</p></article>
+      <article class="interest-item"><span class="interest-number">09</span><h3>Economic History & History of Economic Thought</h3><p>The Enlightenment, Adam Smith, classical political economy, the evolution of economic ideas, the development of market institutions, and the intellectual foundations of economic freedom.</p></article>
+      <article class="interest-item"><span class="interest-number">10</span><h3>Research Methods & Applied Economic Analysis</h3><p>Empirical economic research, comparative analysis, macroeconomic indicators, policy assessment, quantitative interpretation, and evidence-based evaluation of economic outcomes.</p></article>
+    </div>
   </div>
 
   <div class="profile-section">
@@ -77,4 +101,5 @@ PROFILE SECTION
       <p style="margin-top: 14px;">“Economic Freedom and Its Relationship with the Welfare, Prosperity, and Wealth of Nations in the 21st Century: A Global Analysis.”</p>
     </div>
   </div>
+
 </div>
