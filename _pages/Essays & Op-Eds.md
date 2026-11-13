@@ -224,7 +224,7 @@ ESSAYS
 
   <article class="essay">
     <div class="essay-top">
-      <span class="essay-number">03</span>
+      <span class="essay-number">04</span>
       <p class="category">Economic Theory · Political History</p>
     </div>
 
@@ -241,5 +241,18 @@ ESSAYS
   </article>
 
 </div>
+
+  <article class="essay">
+    <div class="essay-top">
+      <span class="essay-number">04</span>
+      <p class="category">History of Economic Thought · Political Philosophy</p>
+    </div>
+
+    <h3>The Parasite Prophet: Debt, Racism, Speculation, Resentment, and the Contradictions of Karl Marx</h3>
+
+    <p class="publication">Jonathan Simon P.</p>
+
+    <p class="description">Few figures embody a deeper contradiction between doctrine and conduct. Behind the revolutionary prophet who denounced the bourgeois order lies a man consumed by frustration, steeped in racial prejudice, and dependent on the fortunes of others — one of the most damning paradoxes of his legacy.</p>
+  </article>
 
 <p class="essays-note">Selected writing beyond formal academic publications.</p>
