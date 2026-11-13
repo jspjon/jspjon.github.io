@@ -2,7 +2,7 @@
 title: "32 Books to Read 📚"
 layout: archive
 permalink: /books/
-author_profile: false
+author_profile: true
 ---
 
 <!-- JETBRAINS MONO FONT -->
