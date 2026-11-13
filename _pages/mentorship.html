@@ -1,74 +1,32 @@
 ---
 layout: archive
-title: "mentorship"
+title: "Mentorship"
 permalink: /mentorship/
 author_profile: true
 ---
 
 <style>
+/* =========================================
+HEADER DEL SISTEMA (mismo lenguaje que home, about y referentes)
+========================================= */
+/* El título del theme, fuera... */
+h1 { display: none; }
+/* ...pero el nuestro, dentro */
+.am-header h1 { display: block !important; }
+.am-header { text-align: center; margin: 0 auto 6px; padding: 0 20px 30px; border-bottom: 1px solid #e5e1d9; }
+.am-header h2 { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: #9a8d78; font-weight: 500; margin-bottom: 24px; }
+.am-header h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; letter-spacing: -.02em; line-height: 1.4; margin-bottom: 20px; color: #2a2a2a; }
+.am-welcome { display: block; font-size: .55em; font-weight: 500; letter-spacing: .02em; color: #817766; margin-bottom: 12px; }
+.am-main-title { display: block; font-size: 1em; font-weight: 700; letter-spacing: -.02em; }
+.am-header > p { font-size: .78rem; color: #817766; max-width: 700px; margin: 0 auto; line-height: 1.9; }
+.am-depth { display: inline-block; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: #9a8d78; padding: 5px 12px; border: 1px solid #e5e1d9; background: rgba(154,141,120,.05); margin-top: 24px; }
+
+/* =========================================
+MENTORSHIP
+========================================= */
 .mentorship-page {
   font-family: "JetBrains Mono", monospace;
   margin-top: 34px;
-}
-
-.mentor-hero {
-  padding: 34px 30px 30px;
-  border: 1px solid #e5e1d9;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  position: relative;
-}
-
-.mentor-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 42px;
-}
-
-.mentor-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #948873;
-  margin: 0;
-}
-
-.mentor-index {
-  font-size: 0.7rem;
-  color: #a69a84;
-  letter-spacing: 0.06em;
-}
-
-.mentor-hero h2 {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 1.65rem;
-  line-height: 1.5;
-  font-weight: 600;
-  margin: 0 0 12px;
-  color: inherit;
-}
-
-.mentor-subtitle {
-  font-size: 0.75rem;
-  line-height: 1.9;
-  color: #948873;
-  letter-spacing: 0.04em;
-  margin: 0;
-}
-
-.mentor-divider {
-  height: 1px;
-  background: #e5e1d9;
-  margin: 26px 0;
-}
-
-.mentor-intro {
-  font-size: 0.76rem;
-  line-height: 1.9;
-  opacity: 0.8;
-  margin: 0;
 }
 
 .mentor-card {
@@ -180,18 +138,6 @@ author_profile: true
     margin-top: 26px;
   }
 
-  .mentor-hero {
-    padding: 25px 20px;
-  }
-
-  .mentor-top {
-    margin-bottom: 32px;
-  }
-
-  .mentor-hero h2 {
-    font-size: 1.3rem;
-  }
-
   .mentor-card {
     padding: 22px 19px;
   }
@@ -221,28 +167,13 @@ author_profile: true
 
 <div class="mentorship-page">
 
-  <section class="mentor-hero">
-
-    <div class="mentor-top">
-      <p class="mentor-label">Academic Development / mentorship</p>
-      <span class="mentor-index">01 — 2025</span>
-    </div>
-
-    <h2>Academic Mentorship</h2>
-
-    <p class="mentor-subtitle">
-      GUIDANCE · LEADERSHIP · PROFESSIONAL DEVELOPMENT
-    </p>
-
-    <div class="mentor-divider"></div>
-
-    <p class="mentor-intro">
-      An academic mentoring experience centered on student development,
-      personalized guidance, and the cultivation of essential skills
-      for academic and professional growth.
-    </p>
-
-  </section>
+  <!-- CABECERA DEL SISTEMA (reemplaza al mentor-hero) -->
+  <header class="am-header">
+    <h2>Guidance Center</h2>
+    <h1><span class="am-welcome">Guidance · Leadership · Professional Development</span><span class="am-main-title">Academic Mentorship</span></h1>
+    <p>An academic mentoring experience centered on student development, personalized guidance, and the cultivation of essential skills for academic and professional growth.</p>
+    <span class="am-depth">Universidad Autónoma de Chihuahua · Feb — Sep 2025</span>
+  </header>
 
   <section class="mentor-card">
 
@@ -306,4 +237,3 @@ author_profile: true
   </div>
 
 </div>
-
