@@ -37,12 +37,12 @@ VARIABLES GLOBALES
 SUBTERRANEAN SYSTEM (Tu diseño original)
 ========================================= */
 .subterranean-system { margin: 20px 0 80px; font-family: "JetBrains Mono", monospace; position: relative; }
-.sys-header { text-align: center; margin-bottom: 60px; padding-bottom: 30px; border-bottom: 1px solid var(--sys-border); }
-.sys-header h2 { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sys-accent); margin: 0 0 24px 0; font-weight: 500; }
-.sys-header h1 { font-family: "JetBrains Mono", monospace; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; color: var(--sys-text); margin: 0 0 20px 0; letter-spacing: -0.02em; line-height: 1.4; }
-.sys-welcome { display: block; font-family: "JetBrains Mono", monospace; font-size: 0.55em; font-weight: 500; letter-spacing: 0.02em; color: var(--sys-muted); margin-bottom: 12px; }
-.sys-main-title { display: block; font-family: "JetBrains Mono", monospace; font-size: 1em; font-weight: 700; letter-spacing: -0.02em; color: var(--sys-text); }
-.sys-header p { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--sys-muted); max-width: 600px; margin: 0 auto; line-height: 1.8; }
+.sys-header { text-align: center; margin-bottom: 60px; padding-bottom: 24px; border-bottom: 1px solid var(--sys-border); }
+.sys-header h2 { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--sys-accent); margin: 0 0 18px 0; font-weight: 500; }
+.sys-header h1 { font-family: "JetBrains Mono", monospace; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; color: var(--sys-text); margin: 0 0 14px 0; letter-spacing: -0.02em; line-height: 1.3; }
+.sys-welcome { display: block; font-family: "JetBrains Mono", monospace; font-size: 0.55em; font-weight: 500; letter-spacing: 0.02em; color: var(--sys-muted); margin-bottom: 8px; }
+.sys-main-title { display: block; font-family: "JetBrains Mono", monospace; font-size: 1em; font-weight: 700; letter-spacing: -0.02em; }
+.sys-header p { font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--sys-muted); max-width: 600px; margin: 0 auto; line-height: 1.75; }
 .sys-shaft { display: flex; flex-direction: column; position: relative; padding-left: 20px; }
 .sys-shaft::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: repeating-linear-gradient(to bottom, var(--sys-border) 0px, var(--sys-border) 6px, transparent 6px, transparent 12px); z-index: 0; }
 .sys-level { display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 12px; position: relative; z-index: 1; }
