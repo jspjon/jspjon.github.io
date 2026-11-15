@@ -130,14 +130,14 @@ const PLATES=[
   desc:"Orator, consul and Stoic of the late Republic. De Re Publica and De Legibus gave the West its classic statement of natural law — right reason in agreement with nature — and his defense of the res publica shaped constitutional thought for two millennia.",
   quote:"True law is right reason in agreement with nature; it is of universal application, unchanging and everlasting.",
   work:"De Re Publica · 51 BC",
-  files:["Ciceron Bust Museos Capitolinos (2).jpg"], pos:[50,12] }, /* NEW */
+  files:["Cicero - Musei Capitolini.JPG"], pos:[50,12] },
 
 { no:"REF.03", name:"Thomas Aquinas", slug:"thomas-aquinas", dates:"1225–1274", origin:"Roccasecca, Italy",
   role:"Scholasticism · Natural Law",
   desc:"The Angelic Doctor. Reconciling Aristotle with the faith, he gave natural law its classic formulation — the rational creature's participation in the eternal law — and defined law itself as an ordinance of reason for the common good.",
   quote:"Law is nothing else than an ordinance of reason for the common good, promulgated by him who has the care of the community.",
   work:"Summa Theologiae · 1265–1274",
-  files:["Carlo Crivelli - Saint Thomas Aquinas - WGA07640.jpg"], pos:[50,10] }, /* NEW */
+  files:["Thomas Aquinas by Sandro Botticelli.jpg"], pos:[50,10] },
 
 { no:"REF.04", name:"Luca Pacioli", slug:"luca-pacioli", dates:"c. 1445–1517", origin:"Sansepolcro, Italy",
   role:"Accounting · Double-Entry Bookkeeping",
@@ -363,7 +363,7 @@ const PLATES=[
   quote:"Ser gran señora no depende de la fortuna familiar, sino de la bondad de su alma.",
   work:"Constitución Política de Chile · 1980",
   host:"es.wikipedia.org",
-  files:["JaimeG.PNG"], pos:[50,12] }, /* NEW */
+  files:["Jaime Guzman-1987.jpg","JaimeG.PNG"], pos:[50,12] },
 
 { no:"REF.36", name:"David Gordon", slug:"david-gordon", dates:"b. 1942", origin:"United States",
   role:"Austrian Economics · Philosophy",
@@ -433,7 +433,7 @@ const PLATES=[
   desc:"McCormick Professor of Jurisprudence at Princeton and the leading heir of Finnis and Grisez. From the dignity of the embryo to marriage and religious liberty, he carries natural law into the courts and the public square.",
   quote:"The human embryo is a whole living member of the species Homo sapiens in the early stage of his or her natural development.",
   work:"The Clash of Orthodoxies · 2001",
-  files:["Robert George by Gage Skidmore (cropped).jpg"], pos:[50,15] }, /* NEW */
+  files:["Robert P. George by Gage Skidmore.jpg"], pos:[50,15] },
 
 { no:"REF.46", name:"Jesús Huerta de Soto", slug:"jesus-huerta-de-soto", dates:"b. 1956", origin:"Madrid, Spain",
   role:"Austrian Economics · Finance",
