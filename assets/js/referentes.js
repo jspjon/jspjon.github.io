@@ -70,7 +70,7 @@ h1{display:none}
 .ref-dates{font-size:.6rem;letter-spacing:.1em;color:var(--ref-muted);text-align:right}
 .ref-name{font-size:1.02rem;font-weight:700;letter-spacing:-.01em;margin-bottom:10px}
 .ref-tag{display:inline-block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ref-accent);padding:4px 9px;border:1px solid var(--ref-border);background:rgba(154,141,120,.05);margin-bottom:12px}
-.ref-desc{font-size:.71rem;line-height:1.85;color:var(--ref-muted)}
+.ref-desc{font-size:.71rem;line-height:1.6;color:var(--ref-muted)}
 .ref-quote{margin-top:14px;padding-left:12px;border-left:2px solid var(--ref-accent);font-style:italic;font-size:.67rem;line-height:1.8;opacity:.92}
 .ref-work{margin-top:13px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ref-accent)}
 
