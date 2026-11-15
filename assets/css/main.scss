@@ -41,7 +41,7 @@
     "layout/json_cv"
 ;
 
-/* Footer transparente y en flujo normal */
+/* Footer transparente, sin posición fija */
 .page__footer {
     background: transparent !important;
     border: none !important;
@@ -49,4 +49,5 @@
     position: static !important;
     width: 100%;
     z-index: auto !important;
+    margin-top: 2rem;
 }
