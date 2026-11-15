@@ -41,9 +41,12 @@
     "layout/json_cv"
 ;
 
-/* Footer transparente */
+/* Footer transparente y en flujo normal */
 .page__footer {
     background: transparent !important;
-    border-top: none !important;
+    border: none !important;
     box-shadow: none !important;
+    position: static !important;
+    width: 100%;
+    z-index: auto !important;
 }
