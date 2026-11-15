@@ -306,7 +306,7 @@ const PLATES=[
   desc:"Scottish Thomist of the Aristotelian revival. After Virtue diagnosed the incoherence of Enlightenment moral language and rebuilt ethics on practices, traditions and the narrative unity of a human life.",
   quote:"I can only answer the question 'What am I to do?' if I can answer the prior question 'Of what story or stories do I find myself a part?'",
   work:"After Virtue · 1981",
-  files:["AlasdairMacIntyre2009 cropped.jpg"], pos:[50,18] }, /* NEW */
+  files:["Alasdair MacIntyre.jpg"], pos:[50,15] },
 
 { no:"REF.28", name:"Thomas Sowell", slug:"thomas-sowell", dates:"b. 1930", origin:"Gastonia, North Carolina",
   role:"Chicago School · Empiricism",
@@ -348,7 +348,7 @@ const PLATES=[
   desc:"Oxford jurist, born in Adelaide. Natural Law and Natural Rights restated Aquinas for the analytical age — basic goods, practical reasonableness and the common good — founding the 'New Natural Law' school with Grisez and Boyle.",
   quote:"Life, knowledge, play, aesthetic experience, sociability, practical reasonableness and religion: the basic goods of human flourishing.",
   work:"Natural Law and Natural Rights · 1980",
-  files:["John Finnis by Sachie Nagasawa (3).jpg"], pos:[50,15] }, /* NEW */
+  files:["John Finnis on After Dark 26th June 1987 (3x4 cropped).jpg"], pos:[50,12] },
 
 { no:"REF.34", name:"Arthur B. Laffer", slug:"arthur-laffer", dates:"b. 1940", origin:"Youngstown, Ohio",
   role:"Supply-Side Economics · The Laffer Curve",
