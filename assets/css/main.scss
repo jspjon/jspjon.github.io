@@ -40,3 +40,10 @@
     "layout/sidebar",
     "layout/json_cv"
 ;
+
+/* Footer transparente */
+.page__footer {
+    background: transparent !important;
+    border-top: none !important;
+    box-shadow: none !important;
+}
