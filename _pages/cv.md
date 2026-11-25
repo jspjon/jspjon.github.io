@@ -111,15 +111,6 @@ CURRICULUM VITAE (escala Essays)
 
 .cv-university-logo { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
 
-.cv-logo-box{position:relative}
-.cv-mono{
-  display:flex;align-items:center;justify-content:center;
-  width:100%;height:100%;
-  font-family:"JetBrains Mono",monospace;
-  font-weight:800;font-size:1.4rem;letter-spacing:.08em;
-  color:var(--accent);
-}
-
 .cv-experience-list { display: grid; gap: 14px; }
 
 .cv-card {
@@ -178,13 +169,11 @@ SECTION 07 — CERTIFICATION LEDGER
 ========================================= */
 .cl-wrap{
   --cl-line:#e5e1d9; --cl-muted:#817766; --cl-accent:#9a8d78; --cl-text:#2a2a2a;
-  --cl-chip:#faf9f7; --cl-chip-ho:#f4f2ef;
   font-family:"JetBrains Mono",monospace;
 }
 html[data-theme="dark"] .cl-wrap,
 body[data-theme="dark"] .cl-wrap{
   --cl-line:#3b3529; --cl-muted:#a89d88; --cl-accent:#c9b48c; --cl-text:#ece5d6;
-  --cl-chip:#211e19; --cl-chip-ho:#2a261f;
 }
 
 .cl-summary{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
@@ -201,10 +190,6 @@ body[data-theme="dark"] .cl-wrap{
   display:flex; align-items:center; justify-content:space-between; gap:16px;
   padding:14px 16px; margin-bottom:12px;
   border:1px solid var(--cl-line);
-  background:linear-gradient(180deg,#f3f1ec,#eceae4);
-}
-html[data-theme="dark"] .cl-head{
-  background:linear-gradient(180deg,#2a261f,#211e19);
 }
 .cl-head-info{ flex:1; min-width:0; }
 .cl-head-info h3{
@@ -224,11 +209,10 @@ html[data-theme="dark"] .cl-head{
   display:flex; align-items:flex-start; gap:12px;
   padding:12px 14px;
   border:1px solid var(--cl-line);
-  background:var(--cl-chip);
   transition:border-color .25s ease, background .25s ease, transform .25s ease;
 }
 .cl-course:hover{
-  border-color:var(--cl-accent); background:var(--cl-chip-ho); transform:translateX(6px);
+  border-color:var(--cl-accent); background:rgba(154,141,120,.05); transform:translateX(6px);
 }
 .cl-no{
   flex-shrink:0; font-size:.6rem; font-weight:700; letter-spacing:.1em;
@@ -245,6 +229,27 @@ html[data-theme="dark"] .cl-head{
   .cl-courses{ grid-template-columns:1fr; }
   .cl-head{ flex-direction:column; align-items:flex-start; gap:8px; }
 }
+
+/* =========================================
+SECTION 10 — CV ON REQUEST
+========================================= */
+.cv-btn{
+  display:inline-block;
+  font-size:.62rem; letter-spacing:.16em; text-transform:uppercase;
+  padding:10px 14px; border:1px solid var(--line);
+  color:var(--muted); text-decoration:none;
+  transition:all .25s ease;
+}
+.cv-btn:hover{ border-color:var(--accent); color:var(--accent); }
+
+.cv-details{ margin-top:14px; }
+.cv-details summary{
+  cursor:pointer; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); padding:12px 16px; border:1px solid var(--line);
+  transition:all .25s ease;
+}
+.cv-details summary:hover{ color:var(--accent); border-color:var(--accent); }
+.cv-details[open] summary{ color:var(--accent); border-color:var(--accent); }
 
 .cv-footer { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; line-height: 1.9; }
 
@@ -706,23 +711,28 @@ html[data-theme="dark"] .cl-head{
   <section class="cv-section" id="cv-pdf">
     <h2 class="cv-heading">
       <span class="cv-number">10</span>
-      Curriculum Vitae — PDF
+      Curriculum Vitae
     </h2>
 
-    <p class="cv-detail" style="margin-bottom: 18px;">
-      View or download the complete academic curriculum vitae.
-    </p>
+    <article class="cv-card">
+      <h3>Available upon request</h3>
+      <p class="cv-detail">
+        The complete professional dossier — education, experience, research, and certifications —
+        is available upon request. Access it directly, or reach out through the contact links.
+      </p>
+      <p style="margin:16px 0 0; display:flex; gap:12px; flex-wrap:wrap;">
+        <a class="cv-btn" href="{{ base_path }}/files/Jonathan_CV.pdf" target="_blank" rel="noopener noreferrer">Open PDF ↗</a>
+        <a class="cv-btn" href="{{ base_path }}/files/Jonathan_CV.pdf" download>Download ↓</a>
+      </p>
+    </article>
 
-    <div style="border: 1px solid #e5e1d9; border-radius: 4px; overflow: hidden;">
-      <iframe src="{{ base_path }}/files/Jonathan_CV.pdf" title="Academic Curriculum Vitae" width="100%" height="800" style="display: block; border: 0; background: #fff;" loading="lazy">
-      </iframe>
-    </div>
-
-    <p style="margin-top: 18px;">
-      <a href="{{ base_path }}/files/Jonathan_CV.pdf" target="_blank" rel="noopener noreferrer">Open PDF in a new tab ↗</a>
-      &nbsp; · &nbsp;
-      <a href="{{ base_path }}/files/Jonathan_CV.pdf" download>Download CV ↓</a>
-    </p>
+    <details class="cv-details">
+      <summary>Preview document</summary>
+      <div style="border:1px solid var(--line); border-radius:4px; overflow:hidden; margin-top:12px;">
+        <iframe src="{{ base_path }}/files/Jonathan_CV.pdf" title="Academic Curriculum Vitae" width="100%" height="800" style="display:block; border:0; background:#fff;" loading="lazy">
+        </iframe>
+      </div>
+    </details>
   </section>
 
   <p class="cv-footer">
