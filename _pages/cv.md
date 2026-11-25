@@ -16,6 +16,9 @@ redirect_from:
 <link rel="stylesheet" href="/assets/css/system.css">
 
 <style>
+/* =========================================
+HEADER DEL SISTEMA (versión compacta)
+========================================= */
 h1 { display: none; }
 .am-header h1 { display: block !important; }
 .am-header { text-align: center; margin: 0 auto 6px; padding: 0 20px 24px; border-bottom: 1px solid #e5e1d9; }
@@ -26,6 +29,9 @@ h1 { display: none; }
 .am-header > p { font-size: .78rem; color: #817766; max-width: 700px; margin: 0 auto; line-height: 1.75; }
 .am-depth { display: inline-block; font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: #9a8d78; padding: 5px 12px; border: 1px solid #e5e1d9; background: rgba(154,141,120,.05); margin-top: 18px; }
 
+/* =========================================
+CURRICULUM VITAE (escala Essays)
+========================================= */
 .cv-page {
   --line: #e5e1d9;
   --muted: #817766;
@@ -105,7 +111,6 @@ h1 { display: none; }
 
 .cv-university-logo { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
 
-/* LOGOS WIKIMEDIA + MONOGRAMA DE RESERVA */
 .cv-logo-box{position:relative}
 .cv-mono{
   display:flex;align-items:center;justify-content:center;
@@ -138,7 +143,6 @@ h1 { display: none; }
 
 .cv-list { margin: 0; padding-left: 24px; font-size: .75rem; line-height: 1.9; list-style: disc; }
 .cv-list li::marker { color: var(--accent); }
-  
 .cv-list li { margin-bottom: 6px; }
 
 .cv-supervisor { margin: 17px 0 0; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; line-height: 1.9; }
@@ -168,6 +172,79 @@ h1 { display: none; }
 .cv-generated li { padding: 17px 0; border-bottom: 1px solid var(--line); font-size: .75rem; line-height: 1.9; }
 
 .cv-generated li:last-child { border-bottom: 0; }
+
+/* =========================================
+SECTION 07 — CERTIFICATION LEDGER
+========================================= */
+.cl-wrap{
+  --cl-line:#e5e1d9; --cl-muted:#817766; --cl-accent:#9a8d78; --cl-text:#2a2a2a;
+  --cl-chip:#faf9f7; --cl-chip-ho:#f4f2ef;
+  font-family:"JetBrains Mono",monospace;
+}
+html[data-theme="dark"] .cl-wrap,
+body[data-theme="dark"] .cl-wrap{
+  --cl-line:#3b3529; --cl-muted:#a89d88; --cl-accent:#c9b48c; --cl-text:#ece5d6;
+  --cl-chip:#211e19; --cl-chip-ho:#2a261f;
+}
+
+.cl-summary{ display:flex; flex-wrap:wrap; gap:10px; margin:0 0 26px; }
+.cl-summary span{
+  font-size:.58rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--cl-accent); padding:5px 12px;
+  border:1px solid var(--cl-line); background:rgba(154,141,120,.05);
+}
+
+.cl-inst{ margin-bottom:26px; }
+.cl-inst:last-child{ margin-bottom:0; }
+
+.cl-head{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:14px 16px; margin-bottom:12px;
+  border:1px solid var(--cl-line);
+  background:linear-gradient(180deg,#f3f1ec,#eceae4);
+}
+html[data-theme="dark"] .cl-head{
+  background:linear-gradient(180deg,#2a261f,#211e19);
+}
+.cl-head-info{ flex:1; min-width:0; }
+.cl-head-info h3{
+  margin:0 0 3px; font-family:"JetBrains Mono",monospace;
+  font-size:1rem; line-height:1.6; font-weight:600; color:var(--cl-text);
+}
+.cl-meta{ margin:0; font-size:.68rem; line-height:1.6; color:var(--cl-muted); letter-spacing:.06em; }
+.cl-count{
+  flex-shrink:0; font-size:.58rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--cl-accent); padding:4px 10px; border:1px solid var(--cl-line);
+  background:rgba(154,141,120,.05); white-space:nowrap;
+}
+
+.cl-courses{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+
+.cl-course{
+  display:flex; align-items:flex-start; gap:12px;
+  padding:12px 14px;
+  border:1px solid var(--cl-line);
+  background:var(--cl-chip);
+  transition:border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.cl-course:hover{
+  border-color:var(--cl-accent); background:var(--cl-chip-ho); transform:translateX(6px);
+}
+.cl-no{
+  flex-shrink:0; font-size:.6rem; font-weight:700; letter-spacing:.1em;
+  color:var(--cl-accent); font-variant-numeric:tabular-nums; padding-top:2px;
+}
+.cl-body{ min-width:0; }
+.cl-course-name{ display:block; font-size:.72rem; line-height:1.7; color:var(--cl-text); }
+.cl-course-type{
+  display:block; margin-top:2px; font-size:.55rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--cl-muted);
+}
+
+@media (max-width:768px){
+  .cl-courses{ grid-template-columns:1fr; }
+  .cl-head{ flex-direction:column; align-items:flex-start; gap:8px; }
+}
 
 .cv-footer { margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; line-height: 1.9; }
 
@@ -412,177 +489,175 @@ h1 { display: none; }
       <span class="cv-number">07</span> Diplomas, Courses &amp; Certifications
     </h2>
 
-    <p class="cv-detail" style="margin-bottom: 18px;">
-      39 additional programs completed with ten international institutions and organizations.
-    </p>
+    <div class="cl-wrap">
 
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">6 Job Simulations</div>
-        <h3>Forage</h3>
-        <p class="cv-institution">Forage Platform · Global</p>
-        <ul class="cv-list">
-          <li>Investment Banking Job Simulation — JPMorganChase</li>
-          <li>Tax Job Simulation — PwC US</li>
-          <li>Litigation Job Simulation — Morrison Foerster</li>
-          <li>UK Law 101 Job Simulation — BCLP</li>
-          <li>US Capital Markets Job Simulation — Freshfields</li>
-          <li>Alternative Dispute Resolution Job Simulation — CIArb (Chartered Institute of Arbitrators)</li>
-        </ul>
+      <div class="cl-summary">
+        <span>39 Programs</span>
+        <span>10 Institutions</span>
+        <span>Worldwide</span>
+        <span>Archive Operational</span>
       </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Forage_logo.svg?width=200" alt="Forage logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>FO</b>'">
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>Forage</h3>
+            <p class="cl-meta">Online Platform · Global</p>
+          </div>
+          <span class="cl-count">6 Simulations</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.01</span><div class="cl-body"><span class="cl-course-name">Investment Banking Job Simulation</span><span class="cl-course-type">JPMorganChase</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.02</span><div class="cl-body"><span class="cl-course-name">Tax Job Simulation</span><span class="cl-course-type">PwC US</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.03</span><div class="cl-body"><span class="cl-course-name">Litigation Job Simulation</span><span class="cl-course-type">Morrison Foerster</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.04</span><div class="cl-body"><span class="cl-course-name">UK Law 101 Job Simulation</span><span class="cl-course-type">BCLP</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.05</span><div class="cl-body"><span class="cl-course-name">US Capital Markets Job Simulation</span><span class="cl-course-type">Freshfields</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.06</span><div class="cl-body"><span class="cl-course-name">Alternative Dispute Resolution Job Simulation</span><span class="cl-course-type">CIArb — Chartered Institute of Arbitrators</span></div></div>
+        </div>
       </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>Hunt ADR</h3>
+            <p class="cl-meta">Alternative Dispute Resolution Provider · United Kingdom</p>
+          </div>
+          <span class="cl-count">2 Courses</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.07</span><div class="cl-body"><span class="cl-course-name">All About Arbitration</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.08</span><div class="cl-body"><span class="cl-course-name">All About Mediation</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>The World Bank Group</h3>
+            <p class="cl-meta">International Organization · Washington, D.C.</p>
+          </div>
+          <span class="cl-count">5 Courses</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.09</span><div class="cl-body"><span class="cl-course-name">Introduction to Behavioral Science in Public Policy</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.10</span><div class="cl-body"><span class="cl-course-name">Documenting Development Data Using Metadata Standards</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.11</span><div class="cl-body"><span class="cl-course-name">Understanding Citizen Data for Better Decision-Making</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.12</span><div class="cl-body"><span class="cl-course-name">Manage Successful Field Research</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.13</span><div class="cl-body"><span class="cl-course-name">Behavioral Diagnostics for Public Policy</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>National Human Rights Commission (CNDH)</h3>
+            <p class="cl-meta">Government Agency · Mexico</p>
+          </div>
+          <span class="cl-count">1 Course</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.14</span><div class="cl-body"><span class="cl-course-name">Freedom of Expression</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>CONDUSEF</h3>
+            <p class="cl-meta">National Commission for the Protection of Financial Services Users · Mexico</p>
+          </div>
+          <span class="cl-count">2 Diplomas</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.15</span><div class="cl-body"><span class="cl-course-name">Diploma in Financial Education</span><span class="cl-course-type">Diploma</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.16</span><div class="cl-body"><span class="cl-course-name">Diploma in Insurance</span><span class="cl-course-type">Diploma</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>Supreme Court of Justice of the Nation (SCJN)</h3>
+            <p class="cl-meta">Supreme Court · Mexico</p>
+          </div>
+          <span class="cl-count">1 Diploma</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.17</span><div class="cl-body"><span class="cl-course-name">Diploma in Amparo Law</span><span class="cl-course-type">Diploma</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>Electoral Judicial School — Federal Electoral Tribunal (TEPJF)</h3>
+            <p class="cl-meta">Electoral Judicial Branch · Mexico</p>
+          </div>
+          <span class="cl-count">1 Diploma</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.18</span><div class="cl-body"><span class="cl-course-name">Diploma in Legal Epistemology</span><span class="cl-course-type">Diploma</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>CAF — Development Bank of Latin America and the Caribbean</h3>
+            <p class="cl-meta">Multilateral Development Bank · Latin America</p>
+          </div>
+          <span class="cl-count">4 Courses</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.19</span><div class="cl-body"><span class="cl-course-name">Macroeconomics I (2nd Edition)</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.20</span><div class="cl-body"><span class="cl-course-name">Monetary Economics (2nd Edition)</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.21</span><div class="cl-body"><span class="cl-course-name">Economic Growth (2nd Edition)</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.22</span><div class="cl-body"><span class="cl-course-name">Dynamic Macroeconomics (2nd Edition)</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>University of Urbino "Carlo Bo"</h3>
+            <p class="cl-meta">Public University · Urbino, Italy</p>
+          </div>
+          <span class="cl-count">6 Courses</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.23</span><div class="cl-body"><span class="cl-course-name">The Rise of Artificial Intelligence</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.24</span><div class="cl-body"><span class="cl-course-name">Artificial Intelligence</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.25</span><div class="cl-body"><span class="cl-course-name">What Is Sustainability</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.26</span><div class="cl-body"><span class="cl-course-name">Money and Payments</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.27</span><div class="cl-body"><span class="cl-course-name">English4U2</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.28</span><div class="cl-body"><span class="cl-course-name">Digital Human (Human in the Digital Age)</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
+      <div class="cl-inst">
+        <div class="cl-head">
+          <div class="cl-head-info">
+            <h3>University of Naples Federico II — Federica Web Learning</h3>
+            <p class="cl-meta">Public University · Naples, Italy</p>
+          </div>
+          <span class="cl-count">11 Courses</span>
+        </div>
+        <div class="cl-courses">
+          <div class="cl-course"><span class="cl-no">C.29</span><div class="cl-body"><span class="cl-course-name">Macroeconomics</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.30</span><div class="cl-body"><span class="cl-course-name">Heterogeneous Agent Models in Macroeconomics</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.31</span><div class="cl-body"><span class="cl-course-name">Mathematical Methods for Economics</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.32</span><div class="cl-body"><span class="cl-course-name">Financial Intermediation</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.33</span><div class="cl-body"><span class="cl-course-name">Business English</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.34</span><div class="cl-body"><span class="cl-course-name">Tax Law</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.35</span><div class="cl-body"><span class="cl-course-name">Python Programming</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.36</span><div class="cl-body"><span class="cl-course-name">International Cyber Law</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.37</span><div class="cl-body"><span class="cl-course-name">Human Rights: Global and Local Protection</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.38</span><div class="cl-body"><span class="cl-course-name">Global Economic Strategies and Economic Intelligence</span><span class="cl-course-type">Course</span></div></div>
+          <div class="cl-course"><span class="cl-no">C.39</span><div class="cl-body"><span class="cl-course-name">Corporate Governance</span><span class="cl-course-type">Course</span></div></div>
+        </div>
+      </div>
+
     </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">2 Courses</div>
-        <h3>Hunt ADR</h3>
-        <p class="cv-institution">Alternative Dispute Resolution Provider · United Kingdom</p>
-        <ul class="cv-list">
-          <li>All About Arbitration</li>
-          <li>All About Mediation</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box"><b class="cv-mono">HA</b></div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">5 Courses</div>
-        <h3>The World Bank Group</h3>
-        <p class="cv-institution">International Organization · Washington, D.C.</p>
-        <ul class="cv-list">
-          <li>Introduction to Behavioral Science in Public Policy</li>
-          <li>Documenting Development Data Using Metadata Standards</li>
-          <li>Understanding Citizen Data for Better Decision-Making</li>
-          <li>Manage Successful Field Research</li>
-          <li>Behavioral Diagnostics for Public Policy</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/World_Bank_Group_logo.svg?width=200" alt="World Bank Group logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>WB</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">1 Course</div>
-        <h3>National Human Rights Commission (CNDH)</h3>
-        <p class="cv-institution">Government Agency · Mexico</p>
-        <ul class="cv-list">
-          <li>Freedom of Expression</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_CNDH.svg?width=200" alt="CNDH logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>CNDH</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">2 Diplomas</div>
-        <h3>CONDUSEF</h3>
-        <p class="cv-institution">National Commission for the Protection of Financial Services Users · Mexico</p>
-        <ul class="cv-list">
-          <li>Diploma in Financial Education</li>
-          <li>Diploma in Insurance</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_CONDUSEF.svg?width=200" alt="CONDUSEF logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>CD</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">1 Diploma</div>
-        <h3>Supreme Court of Justice of the Nation (SCJN)</h3>
-        <p class="cv-institution">Supreme Court · Mexico</p>
-        <ul class="cv-list">
-          <li>Diploma in Amparo Law</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_de_la_SCJN.svg?width=200" alt="SCJN logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>SCJN</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">1 Diploma</div>
-        <h3>Electoral Judicial School — Federal Electoral Tribunal (TEPJF)</h3>
-        <p class="cv-institution">Electoral Judicial Branch · Mexico</p>
-        <ul class="cv-list">
-          <li>Diploma in Legal Epistemology</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Logo_TEPJF.svg?width=200" alt="TEPJF logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>TE</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">4 Courses</div>
-        <h3>CAF — Development Bank of Latin America and the Caribbean</h3>
-        <p class="cv-institution">Multilateral Development Bank · Latin America</p>
-        <ul class="cv-list">
-          <li>Macroeconomics I (2nd Edition)</li>
-          <li>Monetary Economics (2nd Edition)</li>
-          <li>Economic Growth (2nd Edition)</li>
-          <li>Dynamic Macroeconomics (2nd Edition)</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/CAF_logo.svg?width=200" alt="CAF logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>CAF</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">6 Courses</div>
-        <h3>University of Urbino "Carlo Bo"</h3>
-        <p class="cv-institution">Public University · Urbino, Italy</p>
-        <ul class="cv-list">
-          <li>The Rise of Artificial Intelligence</li>
-          <li>Artificial Intelligence</li>
-          <li>What Is Sustainability</li>
-          <li>Money and Payments</li>
-          <li>English4U2</li>
-          <li>Digital Human (Human in the Digital Age)</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Università_degli_Studi_di_Urbino_Carlo_Bo_logo.png?width=200" alt="University of Urbino logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>UU</b>'">
-      </div>
-    </div>
-
-    <div class="cv-entry">
-      <div class="cv-info">
-        <div class="cv-date">11 Courses</div>
-        <h3>University of Naples Federico II — Federica Web Learning</h3>
-        <p class="cv-institution">Public University · Naples, Italy</p>
-        <ul class="cv-list">
-          <li>Macroeconomics</li>
-          <li>Heterogeneous Agent Models in Macroeconomics</li>
-          <li>Mathematical Methods for Economics</li>
-          <li>Financial Intermediation</li>
-          <li>Business English</li>
-          <li>Tax Law</li>
-          <li>Python Programming</li>
-          <li>International Cyber Law</li>
-          <li>Human Rights: Global and Local Protection</li>
-          <li>Global Economic Strategies and Economic Intelligence</li>
-          <li>Corporate Governance</li>
-        </ul>
-      </div>
-      <div class="cv-logo-box">
-        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Università_degli_Studi_di_Napoli_Federico_II_logo.svg?width=200" alt="Federico II logo" class="cv-university-logo" onerror="this.parentElement.innerHTML='<b class=cv-mono>UN</b>'">
-      </div>
-    </div>
-
   </section>
 
   <section class="cv-section">
