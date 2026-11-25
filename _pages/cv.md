@@ -40,6 +40,9 @@ CURRICULUM VITAE (escala Essays)
   font-family: "JetBrains Mono", monospace;
   font-size: 0.75rem;
   line-height: 1.9;
+} 
+html[data-theme="dark"] .cv-page{
+  --muted:#a89d88;
 }
 
 .cv-section { margin-top: 36px; }
