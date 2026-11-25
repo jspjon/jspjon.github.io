@@ -1,10 +1,7 @@
 ---
-permalink: /markdown/
-title: "Markdown"
+permalink: /Intellectual Foundations/
+title: "Intellectual Foundations"
 author_profile: true
-redirect_from: 
-  - /md/
-  - /markdown.html
 ---
 
 {% include toc %}
