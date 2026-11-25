@@ -420,7 +420,7 @@ h1 { display: none; }
       <div class="cv-info">
         <div class="cv-date">6 Job Simulations</div>
         <h3>Forage</h3>
-        <p class="cv-institution">Online Platform · Global</p>
+        <p class="cv-institution">Forage Platform · Global</p>
         <ul class="cv-list">
           <li>Investment Banking Job Simulation — JPMorganChase</li>
           <li>Tax Job Simulation — PwC US</li>
