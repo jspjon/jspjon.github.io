@@ -1,5 +1,5 @@
 ---
-permalink: /Intellectual Foundations/
+permalink: /intellectual-foundations/
 title: "Intellectual Foundations"
 author_profile: true
 ---
