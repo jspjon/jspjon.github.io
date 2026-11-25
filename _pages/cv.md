@@ -476,17 +476,33 @@ SECTION 10 — CV ON REQUEST
     </div>
   </section>
 
+    </section>
+
   <section class="cv-section">
     <h2 class="cv-heading">
       <span class="cv-number">06</span> Publications
     </h2>
-    <div class="cv-generated">
-      <ul>
-        {% for post in site.publications reversed %}
-          {% include archive-single-cv.html %}
-        {% endfor %}
-      </ul>
-    </div>
+
+    <article class="cv-card">
+      <div class="cv-card-top">
+        <h3>Macroeconomic Effects of Fiscal Consolidation and Monetary Stabilization: Evidence from Argentina, 2023–2026</h3>
+        <span class="cv-card-date">2023–2026</span>
+      </div>
+      <p class="cv-org"><span class="cv-abbr" style="margin-left:0;">Ongoing Research</span> · Working Paper</p>
+      <p class="cv-detail">
+        This paper examines Argentina's fiscal and monetary adjustment during 2023–2025, evaluating
+        whether fiscal consolidation, elimination of deficit monetization, and regulatory reform reversed
+        a decades-long pattern of chronic inflation, recurrent deficits, and elevated poverty. Using official
+        data, before-and-after comparisons, growth accounting, and sectoral decomposition, the analysis
+        documents annual inflation falling from 211% in December 2023 to 31.8% by September 2025, alongside
+        Argentina's first primary fiscal surplus in fourteen years (1.8% of GDP, 2024) and 4.4% GDP growth
+        in 2025. Poverty, which rose to 52.9% during the initial contraction, fell to 28.2% by late 2025 —
+        its lowest level since 2018 — equivalent to roughly 11.4 million people crossing the poverty line
+        in eighteen months. Because this design does not support strict causal identification, the findings
+        are interpreted through the lens of fiscal dominance in economies marked by chronic debt intolerance,
+        where credible consolidation may restore price stability more durably than sustained monetization.
+      </p>
+    </article>
   </section>
 
   <section class="cv-section">
