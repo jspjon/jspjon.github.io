@@ -41,8 +41,13 @@ CURRICULUM VITAE (escala Essays)
   font-size: 0.75rem;
   line-height: 1.9;
 } 
-html[data-theme="dark"] .cv-page{
-  --muted:#a89d88;
+html[data-theme="dark"] .cv-page .cv-detail,
+html[data-theme="dark"] .cv-page .cv-org,
+html[data-theme="dark"] .cv-page .cv-card-date,
+html[data-theme="dark"] .cv-page .cv-label,
+html[data-theme="dark"] .cv-page .cv-supervisor{
+  color:inherit;
+  opacity:.8;
 }
 
 .cv-section { margin-top: 36px; }
