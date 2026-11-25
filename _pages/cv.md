@@ -136,8 +136,9 @@ h1 { display: none; }
 
 .cv-label { display: block; margin: 17px 0 8px; color: var(--muted); font-size: .62rem; letter-spacing: 0.06em; text-transform: uppercase; }
 
-.cv-list { margin: 0; padding-left: 21px; font-size: .75rem; line-height: 1.9; }
-
+.cv-list { margin: 0; padding-left: 24px; font-size: .75rem; line-height: 1.9; list-style: disc; }
+.cv-list li::marker { color: var(--accent); }
+  
 .cv-list li { margin-bottom: 6px; }
 
 .cv-supervisor { margin: 17px 0 0; padding-top: 13px; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; line-height: 1.9; }
