@@ -32,7 +32,7 @@ main:
   #   url: /cv-json/
     
   - title: "Intellectual Foundations"
-    url: /markdown/
+    url: /intellectual-foundations/
 
   - title: "Referents"
     url: /referentes/
