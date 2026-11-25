@@ -73,6 +73,7 @@ h1{display:none}
 .ref-desc{font-size:.66rem;line-height:1.6;color:var(--ref-muted)}
 .ref-quote{margin-top:14px;padding-left:12px;border-left:2px solid var(--ref-accent);font-style:italic;font-size:.64rem;line-height:1.8;opacity:.92}
 .ref-work{margin-top:13px;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ref-accent)}
+
 .ref-actions{display:flex;justify-content:center;padding:13px 18px;border-top:1px solid var(--ref-border)}
 
 /* ---------- Pie ---------- */
@@ -122,7 +123,7 @@ const PLATES=[
   desc:"The Philosopher — as Aquinas simply called him. From the polis as man's natural home to prudence as the habit of choosing well, his logic, ethics and politics became the grammar of natural law inherited by every tradition on this wall.",
   quote:"Man is by nature a political animal.",
   work:"Politics · c. 335 BC",
-  files:["Aristotle Altemps Inv8575.jpg"], pos:[50,10] }, /* NEW */
+  files:["Aristotle Altemps Inv8575.jpg"], pos:[50,10] },
 
 { no:"REF.02", name:"Cicero", slug:"cicero", dates:"106–43 BC", origin:"Arpinum, Roman Republic",
   role:"Republicanism · Natural Law",
@@ -136,7 +137,7 @@ const PLATES=[
   desc:"Roman emperor and last of the great Stoics. His Meditations — written on campaign, never meant for publication — remain the closest thing to a manual of self-command ever written by a man holding absolute power.",
   quote:"Waste no more time arguing about what a good man should be. Be one.",
   work:"Meditations · c. 170–180 AD",
-  files:["Marcus Aurelius Glyptothek München (3x4 cropped).jpg"], pos:[50,10] }, /* NEW */
+  files:["Marcus Aurelius Glyptothek München (3x4 cropped).jpg"], pos:[50,10] },
 
 { no:"REF.04", name:"Thomas Aquinas", slug:"thomas-aquinas", dates:"1225–1274", origin:"Roccasecca, Italy",
   role:"Scholasticism · Natural Law",
@@ -238,4 +239,315 @@ const PLATES=[
 
 { no:"REF.18", name:"Friedrich A. Hayek", slug:"friedrich-hayek", dates:"1899–1992", origin:"Vienna, Austria",
   role:"Austrian School · Spontaneous Order",
-  desc:"Nobel laureate and philosopher of spontaneous order. The price system as a communications network, the knowledge problem of planners, and the long argument against serfdom."
+  desc:"Nobel laureate and philosopher of spontaneous order. The price system as a communications network, the knowledge problem of planners, and the long argument against serfdom.",
+  quote:"The curious task of economics is to demonstrate to men how little they really know about what they imagine they can design.",
+  work:"The Road to Serfdom · 1944",
+  files:["Friedrich Hayek portrait.jpg"], pos:[50,20] },
+
+{ no:"REF.19", name:"Karl Popper", slug:"karl-popper", dates:"1902–1994", origin:"Vienna, Austria",
+  role:"Philosophy of Science · Open Society",
+  desc:"Philosopher of falsifiability and the open society. Knowledge grows by conjecture and refutation — and utopias that promise to remake man end by destroying him.",
+  quote:"True ignorance is not the absence of knowledge, but the refusal to acquire it.",
+  work:"The Open Society and Its Enemies · 1945",
+  files:["Karl Popper.jpg"], pos:[50,20] },
+
+{ no:"REF.20", name:"Frank S. Meyer", slug:"frank-s-meyer", dates:"1909–1972", origin:"Newark, New Jersey",
+  role:"Fusionism · National Review",
+  desc:"Ex-communist turned architect of fusionism — the marriage of traditionalist conservatism and libertarianism that powered the postwar American right beside Buckley.",
+  quote:"Virtue is the fruit of freedom.",
+  work:"In Defense of Freedom · 1962",
+  files:["YoungFSM2.jpg"], pos:[50,20] },
+
+{ no:"REF.21", name:"Ronald Coase", slug:"ronald-coase", dates:"1910–2013", origin:"Willesden, England",
+  role:"Institutional Economics · Transaction Costs",
+  desc:"Nobel laureate who asked why firms exist and answered with transaction costs. Property rights, institutions and real-world frictions became economics after him.",
+  quote:"The world of zero transaction costs has often been described as a Coasean world. Nothing could be further from the truth.",
+  work:"The Problem of Social Cost · 1960",
+  files:["Coase scan 11 edited (cropped).jpg"], pos:[50,20] },
+
+{ no:"REF.22", name:"Milton Friedman", slug:"milton-friedman", dates:"1912–2006", origin:"Brooklyn, New York",
+  role:"Chicago School · Monetarism",
+  desc:"Nobel laureate and great popularizer. Monetarism, the permanent-income hypothesis, and the argument that economic and political freedom rise and fall together.",
+  quote:"Underlying most arguments against the free market is a lack of belief in freedom itself.",
+  work:"Capitalism and Freedom · 1962",
+  files:["Milton Friedman.jpg"], pos:[50,22] },
+
+{ no:"REF.23", name:"Bruno Leoni", slug:"bruno-leoni", dates:"1913–1967", origin:"Ancona, Italy",
+  role:"Austrian Economics · Law",
+  desc:"Italian jurist and philosopher of law. Against the legislator's decree he set law as a spontaneously evolved order — discovered, not made.",
+  quote:"Law is not made — it is found.",
+  work:"Freedom and the Law · 1961",
+  host:"it.wikipedia.org",
+  files:["Bruno Leoni (1913-1967).jpg"], pos:[50,20] },
+
+{ no:"REF.24", name:"James M. Buchanan", slug:"james-m-buchanan", dates:"1919–2013", origin:"Murfreesboro, Tennessee",
+  role:"Public Choice · Constitutional Political Economy",
+  desc:"Nobel laureate and founder of constitutional political economy. Rules must bind rulers, because rulers cannot bind themselves.",
+  quote:"Politics without romance.",
+  work:"The Calculus of Consent · 1962",
+  files:["James Buchanan by Atlas network.jpg"], pos:[50,18] },
+
+{ no:"REF.25", name:"Margaret Thatcher", slug:"margaret-thatcher", dates:"1925–2013", origin:"Grantham, England",
+  role:"Political Leadership · Classical Liberalism",
+  desc:"The Grocer's Daughter. Three general elections, the Falklands, the miners' strike, Big Bang — she governed as she believed: there is no such thing as a free lunch.",
+  quote:"The problem with socialism is that you eventually run out of other people's money.",
+  work:"The Downing Street Years · 1993",
+  files:["Margaret Thatcher stock portrait (cropped).jpg","Margaret Thatcher stock portrait.jpg","Margaret Thatcher (1983).jpg"], pos:[50,18] },
+
+{ no:"REF.26", name:"William F. Buckley Jr.", slug:"william-f-buckley", dates:"1925–2008", origin:"New York, New York",
+  role:"Conservative Intellect · National Review",
+  desc:"Fusionist, polemicist, sailor. He founded National Review, hosted a thousand Firing Lines, and made the argument for ordered liberty entertaining enough to survive.",
+  quote:"I would rather be governed by the first 2,000 people in the Boston telephone directory than by the 2,000 people on the faculty of Harvard University.",
+  work:"God and Man at Yale · 1951",
+  files:["William F. Buckley, Jr. Public Domain (cropped).jpg","William F. Buckley Jr. 1985.jpg","William F. Buckley.jpg"], pos:[50,18] },
+
+{ no:"REF.27", name:"Murray N. Rothbard", slug:"murray-rothbard", dates:"1926–1995", origin:"New York, New York",
+  role:"Austrian School · Libertarian Theory",
+  desc:"Historian, economist, polymath of the Austrian revival. Man, Economy, and State rebuilt economic science from first principles — and counted the costs of power and market.",
+  quote:"The state is a gang of thieves writ large.",
+  work:"Man, Economy, and State · 1962",
+  files:["Murray Rothbard.jpg"], pos:[50,20] },
+
+{ no:"REF.28", name:"Alasdair MacIntyre", slug:"alasdair-macintyre", dates:"1929–2025", origin:"Glasgow, Scotland",
+  role:"Virtue Ethics · Thomism",
+  desc:"Scottish Thomist of the Aristotelian revival. After Virtue diagnosed the incoherence of Enlightenment moral language and rebuilt ethics on practices, traditions and the narrative unity of a human life.",
+  quote:"I can only answer the question 'What am I to do?' if I can answer the prior question 'Of what story or stories do I find myself a part?'",
+  work:"After Virtue · 1981",
+  files:["Alasdair MacIntyre.jpg"], pos:[50,15] },
+
+{ no:"REF.29", name:"Thomas Sowell", slug:"thomas-sowell", dates:"b. 1930", origin:"Gastonia, North Carolina",
+  role:"Chicago School · Empiricism",
+  desc:"Empiricist of the Hoover Institution. Knowledge, decisions, incentives and trade-offs — a long career spent auditing the unintended consequences of the intended.",
+  quote:"It is hard to imagine a more stupid or more dangerous way of making decisions than by putting those decisions in the hands of people who pay no price for being wrong.",
+  work:"Basic Economics · 2000",
+  files:["Thomas Sowell Portrait (3x4 cropped).jpg","Thomas Sowell.jpg"], pos:[50,18] },
+
+{ no:"REF.30", name:"Antonin Scalia", slug:"antonin-scalia", dates:"1936–2016", origin:"Trenton, New Jersey",
+  role:"Constitutional Law · Originalism",
+  desc:"Justice of the U.S. Supreme Court, 1986–2016. Originalist, textualist, and the finest dissenter of his age — his arguments outlived his losses.",
+  quote:"The judge who always likes the results he reaches is a bad judge.",
+  work:"Scalia Dissents · 2004",
+  files:["Antonin Scalia Official SCOTUS Portrait.jpg"], pos:[50,18] },
+
+{ no:"REF.31", name:"Robert E. Lucas Jr.", slug:"robert-lucas", dates:"1937–2023", origin:"Yakima, Washington",
+  role:"New Classical Macroeconomics · Rational Expectations",
+  desc:"Nobel laureate. Rational expectations and the Lucas critique: policy changes the very behavior it tries to predict — macroeconomics after him was another science.",
+  quote:"Once you start thinking about growth, it is hard to think about anything else.",
+  work:"Expectations and the Neutrality of Money · 1972",
+  files:["La Revolución Industrial Pasado y Futuro, Robert E. Lucas Jr. screenshot (cropped).jpg"], pos:[50,18] },
+
+{ no:"REF.32", name:"Robert Nozick", slug:"robert-nozick", dates:"1938–2002", origin:"Brooklyn, New York",
+  role:"Political Philosophy · The Minimal State",
+  desc:"The libertarian answer to Rawls. Rights as side constraints, the minimal state as the only legitimate one — a book that reset political philosophy in a single stroke.",
+  quote:"Individuals have rights, and there are things no person or group may do to them without violating their rights.",
+  work:"Anarchy, State, and Utopia · 1974",
+  files:["Robert Nozick 1977 Libertarian Review cover (4x5 cropped).jpg"], pos:[50,15] },
+
+{ no:"REF.33", name:"Eugene F. Fama", slug:"eugene-fama", dates:"b. 1939", origin:"Boston, Massachusetts",
+  role:"Chicago School · Efficient Markets",
+  desc:"Nobel laureate and father of the efficient-markets hypothesis. Prices, he showed, are the fastest summarizers of the world's information.",
+  quote:"I don't even know what a bubble means.",
+  work:"Efficient Capital Markets · 1970",
+  files:["Eugene Fama at Nobel Prize, 2013.jpg"], pos:[50,18] },
+
+{ no:"REF.34", name:"John Finnis", slug:"john-finnis", dates:"b. 1940", origin:"Adelaide, Australia",
+  role:"Natural Law · Jurisprudence",
+  desc:"Oxford jurist, born in Adelaide. Natural Law and Natural Rights restated Aquinas for the analytical age — basic goods, practical reasonableness and the common good — founding the 'New Natural Law' school with Grisez and Boyle.",
+  quote:"Life, knowledge, play, aesthetic experience, sociability, practical reasonableness and religion: the basic goods of human flourishing.",
+  work:"Natural Law and Natural Rights · 1980",
+  files:["John Finnis on After Dark 26th June 1987 (3x4 cropped).jpg"], pos:[50,12] },
+
+{ no:"REF.35", name:"Arthur B. Laffer", slug:"arthur-laffer", dates:"b. 1940", origin:"Youngstown, Ohio",
+  role:"Supply-Side Economics · The Laffer Curve",
+  desc:"Economist of the curve that bears his name. Supply-side adviser to presidents — and chronicler of what high tax rates really do to work, investment and revenue.",
+  quote:"There are always two tax rates that yield the same revenue.",
+  work:"Taxes Have Consequences · 2022",
+  files:["Artur Laffer.jpg"], pos:[50,18] },
+
+{ no:"REF.36", name:"Jaime Guzmán", slug:"jaime-guzman", dates:"1941–1991", origin:"Santiago, Chile",
+  role:"Constitutional Law · Gremialismo",
+  desc:"Chilean jurist, founder of the gremialista movement and principal draftsman of the Constitution of 1980 — the institutional frame under which Chile's later market reforms were written into law.",
+  quote:"Ser gran señora no depende de la fortuna familiar, sino de la bondad de su alma.",
+  work:"Constitución Política de Chile · 1980",
+  host:"es.wikipedia.org",
+  files:["Jaime Guzman-1987.jpg","JaimeG.PNG"], pos:[50,12] },
+
+{ no:"REF.37", name:"David Gordon", slug:"david-gordon", dates:"b. 1942", origin:"United States",
+  role:"Austrian Economics · Philosophy",
+  desc:"Philosopher of the Austrian school at the Mises Institute. Reviewer of everything, editor of the Journal of Libertarian Studies, guardian of the school's intellectual lineage.",
+  quote:"Austrian economics has its origins in the late scholastics.",
+  work:"The Philosophical Origins of Austrian Economics · 1993",
+  files:["David Gordon by Gage Skidmore.jpg"], pos:[50,20] },
+
+{ no:"REF.38", name:"Walter Block", slug:"walter-block", dates:"b. 1942", origin:"Brooklyn, New York",
+  role:"Austrian Economics · Anarcho-Capitalism",
+  desc:"The professor of unpopular defenses. From rent control to roads, he took the arguments nobody would touch and gave them a market-case rigor that trained a generation.",
+  quote:"Taxation is theft.",
+  work:"Defending the Undefendable · 1976",
+  files:["Walter Block.jpg","Walter Block by Gage Skidmore.jpg","Walter Block 2016.jpg"], pos:[50,20] },
+
+{ no:"REF.39", name:"Deirdre N. McCloskey", slug:"deirdre-mccloskey", dates:"b. 1942", origin:"Ann Arbor, Michigan",
+  role:"Economic History · Rhetoric",
+  desc:"Historian of the Great Enrichment. Her trilogy argues the modern world was made not by capital but by ideas — dignity and liberty for the bourgeois innovators.",
+  quote:"Not capital, but ideas, made the modern world.",
+  work:"Bourgeois Dignity · 2010",
+  files:["Deirdre McCloskey (15579711609).jpg","Deirdre McCloskey.jpg","Deirdre Nansen McCloskey.jpg"], pos:[50,22] },
+
+{ no:"REF.40", name:"Richard A. Epstein", slug:"richard-epstein", dates:"b. 1943", origin:"New York, New York",
+  role:"Law & Economics · Simple Rules",
+  desc:"Legal scholar of simple rules. Takings, torts, and the case that a complex world needs few — and firm — principles.",
+  quote:"You own yourself.",
+  work:"Simple Rules for a Complex World · 1995",
+  files:["Epsteinatgmu.jpg"], pos:[50,20] },
+
+{ no:"REF.41", name:"Roger Scruton", slug:"roger-scruton", dates:"1944–2020", origin:"Buslingthorpe, England",
+  role:"Philosophy · Conservatism",
+  desc:"Philosopher of beauty, home and inheritance. He taught that conservatism begins in gratitude — that good things are easily destroyed and slowly, lovingly, built.",
+  quote:"Good things are easily destroyed, but not easily created.",
+  work:"How to Be a Conservative · 2014",
+  files:["Roger Scruton by Pete Helme.jpg","Roger Scruton.jpg","Roger Scruton 2015.jpg","Roger Scruton 2014.jpg"], pos:[50,20] },
+
+{ no:"REF.42", name:"Clarence Thomas", slug:"clarence-thomas", dates:"b. 1948", origin:"Pin Point, Georgia",
+  role:"Constitutional Law · Originalism",
+  desc:"Justice of the U.S. Supreme Court since 1991. From Pin Point, Georgia, to the bench — originalism as lived autobiography, and a jurisprudence of quiet conviction.",
+  quote:"Good manners will open doors that the best education cannot.",
+  work:"My Grandfather's Son · 2007",
+  files:["Clarence Thomas official SCOTUS portrait crop.jpg"], pos:[50,18] },
+
+{ no:"REF.43", name:"Hans-Hermann Hoppe", slug:"hans-hermann-hoppe", dates:"b. 1949", origin:"Peine, Germany",
+  role:"Austrian Economics · Philosophy",
+  desc:"Mises–Rothbard's sharpest heir. Argumentation ethics, the private-property order, and a systematic case that democracy erodes exactly what it promises to protect.",
+  quote:"Democracy has nothing to do with freedom. Democracy is a soft variant of communism.",
+  work:"Democracy: The God That Failed · 2001",
+  files:["Hans-Hermann Hoppe.jpg","Hans-Hermann Hoppe 2012.jpg"], pos:[50,20] },
+
+{ no:"REF.44", name:"Samuel A. Alito Jr.", slug:"samuel-alito", dates:"b. 1950", origin:"Trenton, New Jersey",
+  role:"Constitutional Law · Originalism",
+  desc:"Justice of the U.S. Supreme Court since 2006. The careful craftsman of the modern Court's originalist majority.",
+  quote:"A judge's job is to apply the law, not to remake it.",
+  work:"So Ordered",
+  files:["Samuel Alito official photo.jpg"], pos:[50,18] },
+
+{ no:"REF.45", name:"Randy E. Barnett", slug:"randy-barnett", dates:"b. 1952", origin:"United States",
+  role:"Constitutional Law · Presumption of Liberty",
+  desc:"Constitutional scholar and advocate. The presumption of liberty, the structure of rights, and the case that rebuilt the Ninth Amendment.",
+  quote:"The presumption of liberty.",
+  work:"The Structure of Liberty · 1998",
+  files:["Randy Barnett.jpg"], pos:[50,20] },
+
+{ no:"REF.46", name:"Robert P. George", slug:"robert-p-george", dates:"b. 1955", origin:"Morgantown, West Virginia",
+  role:"Natural Law · Public Philosophy",
+  desc:"McCormick Professor of Jurisprudence at Princeton and the leading heir of Finnis and Grisez. From the dignity of the embryo to marriage and religious liberty, he carries natural law into the courts and the public square.",
+  quote:"The human embryo is a whole living member of the species Homo sapiens in the early stage of his or her natural development.",
+  work:"The Clash of Orthodoxies · 2001",
+  files:["Robert P. George by Gage Skidmore.jpg"], pos:[50,15] },
+
+{ no:"REF.47", name:"Jesús Huerta de Soto", slug:"jesus-huerta-de-soto", dates:"b. 1956", origin:"Madrid, Spain",
+  role:"Austrian Economics · Finance",
+  desc:"The Spanish master of the Austrian school. Money, bank credit and economic cycles — a complete theory of fractional-reserve instability, taught from Madrid to the world.",
+  quote:"Socialism is the most widespread intellectual error of our time.",
+  work:"Money, Bank Credit, and Economic Cycles · 1998",
+  files:["Profesor Jesus-Huerta-de-Soto.jpg","Jesús Huerta de Soto.jpg","Jesus Huerta de Soto.jpg","Huerta de Soto.jpg"], pos:[50,0] },
+
+{ no:"REF.48", name:"Javier Milei", slug:"javier-milei", dates:"b. 1970", origin:"Buenos Aires, Argentina",
+  role:"Austrian School · Political Leadership",
+  desc:"Economist turned president. From classrooms and television to the Casa Rosada — proof that the ideas of Mises and Hoppe can win a national election in the 21st century.",
+  quote:"¡Viva la libertad, carajo!",
+  work:"Davos Speech · 2024",
+  files:["Javier Milei - Presidencia (crop).jpg","Javier Milei 2023 (cropped).jpg","Javier Milei.jpg","Retrato oficial de Javier Milei (cropped).jpg","Javier Milei - Davos 2024 (cropped).jpg"], pos:[50,15] }
+];
+
+/* ---------- 3. CONSTRUCCIÓN ---------- */
+const HOST=r=>r.host||"commons.wikimedia.org";
+const special=(r,f,w)=>`https://${HOST(r)}/wiki/Special:FilePath/${encodeURIComponent(f)}?width=${w}`;
+const commonsPage=r=>`https://${HOST(r)}/wiki/File:${r.fileUsed||r.files[0]}`;
+
+(function build(){
+  /* fuente JetBrains Mono (auto, solo si la página no la carga ya) */
+  if(!document.querySelector('link[href*="JetBrains+Mono"]')){
+    const fontLink=document.createElement("link");
+    fontLink.rel="stylesheet";
+    fontLink.href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap";
+    document.head.appendChild(fontLink);
+  }
+
+  /* estilos */
+  const st=document.createElement("style");
+  st.textContent=REF_CSS;
+  document.head.appendChild(st);
+
+  /* raíz (creada por el .md; si no existe, se crea aquí) */
+  let root=document.getElementById("ref-root");
+  if(!root){
+    root=document.createElement("div");
+    root.id="ref-root";
+    (document.querySelector("article")||document.querySelector("main")||document.body).appendChild(root);
+  }
+
+  root.innerHTML=`
+  <div class="ref-system">
+    <header class="ref-header">
+      <h2>Intellectual Lineage</h2>
+      <h1><span class="ref-welcome">On the shoulders of giants</span><span class="ref-main-title">Intellectual Foundations</span></h1>
+      <p>Forty-eight minds in philosophy, law, accounting, economics, and political leadership —
+      the scholars and statesmen whose ideas inform the research, teaching, and writing
+      collected on this site.</p>
+      <div class="ref-actions-top">
+        <span class="ref-depth">48 Plates · 384 BC — 1970</span>
+      </div>
+    </header>
+
+    <section class="ref-grid" id="refGrid" aria-label="Portrait plates"></section>
+
+    <footer class="ref-footer">
+      <div class="ref-status"><span class="ref-dot"></span><span>Archive Operational</span></div>
+      <div>Portraits via Wikimedia Commons &amp; Wikipedia</div>
+      <div>For Reference &amp; Study</div>
+    </footer>
+  </div>`;
+
+  const grid=root.querySelector("#refGrid");
+  grid.innerHTML=PLATES.map((r,i)=>`
+  <article class="ref-card" id="plate-${i}">
+    <div class="ref-plate">
+      <div class="ref-photo" data-mono="${r.name.split(" ").filter(w=>w[0]===w[0].toUpperCase()).map(w=>w[0]).slice(0,2).join("")}">
+        <img alt="Portrait of ${r.name}" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="ref-body">
+      <div class="ref-row"><span class="ref-no">${r.no}</span><span class="ref-dates">${r.dates} · ${r.origin}</span></div>
+      <h3 class="ref-name">${r.name}</h3>
+      <span class="ref-tag">${r.role}</span>
+      <p class="ref-desc">${r.desc}</p>
+      <p class="ref-quote">“${r.quote}”</p>
+      <p class="ref-work">Key Work — ${r.work}</p>
+    </div>
+    <div class="ref-actions">
+      <a class="btn-src" href="${commonsPage(r)}" target="_blank" rel="noopener">Source ↗</a>
+    </div>
+  </article>`).join("");
+
+  function loadWithFallbacks(card,r){
+    const img=card.querySelector(".ref-photo img");
+    const link=card.querySelector(".btn-src");
+    let k=0;
+    img.onload=()=>{ r.fileUsed=r.files[k]; link.href=commonsPage(r); };
+    img.onerror=()=>{
+      k++;
+      if(k<r.files.length) img.src=special(r,r.files[k],900);
+      else{img.onerror=null;card.querySelector(".ref-photo").classList.add("noimg")}
+    };
+    img.src=special(r,r.files[0],900);
+  }
+
+  const cards=grid.querySelectorAll(".ref-card");
+  const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced){cards.forEach(c=>c.classList.add("on"))}
+  else{
+    const io=new IntersectionObserver(es=>es.forEach((e,i)=>{
+      if(e.isIntersecting){setTimeout(()=>e.target.classList.add("on"),(i%3)*90);io.unobserve(e.target)}
+    }),{threshold:.1});
+    cards.forEach(c=>io.observe(c));
+  }
+  cards.forEach((card,i)=>loadWithFallbacks(card,PLATES[i]));
+})();
