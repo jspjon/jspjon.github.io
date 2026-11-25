@@ -6,4 +6,4 @@ author_profile: true
 
 <div id="ref-root"></div>
 
-<script src="/assets/js/intellectual-foundations" defer></script> 
+<script src="/assets/js/intellectual-foundations.js" defer></script> 
