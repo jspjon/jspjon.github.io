@@ -347,7 +347,7 @@ SECTION 10 — CV ON REQUEST
     <p class="cv-detail">Completed 4 of 8 semesters, plus part of the fifth.</p>
   </div>
   <div class="cv-logo-box">
-    <img src="{{ base_path }}/images/lasalle-logo.svg" alt="Universidad La Salle Logo" class="cv-university-logo">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_de_la_Universidad_La_Salle_sin_letras.svg" alt="Universidad La Salle Logo" class="cv-university-logo">
   </div>
 </div>
   </section>
