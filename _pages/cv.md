@@ -341,13 +341,13 @@ SECTION 10 — CV ON REQUEST
     <div class="cv-date">Until 2014 · Incomplete</div>
     <h3>Bachelor of Science in Financial Economics Engineering</h3>
     <p class="cv-institution">
-      La Salle University
-      <span class="cv-abbr">ULSA</span>
+       University
+      <span class="cv-abbr">UNIVERSITY</span>
     </p>
     <p class="cv-detail">Completed 4 of 8 semesters, plus part of the fifth.</p>
   </div>
   <div class="cv-logo-box">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Logo_de_la_Universidad_La_Salle_sin_letras.svg" alt="Universidad La Salle Logo" class="cv-university-logo">
+<img src="sin_letras.svg" alt="Universidad Logo" class="cv-university-logo">
   </div>
 </div>
   </section>
