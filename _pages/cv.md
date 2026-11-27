@@ -335,6 +335,21 @@ SECTION 10 — CV ON REQUEST
         <img src="{{ base_path }}/images/ipn-logo.png" alt="IPN Logo" class="cv-university-logo">
       </div>
     </div>
+
+    <div class="cv-entry">
+  <div class="cv-info">
+    <div class="cv-date">Until 2014 · Incomplete</div>
+    <h3>Bachelor of Science in Financial Economics Engineering</h3>
+    <p class="cv-institution">
+      La Salle University
+      <span class="cv-abbr">ULSA</span>
+    </p>
+    <p class="cv-detail">Completed 4 of 8 semesters, plus part of the fifth.</p>
+  </div>
+  <div class="cv-logo-box">
+    <img src="{{ base_path }}/images/lasalle-logo.svg" alt="Universidad La Salle Logo" class="cv-university-logo">
+  </div>
+</div>
   </section>
 
   <section class="cv-section">
